@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Patagônia 2027 — Guia de Viagem</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Serif+Display:ital@0;1&display=swap');
+
+  :root {
+    --bg: #f5f3ee;
+    --bg2: #ece9e2;
+    --bg3: #e2dfd7;
+    --card: #ffffff;
+    --border: rgba(0,0,0,0.10);
+    --border2: rgba(0,0,0,0.18);
+    --text: #1a1916;
+    --text2: #5a5850;
+    --text3: #9a9588;
+    --accent: #2d6a4f;
+    --accent-bg: #eaf4ee;
+    --accent-text: #1e4d38;
+    --amber: #92520a;
+    --amber-bg: #fef3e2;
+    --danger: #8b2020;
+    --danger-bg: #fdeaea;
+    --info: #1a4a7a;
+    --info-bg: #e8f0fa;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+    padding-bottom: 32px;
+  }
+
+  /* HEADER */
+  .hero {
+    background: var(--accent);
+    color: #fff;
+    padding: 28px 20px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.65; margin-bottom: 6px; }
+  .hero-title { font-family: 'DM Serif Display', serif; font-size: 32px; line-height: 1.15; margin-bottom: 4px; }
+  .hero-title em { font-style: italic; opacity: 0.85; }
+  .hero-sub { font-size: 13px; opacity: 0.7; margin-top: 8px; }
+  .hero-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+  .hero-badge { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 4px 12px; font-size: 12px; font-weight: 500; }
+
+  /* NAV TABS */
+  .nav-wrap { background: var(--card); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .nav-wrap::-webkit-scrollbar { display: none; }
+  .nav { display: flex; padding: 0 12px; gap: 0; min-width: max-content; }
+  .nav-btn { padding: 14px 16px; font-size: 13px; font-weight: 500; font-family: 'DM Sans', sans-serif; color: var(--text3); background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; white-space: nowrap; transition: color .15s, border-color .15s; }
+  .nav-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .nav-btn i { font-size: 15px; vertical-align: -2px; margin-right: 4px; }
+
+  /* CONTENT */
+  .content { padding: 16px; max-width: 600px; margin: 0 auto; }
+  .panel { display: none; animation: fadeIn .2s ease; }
+  .panel.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* SECTION TITLES */
+  .sec-title { font-size: 13px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text3); margin: 20px 0 10px; }
+  .sec-title:first-child { margin-top: 0; }
+
+  /* CARDS */
+  .card { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); padding: 16px; margin-bottom: 10px; box-shadow: var(--shadow); }
+  .card:last-child { margin-bottom: 0; }
+  .card-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+  .card-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+  .card-sub { font-size: 13px; color: var(--text2); line-height: 1.5; }
+  .card-price { font-size: 13px; font-weight: 600; color: var(--info); white-space: nowrap; flex-shrink: 0; }
+  .card-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+  .tag { font-size: 11px; padding: 3px 9px; border-radius: 20px; background: var(--bg2); color: var(--text2); font-weight: 500; }
+
+  /* ALERTS */
+  .alert { border-radius: var(--radius-sm); padding: 12px 14px; font-size: 13px; line-height: 1.5; margin-bottom: 12px; display: flex; gap: 10px; align-items: flex-start; }
+  .alert i { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+  .alert.warn { background: var(--amber-bg); color: var(--amber); border: 1px solid rgba(146,82,10,.15); }
+  .alert.info { background: var(--info-bg); color: var(--info); border: 1px solid rgba(26,74,122,.12); }
+  .alert.success { background: var(--accent-bg); color: var(--accent-text); border: 1px solid rgba(45,106,79,.15); }
+  .alert.danger { background: var(--danger-bg); color: var(--danger); border: 1px solid rgba(139,32,32,.12); }
+
+  /* PERFIL SELECT */
+  .perfil-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+  .pcard { border: 1.5px solid var(--border); border-radius: var(--radius); padding: 14px; cursor: pointer; background: var(--card); transition: all .15s; box-shadow: var(--shadow); }
+  .pcard.sel { border-color: var(--accent); background: var(--accent-bg); }
+  .pcard-icon { font-size: 22px; margin-bottom: 6px; }
+  .pcard-title { font-size: 13px; font-weight: 600; color: var(--text); }
+  .pcard.sel .pcard-title { color: var(--accent-text); }
+  .pcard-sub { font-size: 12px; color: var(--text2); margin-top: 3px; line-height: 1.4; }
+
+  /* COMPARE GRID */
+  .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+  .ccard { border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; background: var(--card); box-shadow: var(--shadow); }
+  .ccard.rec { border-color: var(--accent); border-width: 1.5px; }
+  .ccard-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .crow { display: flex; justify-content: space-between; font-size: 12px; padding: 5px 0; border-bottom: 1px solid var(--border); color: var(--text2); gap: 6px; }
+  .crow:last-child { border-bottom: none; }
+  .crow span:last-child { font-weight: 500; color: var(--text); white-space: nowrap; text-align: right; }
+  .ctotal { display: flex; justify-content: space-between; font-size: 13px; font-weight: 600; padding-top: 10px; margin-top: 6px; border-top: 1.5px solid var(--border2); }
+  .conv { font-size: 11px; color: var(--text3); font-weight: 400; }
+
+  /* BREAKDOWN */
+  .breakdown-row { display: flex; justify-content: space-between; align-items: baseline; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 14px; gap: 8px; }
+  .breakdown-row:last-child { border-bottom: none; }
+  .breakdown-row span:first-child { color: var(--text2); flex: 1; }
+  .bval { font-weight: 600; color: var(--text); white-space: nowrap; }
+  .bval.green { color: var(--accent); }
+  .bval.amber { color: var(--amber); }
+  .bval.fixed::after { content: ''; }
+
+  /* BUDGET HERO */
+  .budget-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+  .bh-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; box-shadow: var(--shadow); }
+  .bh-card.main { border-color: var(--accent); background: var(--accent-bg); }
+  .bh-label { font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--text3); margin-bottom: 4px; }
+  .bh-card.main .bh-label { color: var(--accent); }
+  .bh-value { font-family: 'DM Serif Display', serif; font-size: 26px; color: var(--text); }
+  .bh-card.main .bh-value { color: var(--accent-text); }
+  .bh-sub { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+  /* PILLS (hostel/airbnb toggle) */
+  .pill-toggle { display: flex; gap: 6px; margin-bottom: 14px; background: var(--bg2); padding: 4px; border-radius: 10px; }
+  .pill-btn { flex: 1; padding: 8px; font-size: 13px; font-weight: 500; font-family: 'DM Sans', sans-serif; border: none; background: none; border-radius: 8px; cursor: pointer; color: var(--text2); transition: all .15s; }
+  .pill-btn.active { background: var(--card); color: var(--text); box-shadow: var(--shadow); }
+
+  /* ROTEIRO */
+  .city-block { margin-bottom: 28px; }
+  .transit-bar { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: var(--bg2); border-radius: var(--radius-sm); margin-bottom: 14px; font-size: 12px; color: var(--text2); }
+  .transit-bar i { font-size: 15px; color: var(--text3); flex-shrink: 0; }
+  .city-header { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .city-dot { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; letter-spacing: 0.02em; }
+  .dot-blue { background: #dbeafe; color: #1e40af; }
+  .dot-teal { background: #d1fae5; color: #065f46; }
+  .dot-purple { background: #ede9fe; color: #5b21b6; }
+  .dot-amber { background: #fef3c7; color: #92400e; }
+  .city-name { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--text); }
+  .city-meta { font-size: 12px; color: var(--text3); margin-top: 1px; }
+
+  /* ATTRACTION CARD */
+  .attr-card { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; margin-bottom: 10px; box-shadow: var(--shadow); }
+  .attr-img-wrap { width: 100%; height: 180px; background: var(--bg3); position: relative; overflow: hidden; }
+  .attr-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0; transition: opacity .4s; }
+  .attr-img-wrap img.loaded { opacity: 1; }
+  .img-icon { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 32px; color: var(--text3); }
+  .attr-body { padding: 14px; }
+  .attr-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 6px; }
+  .attr-name { font-size: 15px; font-weight: 600; color: var(--text); }
+  .attr-fee { font-size: 12px; font-weight: 600; white-space: nowrap; padding: 3px 9px; border-radius: 20px; flex-shrink: 0; }
+  .fee-free { background: var(--accent-bg); color: var(--accent-text); }
+  .fee-paid { background: var(--amber-bg); color: var(--amber); }
+  .fee-inc { background: var(--info-bg); color: var(--info); }
+  .attr-desc { font-size: 13px; color: var(--text2); line-height: 1.55; }
+  .attr-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+
+  /* DICAS */
+  .dica-item { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .dica-item:last-child { border-bottom: none; }
+  .dica-icon { width: 32px; height: 32px; border-radius: 8px; background: var(--bg2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .dica-icon i { font-size: 16px; color: var(--text2); }
+  .dica-text { font-size: 13px; color: var(--text2); line-height: 1.5; }
+
+  /* BADGE */
+  .badge { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+  .badge-green { background: var(--accent-bg); color: var(--accent-text); }
+  .badge-amber { background: var(--amber-bg); color: var(--amber); }
+  .badge-danger { background: var(--danger-bg); color: var(--danger); }
+
+  /* CHECKLIST */
+  .cl-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .cl-row:last-child { border-bottom: none; }
+  .cl-left { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text); }
+  .cl-left i { font-size: 17px; color: var(--text3); }
+  .cl-right { display: flex; align-items: center; gap: 8px; }
+  .pill { font-size: 11px; padding: 3px 9px; border-radius: 20px; font-weight: 600; }
+  .pill-green { background: var(--accent-bg); color: var(--accent-text); }
+  .pill-blue { background: var(--info-bg); color: var(--info); }
+  .pill-amber { background: var(--amber-bg); color: var(--amber); }
+  .cl-kg { font-size: 12px; color: var(--text3); }
+
+  /* EXTRA ROWS */
+  .extra-item { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--border); }
+  .extra-item:last-child { border-bottom: none; }
+  .extra-emoji { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .extra-title { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+  .extra-sub { font-size: 12px; color: var(--text2); line-height: 1.5; }
+  .extra-cost { font-size: 12px; font-weight: 600; margin-top: 4px; }
+  .cost-amber { color: var(--amber); }
+  .cost-green { color: var(--accent); }
+
+  /* LEGEND */
+  .legend { display: flex; gap: 14px; margin-bottom: 10px; font-size: 12px; color: var(--text3); flex-wrap: wrap; }
+
+  /* FOOTER */
+  footer { text-align: center; padding: 24px 16px 8px; font-size: 12px; color: var(--text3); }
+  footer strong { color: var(--text2); }
+
+  /* =========================================
+     OTIMIZAÇÕES PARA DISPOSITIVOS MÓVEIS 
+     ========================================= */
+  @media (max-width: 480px) {
+    /* Transforma grids de 2 colunas em 1 coluna para evitar estreitamento do texto */
+    .perfil-grid, 
+    .compare-grid, 
+    .budget-hero {
+      grid-template-columns: 1fr;
+    }
+    
+    /* Ajusta levemente o título em telas muito pequenas */
+    .hero-title {
+      font-size: 28px;
+    }
+
+    /* Permite que títulos longos em cards empurrem o preço pra baixo */
+    .card-row {
+      flex-direction: column;
+      gap: 6px;
+    }
+    .card-price {
+      align-self: flex-start;
+    }
+
+    /* Empilha os itens da lista de custos detalhada */
+    .breakdown-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+    }
+    .breakdown-row span:first-child {
+      line-height: 1.4;
+    }
+    .bval {
+      align-self: flex-end;
+    }
+
+    /* Ajusta a lista de equipamentos/checklist */
+    .cl-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .cl-right {
+      align-self: flex-end;
+    }
+    
+    /* Evita que as tags cortem a direita nos cards de atrações */
+    .attr-top {
+      flex-direction: column;
+    }
+    .attr-fee {
+      align-self: flex-start;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-eyebrow">Guia de viagem · Set/Out 2027</div>
+  <div class="hero-title">Patagônia<br><em>Argentina & Chile</em></div>
+  <div class="hero-sub">El Calafate · El Chaltén · Puerto Natales · Torres del Paine</div>
+  <div class="hero-badges">
+    <span class="hero-badge">👥 6 pessoas</span>
+    <span class="hero-badge">🗓 12 dias</span>
+    <span class="hero-badge">🚗 Carro pela rota completa</span>
+  </div>
+</div>
+
+<div class="nav-wrap">
+  <div class="nav">
+    <button class="nav-btn active" onclick="show('perfil')"><i class="ti ti-user"></i>Perfil</button>
+    <button class="nav-btn" onclick="show('roteiro')"><i class="ti ti-map-pin"></i>Roteiro</button>
+    <button class="nav-btn" onclick="show('orcamento')"><i class="ti ti-currency-dollar"></i>Orçamento</button>
+    <button class="nav-btn" onclick="show('transporte')"><i class="ti ti-car"></i>Transporte</button>
+    <button class="nav-btn" onclick="show('hospedagem')"><i class="ti ti-bed"></i>Hospedagem</button>
+    <button class="nav-btn" onclick="show('equipamentos')"><i class="ti ti-backpack"></i>Equipamentos</button>
+    <button class="nav-btn" onclick="show('dicas')"><i class="ti ti-bulb"></i>Dicas</button>
+  </div>
+</div>
+
+<div class="content">
+
+<div class="panel active" id="panel-perfil">
+  <div class="sec-title">Escolha seu perfil</div>
+  <div class="perfil-grid">
+    <div class="pcard sel" id="card-camping" onclick="selectPerfil('camping')">
+      <div class="pcard-icon">⛺</div>
+      <div class="pcard-title">Camping + Hostel</div>
+      <div class="pcard-sub">Acampa no TDP, hostels nas cidades. Mais imersivo e barato.</div>
+    </div>
+    <div class="pcard" id="card-airbnb" onclick="selectPerfil('airbnb')">
+      <div class="pcard-icon">🏠</div>
+      <div class="pcard-title">Airbnb Compartilhado</div>
+      <div class="pcard-sub">Casas divididas entre os 6. Mais conforto e privacidade.</div>
+    </div>
+  </div>
+
+  <div id="desc-camping">
+    <div class="card">
+      <div class="card-title" style="margin-bottom:6px">Perfil Camping + Hostel</div>
+      <div class="card-sub">Hostels com quarto privado nas cidades, camping 3–4 noites em Torres del Paine. Equipamentos alugados em Puerto Natales. Carro com ida e volta por El Calafate.</div>
+      <div class="card-tags" style="margin-top:10px">
+        <span class="badge badge-green">~R$ 9.500 / pessoa</span>
+        <span class="badge badge-green">Melhor custo</span>
+      </div>
+    </div>
+  </div>
+  <div id="desc-airbnb" style="display:none">
+    <div class="card">
+      <div class="card-title" style="margin-bottom:6px">Perfil Airbnb Compartilhado</div>
+      <div class="card-sub">Casas inteiras via Airbnb nas 3 cidades com cozinha e privacidade. Base em Puerto Natales para o TDP + 1 noite camping opcional. Carro para todo o trajeto.</div>
+      <div class="card-tags" style="margin-top:10px">
+        <span class="badge badge-green">~R$ 11.000 / pessoa</span>
+        <span class="badge badge-green">Cabe folgado nos R$ 15k</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-title">Quando comprar as passagens</div>
+  <div class="card">
+    <div class="card-row">
+      <div>
+        <div class="card-title">Melhor janela de compra</div>
+        <div class="card-sub" style="margin-top:4px">Para setembro/outubro 2027: compre entre <strong>outubro e dezembro de 2026</strong>. Sweet spot com ~10–12 meses de antecedência, antes da demanda subir.</div>
+      </div>
+    </div>
+    <div class="card-tags"><span class="badge badge-green">Recomendado</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Black Friday 2026</div>
+    <div class="card-sub" style="margin-top:4px">Novembro de 2026. LATAM, Gol e Aerolíneas costumam soltar promoções. Ative alertas de preço no Google Flights com antecedência.</div>
+    <div class="card-tags"><span class="badge badge-amber">Oportunidade</span></div>
+  </div>
+  <div class="alert warn" style="margin-top:4px">
+    <i class="ti ti-alert-triangle"></i>
+    <span>Depois de março/abril 2027 os preços sobem muito. Não deixe para os últimos 3–4 meses.</span>
+  </div>
+</div>
+
+<div class="panel" id="panel-roteiro">
+  <div class="sec-title">Roteiro — 12 dias com carro</div>
+  <div id="roteiro-content"></div>
+</div>
+
+<div class="panel" id="panel-orcamento">
+  <div class="sec-title">Orçamento por pessoa — 12 dias</div>
+  <div class="legend">
+    <span>Sem ~ = valor confirmado</span>
+    <span>~ = estimativa</span>
+    <span>$1 USD ≈ R$ 5,80</span>
+  </div>
+
+  <div class="pill-toggle">
+    <button class="pill-btn active" id="btn-o-camping" onclick="showOrc('camping')">⛺ Camping + Hostel</button>
+    <button class="pill-btn" id="btn-o-airbnb" onclick="showOrc('airbnb')">🏠 Airbnb</button>
+  </div>
+
+  <div id="orc-camping">
+    <div class="budget-hero">
+      <div class="bh-card main">
+        <div class="bh-label">Total / pessoa</div>
+        <div class="bh-value">~R$ 9.500</div>
+        <div class="bh-sub">R$ 5.500 de folga até R$ 15k</div>
+      </div>
+      <div class="bh-card">
+        <div class="bh-label">Grupo de 6</div>
+        <div class="bh-value">~R$ 57k</div>
+        <div class="bh-sub">total estimado</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="breakdown-row"><span>✈ Passagens ida e volta (FTE)</span><span class="bval">R$ 3.000</span></div>
+      <div class="breakdown-row"><span>~Hostels quartos privados (9 noites)</span><span class="bval">~R$ 1.400</span></div>
+      <div class="breakdown-row"><span>⛺ Camping TDP — $21–36 USD (~R$ 122–210)</span><span class="bval">R$ 350</span></div>
+      <div class="breakdown-row"><span>~Aluguel equip. TDP — ~$60–90 USD (~R$ 350–520)</span><span class="bval">~R$ 450</span></div>
+      <div class="breakdown-row"><span>~Alimentação (cozinhando + restaurantes)</span><span class="bval">~R$ 1.600</span></div>
+      <div class="breakdown-row"><span>~SUV 11 dias ÷ 6 + combustível</span><span class="bval">~R$ 1.150</span></div>
+      <div class="breakdown-row"><span>~Taxa fronteira + seguro veículo Chile</span><span class="bval amber">~R$ 250</span></div>
+      <div class="breakdown-row"><span>🏔 Ingresso TDP — $35 USD (~R$ 203)</span><span class="bval">R$ 200</span></div>
+      <div class="breakdown-row"><span>~Passeios — barco Perito Moreno ~$30 (~R$ 175)</span><span class="bval">~R$ 200</span></div>
+      <div class="breakdown-row"><span>~Seguro viagem</span><span class="bval">~R$ 350</span></div>
+      <div class="breakdown-row"><span>~Reserva emergência</span><span class="bval green">~R$ 550</span></div>
+    </div>
+  </div>
+
+  <div id="orc-airbnb" style="display:none">
+    <div class="budget-hero">
+      <div class="bh-card main">
+        <div class="bh-label">Total / pessoa</div>
+        <div class="bh-value">~R$ 11.000</div>
+        <div class="bh-sub">R$ 4.000 de folga até R$ 15k</div>
+      </div>
+      <div class="bh-card">
+        <div class="bh-label">Grupo de 6</div>
+        <div class="bh-value">~R$ 66k</div>
+        <div class="bh-sub">total estimado</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="breakdown-row"><span>✈ Passagens ida e volta (FTE)</span><span class="bval">R$ 3.000</span></div>
+      <div class="breakdown-row"><span>~Airbnb casas inteiras (11 noites)</span><span class="bval">~R$ 3.200</span></div>
+      <div class="breakdown-row"><span>~Aluguel equip. 1 noite ~$20–33 USD (~R$ 116–192)</span><span class="bval">~R$ 200</span></div>
+      <div class="breakdown-row"><span>~Alimentação (cozinhando + restaurantes)</span><span class="bval">~R$ 1.500</span></div>
+      <div class="breakdown-row"><span>~SUV 11 dias ÷ 6 + combustível</span><span class="bval">~R$ 1.150</span></div>
+      <div class="breakdown-row"><span>~Taxa fronteira + seguro veículo Chile</span><span class="bval amber">~R$ 250</span></div>
+      <div class="breakdown-row"><span>🏔 Ingresso TDP — $35 USD (~R$ 203)</span><span class="bval">R$ 200</span></div>
+      <div class="breakdown-row"><span>~Passeios — barco Perito Moreno ~$30 (~R$ 175)</span><span class="bval">~R$ 200</span></div>
+      <div class="breakdown-row"><span>~Seguro viagem</span><span class="bval">~R$ 350</span></div>
+      <div class="breakdown-row"><span>~Reserva emergência</span><span class="bval green">~R$ 950</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="panel" id="panel-transporte">
+  <div class="sec-title">Comparativo de transporte</div>
+  <div class="compare-grid">
+    <div class="ccard">
+      <div class="ccard-title">🚌 Ônibus + voos mistos</div>
+      <div class="crow"><span>GRU→EZE→FTE</span><span>R$ 3.000</span></div>
+      <div class="crow"><span>~Calafate↔Chaltén bus</span><span>~$30 <span class="conv">(~R$175)</span></span></div>
+      <div class="crow"><span>~Calafate→Natales bus</span><span>~$30 <span class="conv">(~R$175)</span></span></div>
+      <div class="crow"><span>~Natales→TDP bus</span><span>~$15 <span class="conv">(~R$90)</span></span></div>
+      <div class="crow"><span>~PUQ→SCL→GRU volta</span><span>~$200–300 <span class="conv">(~R$1.200–1.800)</span></span></div>
+      <div class="ctotal"><span>~Total pp</span><span style="color:var(--amber)">~R$ 4.800–5.400</span></div>
+    </div>
+    <div class="ccard rec">
+      <div class="ccard-title">🚗 Carro + ida e volta FTE <span class="badge badge-green">✓</span></div>
+      <div class="crow"><span>GRU→EZE→FTE ida</span><span>R$ 1.500</span></div>
+      <div class="crow"><span>FTE→EZE→GRU volta</span><span>R$ 1.500</span></div>
+      <div class="crow"><span>~SUV 11d ÷ 6</span><span>~R$ 1.000–1.300</span></div>
+      <div class="crow"><span>~Combustível ÷ 6</span><span>~R$ 150–200</span></div>
+      <div class="crow"><span>~Fronteira+seguro</span><span>~R$ 150–300</span></div>
+      <div class="ctotal"><span>~Total pp</span><span style="color:var(--accent)">~R$ 4.300–4.800</span></div>
+    </div>
+  </div>
+  <div class="alert success"><i class="ti ti-check"></i><span>Rota de carro economiza ~R$ 500–600 pp e dá liberdade total de horários em toda a viagem.</span></div>
+
+  <div class="sec-title">Custos extras do carro</div>
+  <div class="card">
+    <div class="extra-item">
+      <div class="extra-emoji">📋</div>
+      <div>
+        <div class="extra-title">Autorização para o Chile</div>
+        <div class="extra-sub">Obrigatória. Solicitar na locadora antes de assinar, por escrito. Confirmar que a locadora permite.</div>
+        <div class="extra-cost cost-amber">~$30–80 USD (~R$ 175–465) ÷ 6 = ~R$ 30–75 pp</div>
+      </div>
+    </div>
+    <div class="extra-item">
+      <div class="extra-emoji">⛽</div>
+      <div>
+        <div class="extra-title">Combustível — rota completa</div>
+        <div class="extra-sub">~1.300–1.500 km. Diesel ARG ~$1,10/L (~R$ 6,40), CHL ~$1,30/L (~R$ 7,55).</div>
+        <div class="extra-cost cost-amber">~$155–200 USD (~R$ 900–1.160) ÷ 6 = ~R$ 150–200 pp</div>
+      </div>
+    </div>
+    <div class="extra-item">
+      <div class="extra-emoji">🛡️</div>
+      <div>
+        <div class="extra-title">Seguro veículo para o Chile</div>
+        <div class="extra-sub">Obrigatório por lei. Confirme se a locadora inclui ou cobra à parte por dia no Chile.</div>
+        <div class="extra-cost cost-amber">~$15–30 USD/dia (~R$ 87–175/dia) nos dias no Chile</div>
+      </div>
+    </div>
+    <div class="extra-item">
+      <div class="extra-emoji">🔧</div>
+      <div>
+        <div class="extra-title">Estepe — cascalho no TDP</div>
+        <div class="extra-sub">Confirme se o seguro cobre pneu furado e se há estepe no veículo antes de sair.</div>
+        <div class="extra-cost cost-green">Sem custo extra se o seguro cobrir</div>
+      </div>
+    </div>
+  </div>
+  <div class="alert warn"><i class="ti ti-alert-triangle"></i><span>Pergunte na locadora: <em>"¿Está permitido cruzar a Chile? ¿El seguro cubre Chile?"</em> Saia com autorização escrita e estepe confirmado.</span></div>
+</div>
+
+<div class="panel" id="panel-hospedagem">
+  <div class="alert info"><i class="ti ti-info-circle"></i><span>Todos os preços são <strong>por pessoa por noite (pp/noite)</strong>, já divididos em grupo de 6. Câmbio ref.: $1 USD ≈ R$ 5,80.</span></div>
+
+  <div class="pill-toggle">
+    <button class="pill-btn active" id="btn-h-camping" onclick="showHosp('camping')">⛺ Camping + Hostel</button>
+    <button class="pill-btn" id="btn-h-airbnb" onclick="showHosp('airbnb')">🏠 Airbnb</button>
+  </div>
+
+  <div id="hosp-camping">
+    <div class="card">
+      <div class="card-row"><div class="card-title">El Calafate — hostel quarto privado</div><div class="card-price">~R$ 20–30 pp/noite</div></div>
+      <div class="card-sub" style="margin-top:4px">Quarto privado para 6 com cozinha. Del Glaciar, America del Sur. Café da manhã muitas vezes incluído.</div>
+      <div class="card-tags"><span class="tag">2–3 noites</span></div>
+    </div>
+    <div class="card">
+      <div class="card-row"><div class="card-title">El Chaltén — hostel básico</div><div class="card-price">~R$ 17–25 pp/noite</div></div>
+      <div class="card-sub" style="margin-top:4px">Patagonia Hostel, Condor de los Andes. Cozinha compartilhada. Chegam a qualquer hora com o carro.</div>
+      <div class="card-tags"><span class="tag">2–3 noites</span></div>
+    </div>
+    <div class="card">
+      <div class="card-row"><div class="card-title">Puerto Natales — hostel mochileiro</div><div class="card-price">~R$ 15–22 pp/noite</div></div>
+      <div class="card-sub" style="margin-top:4px">The Singing Lamb, Erratic Rock. Retirada dos equipamentos alugados aqui.</div>
+      <div class="card-tags"><span class="tag">1–2 noites</span></div>
+    </div>
+    <div class="card">
+      <div class="card-row"><div class="card-title">Torres del Paine — camping oficial</div><div class="card-price">$7–12 USD (~R$ 41–70) pp/noite</div></div>
+      <div class="card-sub" style="margin-top:4px">Paine Grande, Grey, Los Perros. Valor tabelado CONAF. Reserve em <strong>reservas.conaf.cl</strong></div>
+      <div class="card-tags"><span class="tag">3–4 noites</span><span class="badge badge-green">Reserve já</span></div>
+    </div>
+  </div>
+
+  <div id="hosp-airbnb" style="display:none">
+    <div class="card">
+      <div class="card-row"><div class="card-title">El Calafate — Airbnb casa inteira</div><div class="card-price">~R$ 58–83 pp/noite</div></div>
+      <div class="card-sub" style="margin-top:4px">Casa 3 quartos com cozinha. Valor total da casa dividido por 6.</div>
+      <div class="card-tags"><span class="tag">2–3 noites</span></div>
+    </div>
+    <div class="card">
+      <div class="card-row"><div class="card-title">El Chaltén — Airbnb ou hostel privado</div><div class="card-price">~R$ 47–70 pp/noite</div></div>
+      <div class="card-sub" style="margin-top:4px">Oferta menor de Airbnb aqui. Hostel privado é boa alternativa se o preço não compensar.</div>
+      <div class="card-tags"><span class="tag">2–3 noites</span></div>
+    </div>
+    <div class="card">
+      <div class="card-row"><div class="card-title">Puerto Natales — Airbnb base TDP</div><div class="card-price">~R$ 50–75 pp/noite</div></div>
+      <div class="card-sub" style="margin-top:4px">Base para day trips ao parque (~1h de carro). Jantar em casa na volta.</div>
+      <div class="card-tags"><span class="tag">2–3 noites</span><span class="badge badge-amber">Base estratégica</span></div>
+    </div>
+    <div class="card">
+      <div class="card-row"><div class="card-title">Torres del Paine — camping (opcional)</div><div class="card-price">$7–12 USD (~R$ 41–70) pp/noite</div></div>
+      <div class="card-sub" style="margin-top:4px">Valor tabelado CONAF. Equipamentos alugados em Puerto Natales, devolvidos na saída.</div>
+      <div class="card-tags"><span class="tag">1 noite opcional</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="panel" id="panel-equipamentos">
+  <div class="alert warn"><i class="ti ti-alert-triangle"></i><span>Voo EZE→FTE tem franquia de 15 kg. Com carro, a mochila fica em ~9–11 kg — dentro do limite sem pagar extra.</span></div>
+
+  <div class="sec-title">Levar de casa vs alugar in loco</div>
+  <div class="compare-grid" style="margin-bottom:14px">
+    <div class="ccard">
+      <div class="ccard-title">🎒 Levar de casa</div>
+      <div class="crow"><span>~Bagagem extra (6)</span><span>~R$ 900–1.800</span></div>
+      <div class="crow"><span>~Barraca 2P × 3</span><span>~R$ 1.500</span></div>
+      <div class="crow"><span>~Sleeping bag × 6</span><span>~R$ 1.800</span></div>
+      <div class="crow"><span>~Colchão × 6</span><span>~R$ 600</span></div>
+      <div class="ctotal"><span>Custo pp</span><span style="color:var(--amber)">~R$ 800–1.600</span></div>
+    </div>
+    <div class="ccard rec">
+      <div class="ccard-title">🏪 Alugar em PNT <span class="badge badge-green">✓</span></div>
+      <div class="crow"><span>~Barraca 2P / noite</span><span>~$10–15 <span class="conv">(~R$58–87)</span></span></div>
+      <div class="crow"><span>~Sleeping bag / noite</span><span>~$6–10 <span class="conv">(~R$35–58)</span></span></div>
+      <div class="crow"><span>~Colchão / noite</span><span>~$4–6 <span class="conv">(~R$23–35)</span></span></div>
+      <div class="crow"><span>~3 noites pp</span><span>~$60–90 <span class="conv">(~R$350–520)</span></span></div>
+      <div class="ctotal"><span>Custo pp</span><span style="color:var(--accent)">~R$ 350–520</span></div>
+    </div>
+  </div>
+  <div class="alert info"><i class="ti ti-info-circle"></i><span>Reserve por e-mail com <strong>Erratic Rock</strong> ou <strong>Antares</strong> em Puerto Natales. Com carro, retiram e devolvem sem peso no avião.</span></div>
+
+  <div class="sec-title">Checklist por pessoa</div>
+  <div class="card">
+    <div class="cl-row"><div class="cl-left"><i class="ti ti-backpack"></i>Mochila 50–65L</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">~1,5 kg</span></div></div>
+    <div class="cl-row"><div class="cl-left"><i class="ti ti-shirt"></i>Camadas técnicas (base + fleece + capa)</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">~2,5 kg</span></div></div>
+    <div class="cl-row"><div class="cl-left"><i class="ti ti-boot"></i>Bota de trilha impermeável</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">~1,2 kg</span></div></div>
+    <div class="cl-row"><div class="cl-left"><i class="ti ti-tent"></i>Barraca 2P (3 unid. para 6)</div><div class="cl-right"><span class="pill pill-green">Alugar PNT</span></div></div>
+    <div class="cl-row"><div class="cl-left"><i class="ti ti-moon"></i>Sleeping bag -10°C</div><div class="cl-right"><span class="pill pill-green">Alugar PNT</span></div></div>
+    <div class="cl-row"><div class="cl-left"><i class="ti ti-ripple"></i>Colchão isolante</div><div class="cl-right"><span class="pill pill-green">Alugar PNT</span></div></div>
+    <div class="cl-row"><div class="cl-left"><i class="ti ti-flame"></i>Fogareiro + gás</div><div class="cl-right"><span class="pill pill-amber">Comprar lá</span><span class="cl-kg">~$15 (~R$87)</span></div></div>
+    <div class="cl-row"><div class="cl-left"><i class="ti ti-droplet"></i>Filtro de água (1 por grupo)</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">0,1 kg</span></div></div>
+    <div class="cl-row"><div class="cl-left"><i class="ti ti-first-aid-kit"></i>Kit primeiros socorros</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">0,3 kg</span></div></div>
+    <div class="cl-row"><div class="cl-left"><i class="ti ti-battery-charging"></i>Powerbank (carry-on)</div><div class="cl-right"><span class="pill pill-blue">Levar</span></div></div>
+  </div>
+  <div class="alert danger" style="margin-top:10px"><i class="ti ti-alert-circle"></i><span>Gás não pode entrar no avião. Facas e canivetes só no bagageiro despachado.</span></div>
+</div>
+
+<div class="panel" id="panel-dicas">
+  <div class="sec-title">Logística para 6 pessoas</div>
+  <div class="card">
+    <div class="dica-item">
+      <div class="dica-icon"><i class="ti ti-car"></i></div>
+      <div class="dica-text">Confirme com a locadora antes de assinar: <strong>autorização escrita para o Chile</strong>, seguro que cobre território chileno e estepe no veículo. Hertz, Budget e Localiza estão em El Calafate.</div>
+    </div>
+    <div class="dica-item">
+      <div class="dica-icon"><i class="ti ti-calendar-check"></i></div>
+      <div class="dica-text">Reserve o camping do TDP em <strong>reservas.conaf.cl</strong> antes de comprar as passagens. Paine Grande e Grey esgotam meses antes mesmo em set/out.</div>
+    </div>
+    <div class="dica-item">
+      <div class="dica-icon"><i class="ti ti-building-store"></i></div>
+      <div class="dica-text">Reserve equipamentos de camping por e-mail com a <strong>Erratic Rock</strong> ou <strong>Antares</strong> em Puerto Natales com meses de antecedência.</div>
+    </div>
+    <div class="dica-item">
+      <div class="dica-icon"><i class="ti ti-shopping-cart"></i></div>
+      <div class="dica-text">Compras grandes de mantimentos em El Calafate — supermercados maiores. Com carro, carregam comida para a viagem toda sem limitação de peso.</div>
+    </div>
+    <div class="dica-item">
+      <div class="dica-icon"><i class="ti ti-wind"></i></div>
+      <div class="dica-text">Outubro é mais seguro que setembro — vento menor e todos os refugios abertos no TDP. Em setembro pode ter neve nos trechos altos do Circuito W.</div>
+    </div>
+    <div class="dica-item">
+      <div class="dica-icon"><i class="ti ti-cash"></i></div>
+      <div class="dica-text">Leve USD em espécie além do cartão. ATMs escassos na Patagônia. Na Argentina, pesquise o câmbio blue na época — pode render significativamente mais que o oficial.</div>
+    </div>
+    <div class="dica-item">
+      <div class="dica-icon"><i class="ti ti-shield-check"></i></div>
+      <div class="dica-text">Seguro viagem com <strong>cobertura de evacuação de emergência</strong> é obrigatório para Argentina e vital no TDP. Evacuação de helicóptero pode custar R$ 50.000+ sem cobertura.</div>
+    </div>
+    <div class="dica-item">
+      <div class="dica-icon"><i class="ti ti-shirt"></i></div>
+      <div class="dica-text">Roupas de frio: leve do Brasil. Decathlon tem ótimo custo-benefício para montar o kit do zero. Não planeje comprar roupas técnicas na Patagônia — caro e estoque imprevisível.</div>
+    </div>
+  </div>
+</div>
+
+</div><footer>
+  Guia gerado para o grupo · Set/Out 2027<br>
+  <strong>Câmbio de referência: $1 USD ≈ R$ 5,80</strong><br>
+  Valores com ~ são estimativas sujeitas a variação
+</footer>
+
+<script>
+// ===== ROTEIRO DATA =====
+var cities = [
+  {
+    code:'FTE', dotClass:'dot-blue', name:'El Calafate', days:'Dias 1–3 · 2 noites', transit: null,
+    attractions:[
+      {wiki:'Perito_Moreno_Glacier', emoji:'🧊', name:'Glaciar Perito Moreno', feeType:'paid', fee:'$35 USD (~R$ 203)', feeNote:'ingresso Parque Los Glaciares', desc:'Um dos glaciares mais espetaculares do planeta — 30km de comprimento e 60m de altura. Avança até 2m/dia, causando calving de blocos gigantes. As passarelas panorâmicas estão incluídas no ingresso. Passeio de barco frontal ~$30 USD (~R$ 174) separado.', tags:['~3h de visita','78km de El Calafate','Pasarelas inclusas']},
+      {wiki:'Laguna_Nimez', emoji:'🦩', name:'Laguna Nimez — Reserva de Aves', feeType:'paid', fee:'~$5 USD (~R$ 29)', feeNote:'reserva ecológica', desc:'Reserva a 10 minutos do centro de El Calafate. Habitat de flamingos-patagônicos, patos e 130+ espécies de aves. Ideal para manhã ou tarde antes do glaciar.', tags:['~1h de visita','No centro da cidade','Flamingos patagônicos']},
+      {wiki:'El_Calafate', emoji:'🌅', name:'Centro e Costanera', feeType:'free', fee:'Gratuito', feeNote:'', desc:'Calçadão à beira do Lago Argentino com ótimas vistas. Restaurantes e lojas de artesanato na Av. del Libertador. Pôr do sol sobre o lago é espetacular.', tags:['Qualquer horário','A pé','Vista do Lago Argentino']}
+    ]
+  },
+  {
+    code:'CHT', dotClass:'dot-teal', name:'El Chaltén', days:'Dias 3–6 · 3 noites',
+    transit:{icon:'ti-car', text:'3h de carro de El Calafate · Entrada do parque nacional pela própria cidade — gratuito'},
+    attractions:[
+      {wiki:'Fitz_Roy', emoji:'⛰️', name:'Laguna de los Tres — Fitz Roy', feeType:'free', fee:'Gratuito', feeNote:'Parque Los Glaciares — acesso pela cidade', desc:'A trilha mais icônica da Patagônia argentina. 21km ida e volta, 1.200m de desnível. Chegando ao mirante você enfrenta o Fitz Roy de frente com a laguna turquesa abaixo. Saída recomendada às 5h para pegar o nascer do sol no cume.', tags:['~8–10h','21km / 1.200m desnível','Nível difícil']},
+      {wiki:'Cerro_Torre', emoji:'🏔️', name:'Laguna Torre — Cerro Torre', feeType:'free', fee:'Gratuito', feeNote:'Parque Los Glaciares', desc:'18km ida e volta até a laguna com vista frontal ao Cerro Torre (3.128m). Mais tranquila que a trilha do Fitz Roy. Mirador Maestri no final oferece vista do glaciar na base do Cerro.', tags:['~6–8h','18km / 400m desnível','Nível moderado']},
+      {wiki:'El_Chaltén', emoji:'💧', name:'Chorrillo del Salto', feeType:'free', fee:'Gratuito', feeNote:'', desc:'Cachoeira a 4km da entrada do vilarejo. Trilha fácil de 30 minutos — ótima para o primeiro dia, antes do corpo se acostumar com o esforço. Águas turquesa típicas da Patagônia.', tags:['~1h','4km da cidade','Nível fácil']}
+    ]
+  },
+  {
+    code:'PNT', dotClass:'dot-purple', name:'Puerto Natales', days:'Dia 7 · 1–2 noites',
+    transit:{icon:'ti-car', text:'~5–6h de carro cruzando a fronteira Argentina → Chile'},
+    attractions:[
+      {wiki:'Cueva_del_Milodón_Natural_Monument', emoji:'🦴', name:'Cueva del Milodón', feeType:'paid', fee:'~$8.500 CLP (~R$ 56)', feeNote:'monumento natural nacional', desc:'Caverna pré-histórica onde foram encontrados restos do milodón — mamífero gigante extinto há 10.000 anos. A caverna tem 30m de altura e 80m de profundidade. Inclui réplica em tamanho real do animal. A 24km de Puerto Natales — ideal para visitar no caminho de chegada.', tags:['~2h','24km de Puerto Natales','Monumento Nacional']},
+      {wiki:'Puerto_Natales', emoji:'🌊', name:'Costanera — Seno Última Esperanza', feeType:'free', fee:'Gratuito', feeNote:'', desc:'Puerto Natales fica num fiorde patagônico com vistas espetaculares às montanhas nevadas. O pôr do sol a partir da costanera é um dos melhores momentos da viagem. Frutos do mar frescos nos restaurantes do centro.', tags:['A qualquer hora','Centro da cidade','Vista dos fiordes']},
+      {wiki:'Cerro_Dorotea', emoji:'🗻', name:'Mirador Cerro Dorotea', feeType:'paid', fee:'~$3.000 CLP (~R$ 20)', feeNote:'propriedade privada', desc:'Trilha de 7km com subida de 500m terminando num mirante 360° sobre Puerto Natales, o fiorde e as torres do TDP ao fundo. Ótima atividade de aquecimento antes do parque.', tags:['~3–4h','7km / 500m desnível','Vista 360° da região']}
+    ]
+  },
+  {
+    code:'TDP', dotClass:'dot-amber', name:'Torres del Paine', days:'Dias 8–11 · 3–4 dias',
+    transit:{icon:'ti-car', text:'~1h de carro de Puerto Natales · Ingresso: $35 USD (~R$ 203) por pessoa'},
+    attractions:[
+      {wiki:'Torres_del_Paine_National_Park', emoji:'🗼', name:'Mirador Las Torres — Base das Torres', feeType:'inc', fee:'Incluso no ingresso', feeNote:'ingresso $35 USD (~R$ 203)', desc:'A trilha mais famosa do parque. 18km ida e volta, 800m de desnível até a laguna Azul com as três torres de granito. Saída às 4h para o nascer do sol. A subida final em rocha solta é exigente, mas a vista recompensa.', tags:['~8–10h','18km / 800m desnível','Nível difícil']},
+      {wiki:'French_Valley', emoji:'🏔️', name:'Valle del Francés', feeType:'inc', fee:'Incluso no ingresso', feeNote:'', desc:'O trecho mais selvagem do Circuito W. Vale glaciar com paredes de 2.000m, avalanches de gelo audíveis e cóndores voando. Mirador Británico no topo oferece vista das três faces do parque ao mesmo tempo.', tags:['~8–10h','Nível moderado/difícil','Cóndores e avalanches']},
+      {wiki:'Grey_Glacier', emoji:'💎', name:'Glaciar Grey', feeType:'inc', fee:'Incluso no ingresso', feeNote:'Barco separado ~$80 USD (~R$ 464)', desc:'Glaciar de 270km² descendo do Campo de Gelo Patagônico Sul. Pode ser visto da trilha (gratuito) ou de barco, que leva até a face com icebergs ao redor. Uma das experiências mais impressionantes do parque.', tags:['Trilha ~5h gratuita','Barco ~$80 USD opcional','Campo de Gelo Sul']},
+      {wiki:'Torres_del_Paine_National_Park', emoji:'💧', name:'Salto Grande', feeType:'inc', fee:'Incluso no ingresso', feeNote:'', desc:'Cascata onde o Lago Nordenskjöld descarrega no Lago Pehoé. Vista espetacular das Torres ao fundo. A 1km do estacionamento Pudeto — ideal ao chegar ou sair do parque. Amanhecer e pôr do sol são memoráveis.', tags:['~30min','1km do estacionamento','Vista das Torres']}
+    ]
+  }
+];
+
+function buildRoteiro(){
+  var c = document.getElementById('roteiro-content');
+  var h = '';
+  cities.forEach(function(city){
+    if(city.transit){
+      h += '<div class="transit-bar"><i class="ti '+city.transit.icon+'"></i><span>'+city.transit.text+'</span></div>';
+    }
+    h += '<div class="city-block">';
+    h += '<div class="city-header"><div class="city-dot '+city.dotClass+'">'+city.code+'</div><div><div class="city-name">'+city.name+'</div><div class="city-meta">'+city.days+'</div></div></div>';
+    city.attractions.forEach(function(a,i){
+      var imgId = 'img-'+city.code+'-'+i;
+      var phId = 'ph-'+imgId;
+      var feeClass = a.feeType === 'free' ? 'fee-free' : (a.feeType === 'inc' ? 'fee-inc' : 'fee-paid');
+      var feeDisplay = a.fee + (a.feeNote ? ' · '+a.feeNote : '');
+      var tagsHtml = a.tags.map(function(t){return '<span class="tag">'+t+'</span>';}).join('');
+      h += '<div class="attr-card">';
+      h += '<div class="attr-img-wrap">';
+      h += '<div class="img-icon" id="'+phId+'">'+a.emoji+'</div>';
+      h += '<img id="'+imgId+'" src="" alt="'+a.name+'" onload="this.classList.add(\'loaded\');document.getElementById(\''+phId+'\').style.display=\'none\'">';
+      h += '</div>';
+      h += '<div class="attr-body">';
+      h += '<div class="attr-top"><div class="attr-name">'+a.name+'</div><div class="attr-fee '+feeClass+'">'+feeDisplay+'</div></div>';
+      h += '<div class="attr-desc">'+a.desc+'</div>';
+      h += '<div class="attr-tags">'+tagsHtml+'</div>';
+      h += '</div></div>';
+    });
+    h += '</div>';
+  });
+  c.innerHTML = h;
+  loadWikiImages();
+}
+
+function loadWikiImages(){
+  var pages = [];
+  cities.forEach(function(c){ c.attractions.forEach(function(a){ pages.push(a.wiki); }); });
+  fetch('https://en.wikipedia.org/w/api.php?action=query&prop=pageimages&format=json&piprop=thumbnail&pithumbsize=600&titles='+pages.join('|')+'&origin=*')
+    .then(function(r){return r.json();})
+    .then(function(data){
+      var map = {};
+      Object.values(data.query.pages).forEach(function(p){ if(p.thumbnail) map[p.title.replace(/ /g,'_')] = p.thumbnail.source; });
+      cities.forEach(function(city){
+        city.attractions.forEach(function(a,i){
+          var src = map[a.wiki] || map[a.wiki.replace(/_/g,' ')];
+          if(src){ var el=document.getElementById('img-'+city.code+'-'+i); if(el) el.src=src; }
+        });
+      });
+    }).catch(function(){});
+}
+
+// ===== NAVIGATION =====
+function show(id){
+  var ids=['perfil','roteiro','orcamento','transporte','hospedagem','equipamentos','dicas'];
+  document.querySelectorAll('.nav-btn').forEach(function(b,i){ b.classList.toggle('active', ids[i]===id); });
+  document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+  document.getElementById('panel-'+id).classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function selectPerfil(p){
+  document.getElementById('card-camping').classList.toggle('sel',p==='camping');
+  document.getElementById('card-airbnb').classList.toggle('sel',p==='airbnb');
+  document.getElementById('desc-camping').style.display=p==='camping'?'block':'none';
+  document.getElementById('desc-airbnb').style.display=p==='airbnb'?'block':'none';
+}
+function showHosp(p){
+  document.getElementById('hosp-camping').style.display=p==='camping'?'block':'none';
+  document.getElementById('hosp-airbnb').style.display=p==='airbnb'?'block':'none';
+  document.getElementById('btn-h-camping').classList.toggle('active',p==='camping');
+  document.getElementById('btn-h-airbnb').classList.toggle('active',p==='airbnb');
+}
+function showOrc(p){
+  document.getElementById('orc-camping').style.display=p==='camping'?'block':'none';
+  document.getElementById('orc-airbnb').style.display=p==='airbnb'?'block':'none';
+  document.getElementById('btn-o-camping').classList.toggle('active',p==='camping');
+  document.getElementById('btn-o-airbnb').classList.toggle('active',p==='airbnb');
+}
+
+buildRoteiro();
+</script>
+</body>
+</html>
