@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#2d6a4f">
+<title>Patagônia & Ushuaia 2027 — Guia de Viagem</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-eyebrow">Guia de viagem · Set/Out 2027</div>
+  <div class="hero-title" id="hero-title">Patagônia<br><em>Argentina &amp; Chile</em></div>
+  <div class="hero-sub" id="hero-sub">El Calafate · El Chaltén · Puerto Natales · Torres del Paine</div>
+  <div class="dest-toggle">
+    <button class="dest-btn active" id="dest-btn-patagonia" onclick="selectDest('patagonia')">🏔 Patagônia</button>
+    <button class="dest-btn" id="dest-btn-ushuaia" onclick="selectDest('ushuaia')">🐧 Ushuaia</button>
+  </div>
+  <div class="hero-badges" id="hero-badges">
+    <span class="hero-badge">👥 6 pessoas</span>
+    <span class="hero-badge">🗓 12 dias</span>
+    <span class="hero-badge">🚗 Carro pela rota completa</span>
+  </div>
+</div>
+
+<div class="nav-wrap">
+  <div class="nav">
+    <button class="nav-btn active" onclick="show('perfil')"><i class="ti ti-user"></i>Perfil</button>
+    <button class="nav-btn" onclick="show('roteiro')"><i class="ti ti-map-pin"></i>Roteiro</button>
+    <button class="nav-btn" onclick="show('orcamento')"><i class="ti ti-currency-dollar"></i>Orçamento</button>
+    <button class="nav-btn" onclick="show('transporte')"><i class="ti ti-car"></i>Transporte</button>
+    <button class="nav-btn" onclick="show('hospedagem')"><i class="ti ti-bed"></i>Hospedagem</button>
+    <button class="nav-btn" onclick="show('equipamentos')"><i class="ti ti-backpack"></i>Equipamentos</button>
+    <button class="nav-btn" onclick="show('dicas')"><i class="ti ti-bulb"></i>Dicas</button>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ===================== PERFIL ===================== -->
+<div class="panel active" id="panel-perfil">
+
+  <div class="dest-block" data-dest="patagonia">
+    <div class="sec-title">Escolha seu perfil</div>
+    <div class="perfil-grid">
+      <div class="pcard sel" id="card-camping" onclick="selectPerfil('patagonia','camping')">
+        <div class="pcard-icon">⛺</div>
+        <div class="pcard-title">Camping + Hostel</div>
+        <div class="pcard-sub">Acampa no TDP, hostels nas cidades. Mais imersivo e barato.</div>
+      </div>
+      <div class="pcard" id="card-airbnb" onclick="selectPerfil('patagonia','airbnb')">
+        <div class="pcard-icon">🏠</div>
+        <div class="pcard-title">Airbnb Compartilhado</div>
+        <div class="pcard-sub">Casas divididas entre os 6. Mais conforto e privacidade.</div>
+      </div>
+    </div>
+
+    <div id="desc-camping">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:6px">Perfil Camping + Hostel</div>
+        <div class="card-sub">Hostels com quarto privado nas cidades, camping 3–4 noites em Torres del Paine. Equipamentos alugados em Puerto Natales. Carro com ida e volta por El Calafate.</div>
+        <div class="card-tags" style="margin-top:10px">
+          <span class="badge badge-green">~R$ 8.000 / pessoa</span>
+          <span class="badge badge-green">Melhor custo</span>
+        </div>
+      </div>
+    </div>
+    <div id="desc-airbnb" style="display:none">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:6px">Perfil Airbnb Compartilhado</div>
+        <div class="card-sub">Casas inteiras via Airbnb nas 3 cidades com cozinha e privacidade. Base em Puerto Natales para o TDP + 1 noite camping opcional. Carro para todo o trajeto.</div>
+        <div class="card-tags" style="margin-top:10px">
+          <span class="badge badge-green">~R$ 9.500 / pessoa</span>
+          <span class="badge badge-amber">No limite dos R$ 10k</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-title">Quando comprar as passagens</div>
+    <div class="card">
+      <div class="card-row">
+        <div>
+          <div class="card-title">Melhor janela de compra</div>
+          <div class="card-sub" style="margin-top:4px">Para setembro/outubro 2027: compre entre <strong>outubro e dezembro de 2026</strong>. Sweet spot com ~10–12 meses de antecedência, antes da demanda subir.</div>
+        </div>
+      </div>
+      <div class="card-tags"><span class="badge badge-green">Recomendado</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Black Friday 2026</div>
+      <div class="card-sub" style="margin-top:4px">Novembro de 2026. LATAM, Gol e Aerolíneas costumam soltar promoções. Ative alertas de preço no Google Flights com antecedência.</div>
+      <div class="card-tags"><span class="badge badge-amber">Oportunidade</span></div>
+    </div>
+    <div class="alert warn" style="margin-top:4px">
+      <i class="ti ti-alert-triangle"></i>
+      <span>Depois de março/abril 2027 os preços sobem muito. Não deixe para os últimos 3–4 meses.</span>
+    </div>
+  </div>
+
+  <div class="dest-block" data-dest="ushuaia" style="display:none">
+    <div class="sec-title">Escolha seu perfil</div>
+    <div class="perfil-grid">
+      <div class="pcard sel" id="u-card-camping" onclick="selectPerfil('ushuaia','camping')">
+        <div class="pcard-icon">⛺</div>
+        <div class="pcard-title">Hostel + Camping</div>
+        <div class="pcard-sub">Hostels na cidade, 1 noite de camping no PN Tierra del Fuego. Mais econômico.</div>
+      </div>
+      <div class="pcard" id="u-card-airbnb" onclick="selectPerfil('ushuaia','airbnb')">
+        <div class="pcard-icon">🏠</div>
+        <div class="pcard-title">Cabana / Airbnb</div>
+        <div class="pcard-sub">Casa ou cabana inteira dividida entre os 6. Mais conforto e cozinha.</div>
+      </div>
+    </div>
+
+    <div id="u-desc-camping">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:6px">Perfil Hostel + Camping</div>
+        <div class="card-sub">Hostels com quarto privado em Ushuaia como base e 1 noite opcional de camping no Lago Roca, dentro do PN Tierra del Fuego. Carro alugado para os day trips aos lagos e à Laguna Esmeralda.</div>
+        <div class="card-tags" style="margin-top:10px">
+          <span class="badge badge-green">~R$ 6.500 / pessoa</span>
+          <span class="badge badge-green">Melhor custo</span>
+        </div>
+      </div>
+    </div>
+    <div id="u-desc-airbnb" style="display:none">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:6px">Perfil Cabana / Airbnb</div>
+        <div class="card-sub">Cabana ou casa inteira em Ushuaia com cozinha e, em muitos casos, vista para o Canal Beagle. Base única para todos os passeios, voltando para jantar em casa.</div>
+        <div class="card-tags" style="margin-top:10px">
+          <span class="badge badge-green">~R$ 7.500 / pessoa</span>
+          <span class="badge badge-green">Cabe folgado nos R$ 10k</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-title">Quando comprar as passagens</div>
+    <div class="card">
+      <div class="card-row">
+        <div>
+          <div class="card-title">Melhor janela de compra</div>
+          <div class="card-sub" style="margin-top:4px">Para setembro/outubro 2027: compre entre <strong>outubro e dezembro de 2026</strong>. Voos a Ushuaia (USH) são domésticos via Buenos Aires — compre o internacional e o doméstico juntos para casar horários.</div>
+        </div>
+      </div>
+      <div class="card-tags"><span class="badge badge-green">Recomendado</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Black Friday 2026</div>
+      <div class="card-sub" style="margin-top:4px">Novembro de 2026. Aerolíneas e Flybondi costumam baixar os trechos domésticos a USH. Ative alertas de preço no Google Flights para o trecho Buenos Aires → Ushuaia.</div>
+      <div class="card-tags"><span class="badge badge-amber">Oportunidade</span></div>
+    </div>
+    <div class="alert warn" style="margin-top:4px">
+      <i class="ti ti-alert-triangle"></i>
+      <span>USH tem menos voos diários que destinos maiores — quanto mais perto da data, mais caro e cheio. Reserve cedo.</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===================== ROTEIRO ===================== -->
+<div class="panel" id="panel-roteiro">
+  <div class="sec-title" id="roteiro-title">Roteiro — 12 dias com carro</div>
+  <div id="roteiro-content"></div>
+  <div class="sec-title">Mapa das atrações</div>
+  <div id="roteiro-map"></div>
+  <div class="map-note">📍 Toque em cada pino para ver o nome da atração. Pontos aproximados.</div>
+</div>
+
+<!-- ===================== ORÇAMENTO ===================== -->
+<div class="panel" id="panel-orcamento">
+
+  <div class="dest-block" data-dest="patagonia">
+    <div class="sec-title">Orçamento por pessoa — 12 dias</div>
+    <div class="legend">
+      <span>Sem ~ = valor confirmado</span>
+      <span>~ = estimativa</span>
+      <span>$1 USD ≈ R$ 5,80</span>
+    </div>
+
+    <div class="pill-toggle">
+      <button class="pill-btn active" id="btn-o-camping" onclick="showOrc('patagonia','camping')">⛺ Camping + Hostel</button>
+      <button class="pill-btn" id="btn-o-airbnb" onclick="showOrc('patagonia','airbnb')">🏠 Airbnb</button>
+    </div>
+
+    <div id="orc-camping">
+      <div class="budget-hero">
+        <div class="bh-card main">
+          <div class="bh-label">Total / pessoa</div>
+          <div class="bh-value">~R$ 8.000</div>
+          <div class="bh-sub">R$ 2.000 de folga até R$ 10k</div>
+        </div>
+        <div class="bh-card">
+          <div class="bh-label">Grupo de 6</div>
+          <div class="bh-value">~R$ 48k</div>
+          <div class="bh-sub">total estimado</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="breakdown-row"><span>✈ Passagens ida e volta (FTE)</span><span class="bval">~R$ 2.600</span></div>
+        <div class="breakdown-row"><span>~Hostels quartos privados (9 noites)</span><span class="bval">~R$ 1.150</span></div>
+        <div class="breakdown-row"><span>⛺ Camping TDP — $21–36 USD (~R$ 122–210)</span><span class="bval">R$ 350</span></div>
+        <div class="breakdown-row"><span>~Aluguel equip. TDP — ~$55–80 USD (~R$ 320–465)</span><span class="bval">~R$ 400</span></div>
+        <div class="breakdown-row"><span>~Alimentação (cozinhando + restaurantes)</span><span class="bval">~R$ 1.200</span></div>
+        <div class="breakdown-row"><span>~SUV 11 dias ÷ 6 + combustível</span><span class="bval">~R$ 950</span></div>
+        <div class="breakdown-row"><span>~Taxa fronteira + seguro veículo Chile</span><span class="bval amber">~R$ 200</span></div>
+        <div class="breakdown-row"><span>🏔 Ingresso TDP — $35 USD (~R$ 203)</span><span class="bval">R$ 200</span></div>
+        <div class="breakdown-row"><span>~Passeios — barco Perito Moreno ~$30 (~R$ 175)</span><span class="bval">~R$ 200</span></div>
+        <div class="breakdown-row"><span>~Seguro viagem</span><span class="bval">~R$ 280</span></div>
+        <div class="breakdown-row"><span>~Reserva emergência</span><span class="bval green">~R$ 470</span></div>
+      </div>
+    </div>
+
+    <div id="orc-airbnb" style="display:none">
+      <div class="budget-hero">
+        <div class="bh-card main">
+          <div class="bh-label">Total / pessoa</div>
+          <div class="bh-value">~R$ 9.500</div>
+          <div class="bh-sub">R$ 500 de folga até R$ 10k</div>
+        </div>
+        <div class="bh-card">
+          <div class="bh-label">Grupo de 6</div>
+          <div class="bh-value">~R$ 57k</div>
+          <div class="bh-sub">total estimado</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="breakdown-row"><span>✈ Passagens ida e volta (FTE)</span><span class="bval">~R$ 2.600</span></div>
+        <div class="breakdown-row"><span>~Airbnb casas inteiras (11 noites)</span><span class="bval">~R$ 2.800</span></div>
+        <div class="breakdown-row"><span>~Aluguel equip. 1 noite ~$20–33 USD (~R$ 116–192)</span><span class="bval">~R$ 200</span></div>
+        <div class="breakdown-row"><span>~Alimentação (cozinhando + restaurantes)</span><span class="bval">~R$ 1.150</span></div>
+        <div class="breakdown-row"><span>~SUV 11 dias ÷ 6 + combustível</span><span class="bval">~R$ 950</span></div>
+        <div class="breakdown-row"><span>~Taxa fronteira + seguro veículo Chile</span><span class="bval amber">~R$ 200</span></div>
+        <div class="breakdown-row"><span>🏔 Ingresso TDP — $35 USD (~R$ 203)</span><span class="bval">R$ 200</span></div>
+        <div class="breakdown-row"><span>~Passeios — barco Perito Moreno ~$30 (~R$ 175)</span><span class="bval">~R$ 200</span></div>
+        <div class="breakdown-row"><span>~Seguro viagem</span><span class="bval">~R$ 280</span></div>
+        <div class="breakdown-row"><span>~Reserva emergência</span><span class="bval green">~R$ 920</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dest-block" data-dest="ushuaia" style="display:none">
+    <div class="sec-title">Orçamento por pessoa — 6 dias</div>
+    <div class="legend">
+      <span>Sem ~ = valor confirmado</span>
+      <span>~ = estimativa</span>
+      <span>$1 USD ≈ R$ 5,80</span>
+    </div>
+
+    <div class="pill-toggle">
+      <button class="pill-btn active" id="u-btn-o-camping" onclick="showOrc('ushuaia','camping')">⛺ Hostel + Camping</button>
+      <button class="pill-btn" id="u-btn-o-airbnb" onclick="showOrc('ushuaia','airbnb')">🏠 Cabana / Airbnb</button>
+    </div>
+
+    <div id="u-orc-camping">
+      <div class="budget-hero">
+        <div class="bh-card main">
+          <div class="bh-label">Total / pessoa</div>
+          <div class="bh-value">~R$ 6.500</div>
+          <div class="bh-sub">R$ 3.500 de folga até R$ 10k</div>
+        </div>
+        <div class="bh-card">
+          <div class="bh-label">Grupo de 6</div>
+          <div class="bh-value">~R$ 39k</div>
+          <div class="bh-sub">total estimado</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="breakdown-row"><span>✈ Passagens ida e volta GRU↔USH</span><span class="bval">~R$ 3.000</span></div>
+        <div class="breakdown-row"><span>~Hostels quartos privados (5 noites)</span><span class="bval">~R$ 750</span></div>
+        <div class="breakdown-row"><span>⛺ Camping Lago Roca (PN) — 1 noite</span><span class="bval">~R$ 80</span></div>
+        <div class="breakdown-row"><span>~Alimentação (cozinhando + restaurantes)</span><span class="bval">~R$ 750</span></div>
+        <div class="breakdown-row"><span>~SUV 4–5 dias ÷ 6 + combustível</span><span class="bval">~R$ 600</span></div>
+        <div class="breakdown-row"><span>🏔 Ingresso PN Tierra del Fuego — ~$26 USD (~R$ 150)</span><span class="bval">R$ 150</span></div>
+        <div class="breakdown-row"><span>⛵ Navegação Canal Beagle — ~$50–70 USD (~R$ 290–405)</span><span class="bval">~R$ 350</span></div>
+        <div class="breakdown-row"><span>~Passeios opcionais (tren / pingüinera)</span><span class="bval amber">~R$ 300</span></div>
+        <div class="breakdown-row"><span>~Seguro viagem</span><span class="bval">~R$ 200</span></div>
+        <div class="breakdown-row"><span>~Reserva emergência</span><span class="bval green">~R$ 320</span></div>
+      </div>
+    </div>
+
+    <div id="u-orc-airbnb" style="display:none">
+      <div class="budget-hero">
+        <div class="bh-card main">
+          <div class="bh-label">Total / pessoa</div>
+          <div class="bh-value">~R$ 7.500</div>
+          <div class="bh-sub">R$ 2.500 de folga até R$ 10k</div>
+        </div>
+        <div class="bh-card">
+          <div class="bh-label">Grupo de 6</div>
+          <div class="bh-value">~R$ 45k</div>
+          <div class="bh-sub">total estimado</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="breakdown-row"><span>✈ Passagens ida e volta GRU↔USH</span><span class="bval">~R$ 3.000</span></div>
+        <div class="breakdown-row"><span>~Cabana / casa inteira (6 noites)</span><span class="bval">~R$ 1.800</span></div>
+        <div class="breakdown-row"><span>~Alimentação (cozinhando + restaurantes)</span><span class="bval">~R$ 750</span></div>
+        <div class="breakdown-row"><span>~SUV 4–5 dias ÷ 6 + combustível</span><span class="bval">~R$ 600</span></div>
+        <div class="breakdown-row"><span>🏔 Ingresso PN Tierra del Fuego — ~$26 USD (~R$ 150)</span><span class="bval">R$ 150</span></div>
+        <div class="breakdown-row"><span>⛵ Navegação Canal Beagle — ~$50–70 USD (~R$ 290–405)</span><span class="bval">~R$ 350</span></div>
+        <div class="breakdown-row"><span>~Passeios opcionais (tren / pingüinera)</span><span class="bval amber">~R$ 300</span></div>
+        <div class="breakdown-row"><span>~Seguro viagem</span><span class="bval">~R$ 200</span></div>
+        <div class="breakdown-row"><span>~Reserva emergência</span><span class="bval green">~R$ 350</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===================== TRANSPORTE ===================== -->
+<div class="panel" id="panel-transporte">
+
+  <div class="dest-block" data-dest="patagonia">
+    <div class="sec-title">Comparativo de transporte</div>
+    <div class="compare-grid">
+      <div class="ccard">
+        <div class="ccard-title">🚌 Ônibus + voos mistos</div>
+        <div class="crow"><span>GRU→EZE→FTE</span><span>~R$ 2.600</span></div>
+        <div class="crow"><span>~Calafate↔Chaltén bus</span><span>~$30 <span class="conv">(~R$175)</span></span></div>
+        <div class="crow"><span>~Calafate→Natales bus</span><span>~$30 <span class="conv">(~R$175)</span></span></div>
+        <div class="crow"><span>~Natales→TDP bus</span><span>~$15 <span class="conv">(~R$90)</span></span></div>
+        <div class="crow"><span>~PUQ→SCL→GRU volta</span><span>~$200–300 <span class="conv">(~R$1.200–1.800)</span></span></div>
+        <div class="ctotal"><span>~Total pp</span><span style="color:var(--amber)">~R$ 4.400–5.000</span></div>
+      </div>
+      <div class="ccard rec">
+        <div class="ccard-title">🚗 Carro + ida e volta FTE <span class="badge badge-green">✓</span></div>
+        <div class="crow"><span>GRU→EZE→FTE ida</span><span>~R$ 1.300</span></div>
+        <div class="crow"><span>FTE→EZE→GRU volta</span><span>~R$ 1.300</span></div>
+        <div class="crow"><span>~SUV 11d ÷ 6</span><span>~R$ 850–1.100</span></div>
+        <div class="crow"><span>~Combustível ÷ 6</span><span>~R$ 150–200</span></div>
+        <div class="crow"><span>~Fronteira+seguro</span><span>~R$ 150–250</span></div>
+        <div class="ctotal"><span>~Total pp</span><span style="color:var(--accent)">~R$ 3.750–4.150</span></div>
+      </div>
+    </div>
+    <div class="alert success"><i class="ti ti-check"></i><span>Rota de carro economiza ~R$ 600–850 pp e dá liberdade total de horários em toda a viagem.</span></div>
+
+    <div class="sec-title">Custos extras do carro</div>
+    <div class="card">
+      <div class="extra-item">
+        <div class="extra-emoji">📋</div>
+        <div>
+          <div class="extra-title">Autorização para o Chile</div>
+          <div class="extra-sub">Obrigatória. Solicitar na locadora antes de assinar, por escrito. Confirmar que a locadora permite.</div>
+          <div class="extra-cost cost-amber">~$30–80 USD (~R$ 175–465) ÷ 6 = ~R$ 30–75 pp</div>
+        </div>
+      </div>
+      <div class="extra-item">
+        <div class="extra-emoji">⛽</div>
+        <div>
+          <div class="extra-title">Combustível — rota completa</div>
+          <div class="extra-sub">~1.300–1.500 km. Diesel ARG ~$1,10/L (~R$ 6,40), CHL ~$1,30/L (~R$ 7,55).</div>
+          <div class="extra-cost cost-amber">~$155–200 USD (~R$ 900–1.160) ÷ 6 = ~R$ 150–200 pp</div>
+        </div>
+      </div>
+      <div class="extra-item">
+        <div class="extra-emoji">🛡️</div>
+        <div>
+          <div class="extra-title">Seguro veículo para o Chile</div>
+          <div class="extra-sub">Obrigatório por lei. Confirme se a locadora inclui ou cobra à parte por dia no Chile.</div>
+          <div class="extra-cost cost-amber">~$15–30 USD/dia (~R$ 87–175/dia) nos dias no Chile</div>
+        </div>
+      </div>
+      <div class="extra-item">
+        <div class="extra-emoji">🔧</div>
+        <div>
+          <div class="extra-title">Estepe — cascalho no TDP</div>
+          <div class="extra-sub">Confirme se o seguro cobre pneu furado e se há estepe no veículo antes de sair.</div>
+          <div class="extra-cost cost-green">Sem custo extra se o seguro cobrir</div>
+        </div>
+      </div>
+    </div>
+    <div class="alert warn"><i class="ti ti-alert-triangle"></i><span>Pergunte na locadora: <em>"¿Está permitido cruzar a Chile? ¿El seguro cubre Chile?"</em> Saia com autorização escrita e estepe confirmado.</span></div>
+  </div>
+
+  <div class="dest-block" data-dest="ushuaia" style="display:none">
+    <div class="sec-title">Comparativo de transporte</div>
+    <div class="compare-grid">
+      <div class="ccard">
+        <div class="ccard-title">🚐 Só transfers + excursões</div>
+        <div class="crow"><span>GRU→BA→USH (ida e volta)</span><span>~R$ 3.000</span></div>
+        <div class="crow"><span>~Transfer PN Tierra del Fuego</span><span>~$25 <span class="conv">(~R$145)</span></span></div>
+        <div class="crow"><span>~Excursão lagos / Laguna Esmeralda</span><span>~$40 <span class="conv">(~R$232)</span></span></div>
+        <div class="crow"><span>~Táxis / transfers na cidade</span><span>~$20 <span class="conv">(~R$116)</span></span></div>
+        <div class="ctotal"><span>~Total pp</span><span style="color:var(--amber)">~R$ 3.500–3.800</span></div>
+      </div>
+      <div class="ccard rec">
+        <div class="ccard-title">🚗 Carro alugado <span class="badge badge-green">✓</span></div>
+        <div class="crow"><span>GRU→BA→USH (ida e volta)</span><span>~R$ 3.000</span></div>
+        <div class="crow"><span>~SUV 4–5d ÷ 6</span><span>~R$ 450–650</span></div>
+        <div class="crow"><span>~Combustível ÷ 6</span><span>~R$ 80–120</span></div>
+        <div class="crow"><span>~Estacionamento / extras</span><span>~R$ 50</span></div>
+        <div class="ctotal"><span>~Total pp</span><span style="color:var(--accent)">~R$ 3.580–3.820</span></div>
+      </div>
+    </div>
+    <div class="alert success"><i class="ti ti-check"></i><span>O carro custa quase o mesmo dos transfers, mas libera a Laguna Esmeralda e os lagos Escondido/Fagnano, fora do alcance das excursões fixas.</span></div>
+
+    <div class="sec-title">Pontos de atenção</div>
+    <div class="card">
+      <div class="extra-item">
+        <div class="extra-emoji">✈</div>
+        <div>
+          <div class="extra-title">Voo doméstico via Buenos Aires</div>
+          <div class="extra-sub">USH não tem voo internacional direto. A conexão é em BA — atenção à possível troca de aeroporto (EZE ↔ AEP). Deixe boa folga entre os voos.</div>
+          <div class="extra-cost cost-amber">Reserve transfer EZE↔AEP se a conexão exigir</div>
+        </div>
+      </div>
+      <div class="extra-item">
+        <div class="extra-emoji">❄️</div>
+        <div>
+          <div class="extra-title">Neve e ripio no início da primavera</div>
+          <div class="extra-sub">Set/out ainda tem neve no Paso Garibaldi e trechos de terra até a Laguna Esmeralda e o Cerro Castor. Confirme pneus adequados com a locadora.</div>
+          <div class="extra-cost cost-amber">Correntes/pneus de neve podem ser exigidos</div>
+        </div>
+      </div>
+      <div class="extra-item">
+        <div class="extra-emoji">⛽</div>
+        <div>
+          <div class="extra-title">Combustível — distâncias curtas</div>
+          <div class="extra-sub">Tudo gira em torno de Ushuaia; o total roda ~300–400 km na viagem inteira. Abasteça na cidade antes dos day trips ao norte.</div>
+          <div class="extra-cost cost-green">Gasto baixo dividido por 6</div>
+        </div>
+      </div>
+      <div class="extra-item">
+        <div class="extra-emoji">🅿️</div>
+        <div>
+          <div class="extra-title">Sem cruzamento de fronteira</div>
+          <div class="extra-sub">Chegando de avião, não há a burocracia de cruzar para o Chile como na Patagônia continental. Estacionamento gratuito na maioria dos pontos.</div>
+          <div class="extra-cost cost-green">Sem taxa de fronteira</div>
+        </div>
+      </div>
+    </div>
+    <div class="alert warn"><i class="ti ti-alert-triangle"></i><span>Garanta a conexão doméstica a USH no mesmo bilhete sempre que possível — remarcar trecho separado em alta temporada é caro.</span></div>
+  </div>
+
+</div>
+
+<!-- ===================== HOSPEDAGEM ===================== -->
+<div class="panel" id="panel-hospedagem">
+
+  <div class="dest-block" data-dest="patagonia">
+    <div class="alert info"><i class="ti ti-info-circle"></i><span>Todos os preços são <strong>por pessoa por noite (pp/noite)</strong>, já divididos em grupo de 6. Câmbio ref.: $1 USD ≈ R$ 5,80.</span></div>
+
+    <div class="pill-toggle">
+      <button class="pill-btn active" id="btn-h-camping" onclick="showHosp('patagonia','camping')">⛺ Camping + Hostel</button>
+      <button class="pill-btn" id="btn-h-airbnb" onclick="showHosp('patagonia','airbnb')">🏠 Airbnb</button>
+    </div>
+
+    <div id="hosp-camping">
+      <div class="card">
+        <div class="card-row"><div class="card-title">El Calafate — hostel quarto privado</div><div class="card-price">~R$ 20–30 pp/noite</div></div>
+        <div class="card-sub" style="margin-top:4px">Quarto privado para 6 com cozinha. Del Glaciar, America del Sur. Café da manhã muitas vezes incluído.</div>
+        <div class="card-tags"><span class="tag">2–3 noites</span></div>
+      </div>
+      <div class="card">
+        <div class="card-row"><div class="card-title">El Chaltén — hostel básico</div><div class="card-price">~R$ 17–25 pp/noite</div></div>
+        <div class="card-sub" style="margin-top:4px">Patagonia Hostel, Condor de los Andes. Cozinha compartilhada. Chegam a qualquer hora com o carro.</div>
+        <div class="card-tags"><span class="tag">2–3 noites</span></div>
+      </div>
+      <div class="card">
+        <div class="card-row"><div class="card-title">Puerto Natales — hostel mochileiro</div><div class="card-price">~R$ 15–22 pp/noite</div></div>
+        <div class="card-sub" style="margin-top:4px">The Singing Lamb, Erratic Rock. Retirada dos equipamentos alugados aqui.</div>
+        <div class="card-tags"><span class="tag">1–2 noites</span></div>
+      </div>
+      <div class="card">
+        <div class="card-row"><div class="card-title">Torres del Paine — camping oficial</div><div class="card-price">$7–12 USD (~R$ 41–70) pp/noite</div></div>
+        <div class="card-sub" style="margin-top:4px">Paine Grande, Grey, Los Perros. Valor tabelado CONAF. Reserve em <strong>reservas.conaf.cl</strong></div>
+        <div class="card-tags"><span class="tag">3–4 noites</span><span class="badge badge-green">Reserve já</span></div>
+      </div>
+    </div>
+
+    <div id="hosp-airbnb" style="display:none">
+      <div class="card">
+        <div class="card-row"><div class="card-title">El Calafate — Airbnb casa inteira</div><div class="card-price">~R$ 58–83 pp/noite</div></div>
+        <div class="card-sub" style="margin-top:4px">Casa 3 quartos com cozinha. Valor total da casa dividido por 6.</div>
+        <div class="card-tags"><span class="tag">2–3 noites</span></div>
+      </div>
+      <div class="card">
+        <div class="card-row"><div class="card-title">El Chaltén — Airbnb ou hostel privado</div><div class="card-price">~R$ 47–70 pp/noite</div></div>
+        <div class="card-sub" style="margin-top:4px">Oferta menor de Airbnb aqui. Hostel privado é boa alternativa se o preço não compensar.</div>
+        <div class="card-tags"><span class="tag">2–3 noites</span></div>
+      </div>
+      <div class="card">
+        <div class="card-row"><div class="card-title">Puerto Natales — Airbnb base TDP</div><div class="card-price">~R$ 50–75 pp/noite</div></div>
+        <div class="card-sub" style="margin-top:4px">Base para day trips ao parque (~1h de carro). Jantar em casa na volta.</div>
+        <div class="card-tags"><span class="tag">2–3 noites</span><span class="badge badge-amber">Base estratégica</span></div>
+      </div>
+      <div class="card">
+        <div class="card-row"><div class="card-title">Torres del Paine — camping (opcional)</div><div class="card-price">$7–12 USD (~R$ 41–70) pp/noite</div></div>
+        <div class="card-sub" style="margin-top:4px">Valor tabelado CONAF. Equipamentos alugados em Puerto Natales, devolvidos na saída.</div>
+        <div class="card-tags"><span class="tag">1 noite opcional</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dest-block" data-dest="ushuaia" style="display:none">
+    <div class="alert info"><i class="ti ti-info-circle"></i><span>Todos os preços são <strong>por pessoa por noite (pp/noite)</strong>, já divididos em grupo de 6. Câmbio ref.: $1 USD ≈ R$ 5,80.</span></div>
+
+    <div class="pill-toggle">
+      <button class="pill-btn active" id="u-btn-h-camping" onclick="showHosp('ushuaia','camping')">⛺ Hostel + Camping</button>
+      <button class="pill-btn" id="u-btn-h-airbnb" onclick="showHosp('ushuaia','airbnb')">🏠 Cabana / Airbnb</button>
+    </div>
+
+    <div id="u-hosp-camping">
+      <div class="card">
+        <div class="card-row"><div class="card-title">Ushuaia — hostel quarto privado</div><div class="card-price">~R$ 45–65 pp/noite</div></div>
+        <div class="card-sub" style="margin-top:4px">Antarctica Hostel, Los Cormoranes, Cruz del Sur. Quarto privado para o grupo com cozinha. Base para todos os passeios.</div>
+        <div class="card-tags"><span class="tag">4–5 noites</span></div>
+      </div>
+      <div class="card">
+        <div class="card-row"><div class="card-title">PN Tierra del Fuego — Camping Lago Roca</div><div class="card-price">$10–15 USD (~R$ 58–87) pp/noite</div></div>
+        <div class="card-sub" style="margin-top:4px">Área de camping agreste dentro do parque, à beira do Lago Roca. Tem confeitaria/quincho próximo. Equipamento alugado ou levado.</div>
+        <div class="card-tags"><span class="tag">1 noite opcional</span></div>
+      </div>
+    </div>
+
+    <div id="u-hosp-airbnb" style="display:none">
+      <div class="card">
+        <div class="card-row"><div class="card-title">Ushuaia — cabana inteira com vista</div><div class="card-price">~R$ 90–120 pp/noite</div></div>
+        <div class="card-sub" style="margin-top:4px">Cabanas na encosta com vista ao Canal Beagle, cozinha completa e lareira. Valor total dividido por 6. Carro ajuda no acesso.</div>
+        <div class="card-tags"><span class="tag">5–6 noites</span><span class="badge badge-amber">Vista do canal</span></div>
+      </div>
+      <div class="card">
+        <div class="card-row"><div class="card-title">Ushuaia centro — apartamento inteiro</div><div class="card-price">~R$ 70–100 pp/noite</div></div>
+        <div class="card-sub" style="margin-top:4px">Apto a pé do porto e dos restaurantes. Prático para a navegação no Canal Beagle e a vida noturna do centro.</div>
+        <div class="card-tags"><span class="tag">5–6 noites</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===================== EQUIPAMENTOS ===================== -->
+<div class="panel" id="panel-equipamentos">
+
+  <div class="dest-block" data-dest="patagonia">
+    <div class="alert warn"><i class="ti ti-alert-triangle"></i><span>Voo EZE→FTE tem franquia de 15 kg. Com carro, a mochila fica em ~9–11 kg — dentro do limite sem pagar extra.</span></div>
+
+    <div class="sec-title">Levar de casa vs alugar in loco</div>
+    <div class="compare-grid" style="margin-bottom:14px">
+      <div class="ccard">
+        <div class="ccard-title">🎒 Levar de casa</div>
+        <div class="crow"><span>~Bagagem extra (6)</span><span>~R$ 900–1.800</span></div>
+        <div class="crow"><span>~Barraca 2P × 3</span><span>~R$ 1.500</span></div>
+        <div class="crow"><span>~Sleeping bag × 6</span><span>~R$ 1.800</span></div>
+        <div class="crow"><span>~Colchão × 6</span><span>~R$ 600</span></div>
+        <div class="ctotal"><span>Custo pp</span><span style="color:var(--amber)">~R$ 800–1.600</span></div>
+      </div>
+      <div class="ccard rec">
+        <div class="ccard-title">🏪 Alugar em PNT <span class="badge badge-green">✓</span></div>
+        <div class="crow"><span>~Barraca 2P / noite</span><span>~$10–15 <span class="conv">(~R$58–87)</span></span></div>
+        <div class="crow"><span>~Sleeping bag / noite</span><span>~$6–10 <span class="conv">(~R$35–58)</span></span></div>
+        <div class="crow"><span>~Colchão / noite</span><span>~$4–6 <span class="conv">(~R$23–35)</span></span></div>
+        <div class="crow"><span>~3 noites pp</span><span>~$60–90 <span class="conv">(~R$350–520)</span></span></div>
+        <div class="ctotal"><span>Custo pp</span><span style="color:var(--accent)">~R$ 350–520</span></div>
+      </div>
+    </div>
+    <div class="alert info"><i class="ti ti-info-circle"></i><span>Reserve por e-mail com <strong>Erratic Rock</strong> ou <strong>Antares</strong> em Puerto Natales. Com carro, retiram e devolvem sem peso no avião.</span></div>
+
+    <div class="sec-title">Checklist por pessoa</div>
+    <div class="card">
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-backpack"></i>Mochila 50–65L</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">~1,5 kg</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-shirt"></i>Camadas técnicas (base + fleece + capa)</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">~2,5 kg</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-boot"></i>Bota de trilha impermeável</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">~1,2 kg</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-tent"></i>Barraca 2P (3 unid. para 6)</div><div class="cl-right"><span class="pill pill-green">Alugar PNT</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-moon"></i>Sleeping bag -10°C</div><div class="cl-right"><span class="pill pill-green">Alugar PNT</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-ripple"></i>Colchão isolante</div><div class="cl-right"><span class="pill pill-green">Alugar PNT</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-flame"></i>Fogareiro + gás</div><div class="cl-right"><span class="pill pill-amber">Comprar lá</span><span class="cl-kg">~$15 (~R$87)</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-droplet"></i>Filtro de água (1 por grupo)</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">0,1 kg</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-first-aid-kit"></i>Kit primeiros socorros</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">0,3 kg</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-battery-charging"></i>Powerbank (carry-on)</div><div class="cl-right"><span class="pill pill-blue">Levar</span></div></div>
+    </div>
+    <div class="alert danger" style="margin-top:10px"><i class="ti ti-alert-circle"></i><span>Gás não pode entrar no avião. Facas e canivetes só no bagageiro despachado.</span></div>
+  </div>
+
+  <div class="dest-block" data-dest="ushuaia" style="display:none">
+    <div class="alert warn"><i class="ti ti-alert-triangle"></i><span>Em Ushuaia predominam trilhas de um dia — basta uma mochila de ataque. Equipamento de camping só se for acampar a noite no PN.</span></div>
+
+    <div class="sec-title">Levar de casa vs alugar in loco</div>
+    <div class="compare-grid" style="margin-bottom:14px">
+      <div class="ccard rec">
+        <div class="ccard-title">🎒 Levar de casa <span class="badge badge-green">✓</span></div>
+        <div class="crow"><span>Mochila de ataque 25–35L</span><span>já tem</span></div>
+        <div class="crow"><span>Camadas + corta-vento</span><span>essencial</span></div>
+        <div class="crow"><span>Bota impermeável</span><span>essencial</span></div>
+        <div class="crow"><span>~Bagagem despachada</span><span>~R$ 0–300</span></div>
+        <div class="ctotal"><span>Custo pp</span><span style="color:var(--accent)">~R$ 0–300</span></div>
+      </div>
+      <div class="ccard">
+        <div class="ccard-title">🏪 Alugar em Ushuaia</div>
+        <div class="crow"><span>~Esqui Cerro Castor / dia</span><span>~$30–45 <span class="conv">(~R$175–260)</span></span></div>
+        <div class="crow"><span>~Barraca + sleeping / noite</span><span>~$15–25 <span class="conv">(~R$87–145)</span></span></div>
+        <div class="crow"><span>~Raquetes de neve</span><span>~$15 <span class="conv">(~R$87)</span></span></div>
+        <div class="crow"><span>Só se fizer o opcional</span><span>variável</span></div>
+        <div class="ctotal"><span>Custo pp</span><span style="color:var(--amber)">~R$ 0–350</span></div>
+      </div>
+    </div>
+    <div class="alert info"><i class="ti ti-info-circle"></i><span>Esqui no Cerro Castor e raquetes de neve são alugados no local. Para acampar a noite no Lago Roca, dá para alugar barraca/sleeping na cidade.</span></div>
+
+    <div class="sec-title">Checklist por pessoa</div>
+    <div class="card">
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-backpack"></i>Mochila de ataque 25–35L</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">~0,8 kg</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-shirt"></i>Camadas técnicas + corta-vento impermeável</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">~2,5 kg</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-boot"></i>Bota de trilha impermeável</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">~1,2 kg</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-hanger"></i>Luva, gorro e buff (vento gelado)</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">~0,3 kg</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-sunglasses"></i>Óculos de sol + protetor solar</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">~0,2 kg</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-umbrella"></i>Capa de chuva / poncho</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">~0,3 kg</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-droplet"></i>Garrafa de água</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">~0,2 kg</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-ski-jumping"></i>Equipamento de esqui</div><div class="cl-right"><span class="pill pill-green">Alugar (Castor)</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-tent"></i>Barraca + sleeping (se acampar)</div><div class="cl-right"><span class="pill pill-green">Alugar / Levar</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-battery-charging"></i>Powerbank (carry-on)</div><div class="cl-right"><span class="pill pill-blue">Levar</span></div></div>
+    </div>
+    <div class="alert danger" style="margin-top:10px"><i class="ti ti-alert-circle"></i><span>Set/out é início da primavera austral: 0–10°C, vento forte e tempo que muda rápido. Camadas e corta-vento impermeável são indispensáveis.</span></div>
+  </div>
+
+</div>
+
+<!-- ===================== DICAS ===================== -->
+<div class="panel" id="panel-dicas">
+
+  <div class="dest-block" data-dest="patagonia">
+    <div class="sec-title">Logística para 6 pessoas</div>
+    <div class="card">
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-car"></i></div>
+        <div class="dica-text">Confirme com a locadora antes de assinar: <strong>autorização escrita para o Chile</strong>, seguro que cobre território chileno e estepe no veículo. Hertz, Budget e Localiza estão em El Calafate.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-calendar-check"></i></div>
+        <div class="dica-text">Reserve o camping do TDP em <strong>reservas.conaf.cl</strong> antes de comprar as passagens. Paine Grande e Grey esgotam meses antes mesmo em set/out.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-building-store"></i></div>
+        <div class="dica-text">Reserve equipamentos de camping por e-mail com a <strong>Erratic Rock</strong> ou <strong>Antares</strong> em Puerto Natales com meses de antecedência.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-shopping-cart"></i></div>
+        <div class="dica-text">Compras grandes de mantimentos em El Calafate — supermercados maiores. Com carro, carregam comida para a viagem toda sem limitação de peso.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-wind"></i></div>
+        <div class="dica-text">Outubro é mais seguro que setembro — vento menor e todos os refugios abertos no TDP. Em setembro pode ter neve nos trechos altos do Circuito W.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-cash"></i></div>
+        <div class="dica-text">Leve USD em espécie além do cartão. ATMs escassos na Patagônia. Na Argentina, pesquise o câmbio blue na época — pode render significativamente mais que o oficial.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-shield-check"></i></div>
+        <div class="dica-text">Seguro viagem com <strong>cobertura de evacuação de emergência</strong> é obrigatório para Argentina e vital no TDP. Evacuação de helicóptero pode custar R$ 50.000+ sem cobertura.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-shirt"></i></div>
+        <div class="dica-text">Roupas de frio: leve do Brasil. Decathlon tem ótimo custo-benefício para montar o kit do zero. Não planeje comprar roupas técnicas na Patagônia — caro e estoque imprevisível.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dest-block" data-dest="ushuaia" style="display:none">
+    <div class="sec-title">Logística para 6 pessoas</div>
+    <div class="card">
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-ship"></i></div>
+        <div class="dica-text">Reserve a <strong>navegação pelo Canal Beagle</strong> com antecedência. Para desembarcar na pingüinera (Isla Martillo), a <strong>Piratour</strong> é a única operadora autorizada — esgota meses antes.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-plane"></i></div>
+        <div class="dica-text">Voos a Ushuaia (USH) são domésticos via Buenos Aires. Deixe boa folga na conexão e atenção à possível <strong>troca de aeroporto (EZE ↔ AEP)</strong>. Compre no mesmo bilhete quando der.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-snowflake"></i></div>
+        <div class="dica-text">Set/out é início de temporada: o <strong>Cerro Castor</strong> pode ainda estar esquiável (opcional) e os dias ficam mais longos. Leve roupa de frio e corta-vento — o vento é constante.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-car"></i></div>
+        <div class="dica-text">Carro alugado dá liberdade para a <strong>Laguna Esmeralda</strong> e os lagos Escondido/Fagnano, fora das excursões fixas. Confirme pneus adequados para neve/ripio.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-cash"></i></div>
+        <div class="dica-text">Leve USD em espécie e pesquise o <strong>câmbio blue</strong> na Argentina — costuma render bem mais que o oficial. ATMs cobram taxas altas.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-shield-check"></i></div>
+        <div class="dica-text">Seguro viagem com cobertura médica e de evacuação é essencial, sobretudo nas trilhas e na navegação. Confira a cobertura antes de embarcar.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-shopping-cart"></i></div>
+        <div class="dica-text">Mantimentos na <strong>La Anónima</strong> e nos mercados do centro. Vale provar a <strong>centolla</strong> (caranguejo-real) e o cordeiro fueguino nos restaurantes locais.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-shirt"></i></div>
+        <div class="dica-text">Roupas de frio: leve do Brasil. Mesmo na primavera, a temperatura fica perto de 0–10°C com sensação térmica menor pelo vento. Camadas resolvem melhor que um casaco único.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</div><footer>
+  Guia gerado para o grupo · Set/Out 2027<br>
+  <strong>Câmbio de referência: $1 USD ≈ R$ 5,80</strong><br>
+  Valores com ~ são estimativas sujeitas a variação
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
