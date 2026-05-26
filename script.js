@@ -12,7 +12,7 @@ var roteiros = {
     },
     {
       code:'CHT', dotClass:'dot-teal', name:'El Chaltén', days:'Dias 3–6 · 3 noites',
-      transit:{icon:'ti-car', text:'3h de carro de El Calafate · Entrada do parque nacional pela própria cidade — gratuito'},
+      transit:{icon:'ti-bus', text:'3h de ônibus de El Calafate · trilhas saem da própria cidade — não precisa de carro aqui'},
       attractions:[
         {wiki:'Fitz_Roy', lat:-49.2720, lng:-72.9920, emoji:'⛰️', name:'Laguna de los Tres — Fitz Roy', feeType:'free', fee:'Gratuito', feeNote:'Parque Los Glaciares — acesso pela cidade', desc:'A trilha mais icônica da Patagônia argentina. 21km ida e volta, 1.200m de desnível. Chegando ao mirante você enfrenta o Fitz Roy de frente com a laguna turquesa abaixo. Saída recomendada às 5h para pegar o nascer do sol no cume.', tags:['~8–10h','21km / 1.200m desnível','Nível difícil']},
         {wiki:'Cerro_Torre', lat:-49.3000, lng:-73.0700, emoji:'🏔️', name:'Laguna Torre — Cerro Torre', feeType:'free', fee:'Gratuito', feeNote:'Parque Los Glaciares', desc:'18km ida e volta até a laguna com vista frontal ao Cerro Torre (3.128m). Mais tranquila que a trilha do Fitz Roy. Mirador Maestri no final oferece vista do glaciar na base do Cerro.', tags:['~6–8h','18km / 400m desnível','Nível moderado']},
@@ -22,7 +22,7 @@ var roteiros = {
     },
     {
       code:'PNT', dotClass:'dot-purple', name:'Puerto Natales', days:'Dia 7 · 1–2 noites',
-      transit:{icon:'ti-car', text:'~5–6h de carro cruzando a fronteira Argentina → Chile'},
+      transit:{icon:'ti-bus', text:'~5–6h de ônibus cruzando a fronteira Argentina → Chile · migração feita pela empresa'},
       attractions:[
         {wiki:'Cueva_del_Milodón_Natural_Monument', lat:-51.5670, lng:-72.6170, emoji:'🦴', name:'Cueva del Milodón', feeType:'paid', fee:'~$8.500 CLP (~R$ 56)', feeNote:'monumento natural nacional', desc:'Caverna pré-histórica onde foram encontrados restos do milodón — mamífero gigante extinto há 10.000 anos. A caverna tem 30m de altura e 80m de profundidade. Inclui réplica em tamanho real do animal. A 24km de Puerto Natales — ideal para visitar no caminho de chegada.', tags:['~2h','24km de Puerto Natales','Monumento Nacional']},
         {wiki:'Puerto_Natales', lat:-51.7236, lng:-72.5064, emoji:'🌊', name:'Costanera — Seno Última Esperanza', feeType:'free', fee:'Gratuito', feeNote:'', desc:'Puerto Natales fica num fiorde patagônico com vistas espetaculares às montanhas nevadas. O pôr do sol a partir da costanera é um dos melhores momentos da viagem. Frutos do mar frescos nos restaurantes do centro.', tags:['A qualquer hora','Centro da cidade','Vista dos fiordes']},
@@ -31,7 +31,7 @@ var roteiros = {
     },
     {
       code:'TDP', dotClass:'dot-amber', name:'Torres del Paine', days:'Dias 8–11 · 3–4 dias',
-      transit:{icon:'ti-car', text:'~1h de carro de Puerto Natales · Ingresso: $35 USD (~R$ 203) por pessoa'},
+      transit:{icon:'ti-car', text:'~1h de Puerto Natales · carro-dia alugado em Natales ou shuttle do parque · Ingresso: $35 USD (~R$ 203) por pessoa'},
       attractions:[
         {wiki:'Torres_del_Paine_National_Park', lat:-50.9423, lng:-72.9869, emoji:'🗼', name:'Mirador Las Torres — Base das Torres', feeType:'inc', fee:'Incluso no ingresso', feeNote:'ingresso $35 USD (~R$ 203)', desc:'A trilha mais famosa do parque. 18km ida e volta, 800m de desnível até a laguna Azul com as três torres de granito. Saída às 4h para o nascer do sol. A subida final em rocha solta é exigente, mas a vista recompensa.', tags:['~8–10h','18km / 800m desnível','Nível difícil']},
         {wiki:'French_Valley', lat:-51.0000, lng:-73.0500, emoji:'🏔️', name:'Valle del Francés', feeType:'inc', fee:'Incluso no ingresso', feeNote:'', desc:'O trecho mais selvagem do Circuito W. Vale glaciar com paredes de 2.000m, avalanches de gelo audíveis e cóndores voando. Mirador Británico no topo oferece vista das três faces do parque ao mesmo tempo.', tags:['~8–10h','Nível moderado/difícil','Cóndores e avalanches']},
@@ -87,8 +87,8 @@ var heroInfo = {
   patagonia: {
     title:'Patagônia<br><em>Argentina &amp; Chile</em>',
     sub:'El Calafate · El Chaltén · Puerto Natales · Torres del Paine',
-    badges:'<span class="hero-badge">👥 6 pessoas</span><span class="hero-badge">🗓 12 dias</span><span class="hero-badge">🚗 Carro pela rota completa</span>',
-    roteiroTitle:'Roteiro — 12 dias com carro'
+    badges:'<span class="hero-badge">👥 6 pessoas</span><span class="hero-badge">🗓 12 dias</span><span class="hero-badge">🔄 Open-jaw: entra FTE · sai PUQ</span>',
+    roteiroTitle:'Roteiro — 12 dias · ônibus + carro-dia'
   },
   ushuaia: {
     title:'Ushuaia<br><em>Terra do Fogo · Argentina</em>',
