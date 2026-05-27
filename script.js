@@ -119,6 +119,47 @@ var roteiros = {
         {wiki:'El_Bolsón', lat:-41.9670, lng:-71.5340, emoji:'🌻', name:'El Bolsón — feria e Cabeza del Indio', feeType:'free', fee:'Gratuito', feeNote:'day trip opcional', desc:'Vilarejo hippie a ~2h ao sul pela Ruta 40, com a famosa feira artesanal (ter/qui/sáb), cervejarias e o mirante gratuito da Cabeza del Indio. Day trip opcional e barato — só combustível dividido por 6. Bom plano B se o Tronador estiver fechado.', tags:['Opcional','~2h de carro','Feira e mirantes grátis']}
       ]
     }
+  ],
+
+  santiago: [
+    {
+      code:'SCL', dotClass:'dot-blue', name:'Santiago — centro', days:'Dias 1–2 · 2 noites', transit: null,
+      attractions:[
+        {wiki:'Plaza_de_Armas,_Santiago', lat:-33.4378, lng:-70.6504, emoji:'🏛️', name:'Plaza de Armas e Catedral', feeType:'free', fee:'Gratuito', feeNote:'', desc:'O marco zero de Santiago, cercado pela Catedral Metropolitana, o Correio Central e o Museu Histórico Nacional. Tudo a pé e de graça. Ótimo primeiro dia, ligado por metrô a quase toda a cidade.', tags:['Qualquer horário','A pé / metrô','Centro histórico']},
+        {wiki:'Santa_Lucía_Hill', lat:-33.4400, lng:-70.6440, emoji:'🌳', name:'Cerro Santa Lucía', feeType:'free', fee:'Gratuito', feeNote:'', desc:'Pequeno cerro ajardinado no coração da cidade, com terraços, fontes e um mirante sobre os telhados de Santiago e a cordilheira nevada ao fundo. Entrada gratuita, subida leve.', tags:['~1–2h','A pé','Mirante da cidade']},
+        {wiki:'San_Cristóbal_Hill', lat:-33.4253, lng:-70.6320, emoji:'🚡', name:'Cerro San Cristóbal — funicular', feeType:'paid', fee:'~$7–9 USD (~R$ 41–52)', feeNote:'funicular barato · subida a pé grátis', desc:'O ponto mais alto acessível da cidade, no Parque Metropolitano, com a melhor vista de Santiago e dos Andes. O funicular histórico é barato; dá para subir a pé ou de bicicleta de graça. Vá em dia claro, de manhã, para fugir da poluição.', tags:['~2–3h','Subida a pé grátis','Melhor vista da cidade']},
+        {wiki:'Lastarria', lat:-33.4370, lng:-70.6400, emoji:'🎨', name:'Barrio Lastarria e Bellavista', feeType:'free', fee:'Gratuito', feeNote:'', desc:'Bairros boêmios com ruas de paralelepípedo, arte de rua, museus (Bellas Artes), cafés e restaurantes. Caminhar é grátis; reserve aqui parte do orçamento de comer fora. La Chascona (casa de Neruda) fica em Bellavista.', tags:['Qualquer horário','A pé','Vida cultural e gastronomia']},
+        {wiki:'Gran_Torre_Santiago', lat:-33.4178, lng:-70.6064, emoji:'🏙️', name:'Sky Costanera — mirador', feeType:'paid', fee:'~$22 USD (~R$ 128)', feeNote:'passeio opcional', desc:'Mirante envidraçado no topo do prédio mais alto da América do Sul, com vista 360° da cidade e da cordilheira. Caro para o que entrega quando o San Cristóbal já dá vista de graça — mantido como opcional, melhor ao pôr do sol.', tags:['Opcional','~1h','Vista 360° no 61º andar']}
+      ]
+    },
+    {
+      code:'VN', dotClass:'dot-teal', name:'Valle Nevado & Cordilheira', days:'Dias 3–5 · ski',
+      transit:{icon:'ti-bus', text:'~46 km a leste pelo Camino a Farellones (40 curvas) · transfer/van da operadora — estrada exige correntes e 4x4 no inverno, por isso o transfer compensa'},
+      attractions:[
+        {wiki:'Valle_Nevado', lat:-33.3550, lng:-70.2486, emoji:'⛷️', name:'Valle Nevado', feeType:'paid', fee:'Passe ~$55–75 USD (~R$ 320–435)/dia', feeNote:'+ aluguel de equipamento', desc:'A maior estação de esqui da América do Sul, a 3.000 m. Pistas para todos os níveis, neve seca em agosto (pico da temporada) e vista aberta dos Andes. O passe diário e o aluguel são o maior custo da viagem — compre pacotes de vários dias para baratear.', tags:['Pico da neve em agosto','Pistas para todos níveis','Maior custo da viagem']},
+        {wiki:'El_Colorado', lat:-33.3520, lng:-70.2980, emoji:'🏂', name:'El Colorado / Farellones', feeType:'paid', fee:'Passe ~$40–55 USD (~R$ 232–320)/dia', feeNote:'opção mais barata', desc:'Estações vizinhas mais próximas de Santiago e mais baratas que Valle Nevado, ideais para iniciantes e para o primeiro dia na neve. Farellones tem parque de neve para quem não esquia (trenó, tubing). Bom custo-benefício.', tags:['Mais barato','Ideal para iniciantes','Parque de neve em Farellones']},
+        {wiki:'La_Parva', lat:-33.3300, lng:-70.2870, emoji:'🎿', name:'La Parva', feeType:'paid', fee:'Passe ~$50–65 USD (~R$ 290–377)/dia', feeNote:'passeio opcional', desc:'Estação mais tranquila e exclusiva do trio Tres Valles, com pistas conectadas a Valle Nevado pelo passe Tres Valles. Opcional — só vale se quiserem variar de domínio esquiável num dia extra.', tags:['Opcional','Menos lotada','Conecta com Valle Nevado']},
+        {wiki:'Farellones', lat:-33.3500, lng:-70.3170, emoji:'⛄', name:'Mirador e nieve em Farellones', feeType:'paid', fee:'~$15–25 USD (~R$ 87–145)', feeNote:'parque de neve / sem esqui', desc:'Para quem não vai esquiar todos os dias: o vilarejo de Farellones tem mirantes da cordilheira, áreas de trenó e tubing e restaurantes. Custo baixo e dia leve na neve sem precisar de passe de esqui completo.', tags:['~½ dia','Sem precisar esquiar','Trenó e tubing baratos']}
+      ]
+    },
+    {
+      code:'VAP', dotClass:'dot-purple', name:'Valparaíso & Viña del Mar', days:'Dia 6 · day trip',
+      transit:{icon:'ti-bus', text:'~120 km a oeste · ônibus Turbus/Pullman do Terminal Alameda (~1h45) · barato e frequente, não precisa de carro'},
+      attractions:[
+        {wiki:'Valparaíso', lat:-33.0410, lng:-71.6260, emoji:'🎨', name:'Cerros Concepción e Alegre', feeType:'free', fee:'Gratuito', feeNote:'ascensores ~$1 USD', desc:'O coração patrimonial de Valparaíso (Unesco): ladeiras coloridas, murais de arte urbana, mirantes (Paseo Gervasoni, Paseo Yugoslavo) e ascensores centenários que custam centavos. Caminhar pelos cerros é gratuito e é o melhor da cidade.', tags:['~½ dia','A pé + ascensores','Arte de rua e mirantes']},
+        {wiki:'Viña_del_Mar', lat:-33.0246, lng:-71.5460, emoji:'🌊', name:'Viña del Mar — Reloj de Flores e costa', feeType:'free', fee:'Gratuito', feeNote:'', desc:'A cidade-jardim vizinha, ligada a Valparaíso pelo metrô regional (Merval). O Reloj de Flores, a costanera e as praias rendem um passeio gratuito à beira-mar. Frutos do mar frescos nos mercados (opcional comer fora).', tags:['~2–3h','Metrô Merval entre as cidades','Praia e jardins']},
+        {wiki:'La_Sebastiana', lat:-33.0480, lng:-71.6210, emoji:'🏠', name:'La Sebastiana — casa de Neruda', feeType:'paid', fee:'~$8 USD (~R$ 46)', feeNote:'museu opcional', desc:'Uma das casas do poeta Pablo Neruda, com vista panorâmica da baía e acervo excêntrico. Ingresso barato e opcional — bom complemento cultural se o tempo estiver ruim para os mirantes ao ar livre.', tags:['Opcional','~1h','Vista da baía']}
+      ]
+    },
+    {
+      code:'MAI', dotClass:'dot-amber', name:'Cajón del Maipo', days:'Dia 7 · day trip',
+      transit:{icon:'ti-bus', text:'~50 km a sudeste · metrô até Bellavista de La Florida + ônibus/colectivo, ou tour de dia inteiro · neve no inverno nos trechos altos'},
+      attractions:[
+        {wiki:'El_Yeso_Dam', lat:-33.6700, lng:-70.0900, emoji:'💧', name:'Embalse El Yeso', feeType:'free', fee:'Gratuito', feeNote:'acesso por tour ou colectivo', desc:'Represa de águas turquesa cercada por montanhas nevadas, no alto do Cajón del Maipo. O acesso final é por estrada de terra — no inverno pode estar com neve. Tour de dia inteiro saindo de Santiago é a forma mais simples e barata sem carro.', tags:['Dia inteiro','Águas turquesa','Pode ter neve no inverno']},
+        {wiki:'San_José_de_Maipo', lat:-33.6400, lng:-70.3500, emoji:'🏔️', name:'San José de Maipo e Cascada de las Ánimas', feeType:'free', fee:'Gratuito', feeNote:'reserva privada paga à parte', desc:'Vilarejo cordilherano com cafés e termas próximas. A Reserva Cascada de las Ánimas (entrada paga) oferece trilhas; passear pelo vilarejo e ver o rio Maipo é gratuito. Boa parada de almoço no caminho do El Yeso.', tags:['~2h','Vilarejo de montanha','Rio Maipo']},
+        {wiki:'Concha_y_Toro', lat:-33.6600, lng:-70.5900, emoji:'🍷', name:'Viña Concha y Toro — Pirque', feeType:'paid', fee:'~$25–35 USD (~R$ 145–203)', feeNote:'tour com degustação · opcional', desc:'A vinícola mais famosa do Chile, em Pirque (a caminho do Cajón), com tour pela adega Casillero del Diablo e degustação. Opcional e mais caro — alternativa cultural a quem não quiser o dia inteiro na montanha.', tags:['Opcional','~1h30 com degustação','Casillero del Diablo']}
+      ]
+    }
   ]
 };
 
@@ -141,6 +182,12 @@ var heroInfo = {
     sub:'Nahuel Huapi · Circuito Chico · Llao Llao · Cerro Catedral · Tronador',
     badges:'<span class="hero-badge">👥 6 pessoas</span><span class="hero-badge">🗓 7 dias</span><span class="hero-badge">💰 Custo acessível · carro ÷6</span>',
     roteiroTitle:'Roteiro — 7 dias · base única + day trips'
+  },
+  santiago: {
+    title:'Santiago<br><em>& Valle Nevado · Chile</em>',
+    sub:'Santiago · Valle Nevado · Valparaíso · Cajón del Maipo · neve em agosto',
+    badges:'<span class="hero-badge">👥 6 pessoas</span><span class="hero-badge">🗓 7 dias</span><span class="hero-badge">❄️ Agosto · ski</span><span class="hero-badge">🚐 Transfer + metrô (sem carro)</span>',
+    roteiroTitle:'Roteiro — 7 dias · Santiago base + ski e day trips'
   }
 };
 
@@ -222,7 +269,7 @@ function refreshMap(){
 
 // ===== PREFIXO DE IDs POR DESTINO =====
 function destPrefix(dest){
-  return dest==='ushuaia' ? 'u-' : (dest==='bariloche' ? 'b-' : '');
+  return dest==='ushuaia' ? 'u-' : (dest==='bariloche' ? 'b-' : (dest==='santiago' ? 's-' : ''));
 }
 
 // ===== TROCA DE DESTINO =====

@@ -19,6 +19,7 @@
     <button class="dest-btn active" id="dest-btn-patagonia" onclick="selectDest('patagonia')">🏔 Patagônia</button>
     <button class="dest-btn" id="dest-btn-ushuaia" onclick="selectDest('ushuaia')">🐧 Ushuaia</button>
     <button class="dest-btn" id="dest-btn-bariloche" onclick="selectDest('bariloche')">🌲 Bariloche</button>
+    <button class="dest-btn" id="dest-btn-santiago" onclick="selectDest('santiago')">❄️ Santiago</button>
   </div>
   <div class="hero-badges" id="hero-badges">
     <span class="hero-badge">👥 6 pessoas</span>
@@ -212,6 +213,63 @@
     <div class="alert info" style="margin-top:4px">
       <i class="ti ti-info-circle"></i>
       <span>Set/out é fim do inverno / começo da primavera: preços mais baixos que o pico de verão e de inverno, neve possível no Catedral e Tronador. Ótima janela para custo acessível.</span>
+    </div>
+  </div>
+
+  <div class="dest-block" data-dest="santiago" style="display:none">
+    <div class="sec-title">Escolha seu perfil</div>
+    <div class="perfil-grid">
+      <div class="pcard sel" id="s-card-camping" onclick="selectPerfil('santiago','camping')">
+        <div class="pcard-icon">🛏️</div>
+        <div class="pcard-title">Hostel + ski econômico</div>
+        <div class="pcard-sub">Hostel no centro e neve em El Colorado/Farellones (mais barato). Foco em custo.</div>
+      </div>
+      <div class="pcard" id="s-card-airbnb" onclick="selectPerfil('santiago','airbnb')">
+        <div class="pcard-icon">🏙️</div>
+        <div class="pcard-title">Apart-hotel + Valle Nevado</div>
+        <div class="pcard-sub">Apartamento inteiro dividido entre os 6 e ski no Valle Nevado. Mais conforto.</div>
+      </div>
+    </div>
+
+    <div id="s-desc-camping">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:6px">Perfil Hostel + ski econômico</div>
+        <div class="card-sub">Hostel com quarto privado no centro de Santiago (próximo ao metrô) e 2 dias de neve em El Colorado/Farellones, mais baratos que Valle Nevado. Transfer para a cordilheira, ônibus a Valparaíso e metrô na cidade — sem carro. Metade das refeições cozinhando.</div>
+        <div class="card-tags" style="margin-top:10px">
+          <span class="badge badge-green">~R$ 6.800 / pessoa</span>
+          <span class="badge badge-green">Melhor custo</span>
+        </div>
+      </div>
+    </div>
+    <div id="s-desc-airbnb" style="display:none">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:6px">Perfil Apart-hotel + Valle Nevado</div>
+        <div class="card-sub">Apartamento inteiro (Providencia/Centro) com cozinha, dividido por 6, e 2–3 dias de ski no Valle Nevado com pacote multi-dia. Transfers e metrô para tudo. Mais conforto e espaço, ainda sem precisar de carro.</div>
+        <div class="card-tags" style="margin-top:10px">
+          <span class="badge badge-green">~R$ 8.500 / pessoa</span>
+          <span class="badge badge-amber">Ski é o maior custo</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-title">Quando comprar as passagens</div>
+    <div class="card">
+      <div class="card-row">
+        <div>
+          <div class="card-title">Melhor janela de compra</div>
+          <div class="card-sub" style="margin-top:4px">Agosto é <strong>pico da temporada de neve</strong> e alta demanda. Compre voos e hospedagem com <strong>5–8 meses de antecedência</strong>. GRU→SCL tem muitos voos diretos (~4h), então a passagem costuma ser competitiva.</div>
+        </div>
+      </div>
+      <div class="card-tags"><span class="badge badge-green">Recomendado</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Pacotes de ski multi-dia</div>
+      <div class="card-sub" style="margin-top:4px">Passe + aluguel + transfer comprados em pacote (2–3 dias) saem bem mais baratos que diárias avulsas. Reserve transfer e equipamento (Ski Total, Ski Santiago) com antecedência — esgotam em agosto.</div>
+      <div class="card-tags"><span class="badge badge-amber">Economia real</span></div>
+    </div>
+    <div class="alert warn" style="margin-top:4px">
+      <i class="ti ti-alert-triangle"></i>
+      <span>Agosto é o mês mais caro e cheio nas estações. Quanto mais cedo reservar neve e transfer, melhor o preço — e há risco de estrada fechada por nevasca em dias isolados.</span>
     </div>
   </div>
 
@@ -427,6 +485,72 @@
     </div>
   </div>
 
+  <div class="dest-block" data-dest="santiago" style="display:none">
+    <div class="sec-title">Orçamento por pessoa — 7 dias</div>
+    <div class="legend">
+      <span>Sem ~ = valor confirmado</span>
+      <span>~ = estimativa</span>
+      <span>$1 USD ≈ R$ 5,80</span>
+    </div>
+
+    <div class="pill-toggle">
+      <button class="pill-btn active" id="s-btn-o-camping" onclick="showOrc('santiago','camping')">🛏️ Hostel + ski econômico</button>
+      <button class="pill-btn" id="s-btn-o-airbnb" onclick="showOrc('santiago','airbnb')">🏙️ Apart + Valle Nevado</button>
+    </div>
+
+    <div id="s-orc-camping">
+      <div class="budget-hero">
+        <div class="bh-card main">
+          <div class="bh-label">Total / pessoa</div>
+          <div class="bh-value">~R$ 6.800</div>
+          <div class="bh-sub">R$ 3.200 de folga até R$ 10k</div>
+        </div>
+        <div class="bh-card">
+          <div class="bh-label">Grupo de 6</div>
+          <div class="bh-value">~R$ 41k</div>
+          <div class="bh-sub">total estimado</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="breakdown-row"><span>✈ Passagens ida e volta GRU↔SCL</span><span class="bval">~R$ 2.500</span></div>
+        <div class="breakdown-row"><span>~Hostel quarto privado (6 noites)</span><span class="bval">~R$ 650</span></div>
+        <div class="breakdown-row"><span>⛷️ Ski 2 dias El Colorado (passe + aluguel)</span><span class="bval">~R$ 1.100</span></div>
+        <div class="breakdown-row"><span>🚐 Transfer cordilheira + ônibus Valpo + metrô</span><span class="bval">~R$ 550</span></div>
+        <div class="breakdown-row"><span>~Alimentação (metade cozinhando)</span><span class="bval">~R$ 800</span></div>
+        <div class="breakdown-row"><span>🚡 Funicular San Cristóbal + tour El Yeso ÷ 6</span><span class="bval">~R$ 250</span></div>
+        <div class="breakdown-row"><span>~Passeios opcionais (Sky Costanera / vinícola / dia extra de ski)</span><span class="bval amber">~R$ 350</span></div>
+        <div class="breakdown-row"><span>~Seguro viagem</span><span class="bval">~R$ 200</span></div>
+        <div class="breakdown-row"><span>~Reserva emergência</span><span class="bval green">~R$ 400</span></div>
+      </div>
+    </div>
+
+    <div id="s-orc-airbnb" style="display:none">
+      <div class="budget-hero">
+        <div class="bh-card main">
+          <div class="bh-label">Total / pessoa</div>
+          <div class="bh-value">~R$ 8.500</div>
+          <div class="bh-sub">R$ 1.500 de folga até R$ 10k</div>
+        </div>
+        <div class="bh-card">
+          <div class="bh-label">Grupo de 6</div>
+          <div class="bh-value">~R$ 51k</div>
+          <div class="bh-sub">total estimado</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="breakdown-row"><span>✈ Passagens ida e volta GRU↔SCL</span><span class="bval">~R$ 2.500</span></div>
+        <div class="breakdown-row"><span>~Apart-hotel inteiro (6 noites)</span><span class="bval">~R$ 1.300</span></div>
+        <div class="breakdown-row"><span>⛷️ Ski 2–3 dias Valle Nevado (pacote + aluguel)</span><span class="bval">~R$ 2.200</span></div>
+        <div class="breakdown-row"><span>🚐 Transfer cordilheira + ônibus Valpo + metrô</span><span class="bval">~R$ 550</span></div>
+        <div class="breakdown-row"><span>~Alimentação (metade cozinhando)</span><span class="bval">~R$ 800</span></div>
+        <div class="breakdown-row"><span>🚡 Funicular San Cristóbal + tour El Yeso ÷ 6</span><span class="bval">~R$ 250</span></div>
+        <div class="breakdown-row"><span>~Passeios opcionais (Sky Costanera / vinícola)</span><span class="bval amber">~R$ 300</span></div>
+        <div class="breakdown-row"><span>~Seguro viagem</span><span class="bval">~R$ 200</span></div>
+        <div class="breakdown-row"><span>~Reserva emergência</span><span class="bval green">~R$ 400</span></div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <!-- ===================== TRANSPORTE ===================== -->
@@ -624,6 +748,64 @@
     <div class="alert warn"><i class="ti ti-alert-triangle"></i><span>Para 6 pessoas reserve uma <em>van/SUV grande</em> com antecedência, leve a <strong>PID</strong> e confirme pneus adequados — set/out ainda pode ter neve no Catedral e ripio até o Tronador.</span></div>
   </div>
 
+  <div class="dest-block" data-dest="santiago" style="display:none">
+    <div class="alert success"><i class="ti ti-route"></i><span>Aqui o <strong>carro alugado não compensa</strong>: o metrô de Santiago é excelente, a estrada da neve exige correntes/4x4 e os transfers de ski saem mais baratos, e Valparaíso/Cajón se faz de ônibus ou tour. Use carro só num cenário específico (abaixo).</span></div>
+
+    <div class="sec-title">Comparativo de transporte</div>
+    <div class="compare-grid">
+      <div class="ccard rec">
+        <div class="ccard-title">🚐 Transfer + metrô + ônibus <span class="badge badge-green">✓</span></div>
+        <div class="crow"><span>GRU↔SCL (ida e volta)</span><span>~R$ 2.500</span></div>
+        <div class="crow"><span>~Transfer ski (ida/volta) ÷ dias</span><span>~$25–35 <span class="conv">(~R$145–203)</span></span></div>
+        <div class="crow"><span>~Ônibus Santiago↔Valparaíso</span><span>~$8 <span class="conv">(~R$46)</span></span></div>
+        <div class="crow"><span>~Metrô (cartão Bip!) na cidade</span><span>~$1 <span class="conv">(~R$6)/viagem</span></span></div>
+        <div class="ctotal"><span>~Total pp</span><span style="color:var(--accent)">~R$ 2.900–3.100</span></div>
+      </div>
+      <div class="ccard">
+        <div class="ccard-title">🚗 Carro alugado ÷ 6</div>
+        <div class="crow"><span>GRU↔SCL (ida e volta)</span><span>~R$ 2.500</span></div>
+        <div class="crow"><span>~SUV 7d ÷ 6</span><span>~R$ 500–700</span></div>
+        <div class="crow"><span>~Correntes/4x4 p/ cordilheira</span><span style="color:var(--danger)">obrigatório / caro</span></div>
+        <div class="crow"><span>~Pedágios + estacionamento centro</span><span>~R$ 150</span></div>
+        <div class="ctotal"><span>~Total pp</span><span style="color:var(--amber)">~R$ 3.150–3.350 + risco</span></div>
+      </div>
+    </div>
+    <div class="alert success"><i class="ti ti-check"></i><span>O transfer + metrô sai <strong>mais barato e sem o risco da neve</strong>. O carro não salva tempo na cidade (trânsito + estacionamento caro) e na cordilheira ainda exige correntes — não vale a pena para este roteiro.</span></div>
+
+    <div class="sec-title">Quando o carro valeria a pena</div>
+    <div class="card">
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-check"></i></div>
+        <div class="dica-text"><strong>Só compensa</strong> se vocês trocarem os day trips de ônibus/tour por uma <strong>rota livre fora de Santiago</strong> (ex.: vários dias por Cajón del Maipo, Valle del Maipo e litoral sem horário fixo) — aí um SUV ÷ 6 pode bater o custo de vários tours. Mesmo assim, <strong>nunca para subir à neve</strong>: deixe o carro na cidade e use transfer para a cordilheira.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-x"></i></div>
+        <div class="dica-text"><strong>Não compensa</strong> no roteiro base (ski + cidade + Valparaíso de ônibus): metrô e transfers cobrem tudo melhor, mais barato e sem dor de cabeça com neve e estacionamento.</div>
+      </div>
+    </div>
+
+    <div class="sec-title">Estratégia recomendada</div>
+    <div class="card">
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-plane"></i></div>
+        <div class="dica-text"><strong>Voo:</strong> direto GRU→SCL (~4h), vários por dia. Compre cedo — agosto é alta de inverno. <span class="conv">~R$ 2.500 pp ida e volta</span></div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-bus"></i></div>
+        <div class="dica-text"><strong>Ski:</strong> transfer ida e volta da operadora (Ski Total, Ski Santiago) com horário fixo. Inclui apoio com correntes na estrada de 40 curvas. Mais barato e seguro que dirigir. <span class="conv">~$25–35/dia</span></div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-train"></i></div>
+        <div class="dica-text"><strong>Na cidade:</strong> cartão <strong>Bip!</strong> no metrô e nos ônibus (Red). Rápido, barato e cobre centro, Providencia, Bellavista e San Cristóbal. Sem necessidade de táxi/carro.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-bus-stop"></i></div>
+        <div class="dica-text"><strong>Valparaíso/Viña:</strong> ônibus Turbus/Pullman do Terminal Alameda (~1h45), saídas a cada poucos minutos. <strong>Cajón del Maipo:</strong> metrô + colectivo ou tour de dia inteiro.</div>
+      </div>
+    </div>
+    <div class="alert warn"><i class="ti ti-alert-triangle"></i><span>Em agosto a estrada à cordilheira pode fechar por nevasca em dias isolados. Reserve transfer reembolsável/flexível e tenha um plano B na cidade (museus, Valparaíso) para o caso de fechamento.</span></div>
+  </div>
+
 </div>
 
 <!-- ===================== HOSPEDAGEM ===================== -->
@@ -754,6 +936,41 @@
     </div>
   </div>
 
+  <div class="dest-block" data-dest="santiago" style="display:none">
+    <div class="alert info"><i class="ti ti-info-circle"></i><span>Todos os preços são <strong>por pessoa por noite (pp/noite)</strong>, já divididos em grupo de 6. Câmbio ref.: $1 USD ≈ R$ 5,80.</span></div>
+
+    <div class="pill-toggle">
+      <button class="pill-btn active" id="s-btn-h-camping" onclick="showHosp('santiago','camping')">🛏️ Hostel</button>
+      <button class="pill-btn" id="s-btn-h-airbnb" onclick="showHosp('santiago','airbnb')">🏙️ Apart / Airbnb</button>
+    </div>
+
+    <div id="s-hosp-camping">
+      <div class="card">
+        <div class="card-row"><div class="card-title">Centro / Lastarria — hostel quarto privado</div><div class="card-price">~R$ 40–60 pp/noite</div></div>
+        <div class="card-sub" style="margin-top:4px">Princesa Insolente, CasAltura, Hostal Forestal. Quarto privado para o grupo com cozinha, a pé do metrô e dos bairros boêmios. Base ideal para os transfers de ski e os ônibus aos day trips.</div>
+        <div class="card-tags"><span class="tag">6 noites</span><span class="badge badge-green">Melhor custo</span></div>
+      </div>
+      <div class="card">
+        <div class="card-row"><div class="card-title">Pernoite na cordilheira (opcional)</div><div class="card-price">~R$ 120–200 pp/noite</div></div>
+        <div class="card-sub" style="margin-top:4px">Refúgios/hostels em Farellones evitam o transfer diário em dias de ski intenso. Bem mais caro — só vale se forem esquiar vários dias seguidos. Reserve cedo em agosto.</div>
+        <div class="card-tags"><span class="tag">opcional</span><span class="badge badge-amber">Caro · alta temporada</span></div>
+      </div>
+    </div>
+
+    <div id="s-hosp-airbnb" style="display:none">
+      <div class="card">
+        <div class="card-row"><div class="card-title">Providencia — apart-hotel inteiro</div><div class="card-price">~R$ 75–110 pp/noite</div></div>
+        <div class="card-sub" style="margin-top:4px">Apartamentos de 2–3 quartos com cozinha completa, ao lado de estações de metrô (Manuel Montt, Los Leones). Seguro, bem localizado e fácil de cozinhar em grupo. Valor total dividido por 6.</div>
+        <div class="card-tags"><span class="tag">6 noites</span><span class="badge badge-amber">Bem localizado</span></div>
+      </div>
+      <div class="card">
+        <div class="card-row"><div class="card-title">Centro / Bellas Artes — apartamento inteiro</div><div class="card-price">~R$ 60–90 pp/noite</div></div>
+        <div class="card-sub" style="margin-top:4px">Aptos a pé dos pontos históricos, do Mercado Central e do metrô. Prático para cozinhar e caminhar nos dias de cidade, sem depender de transporte.</div>
+        <div class="card-tags"><span class="tag">6 noites</span></div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <!-- ===================== EQUIPAMENTOS ===================== -->
@@ -879,6 +1096,46 @@
     <div class="alert danger" style="margin-top:10px"><i class="ti ti-alert-circle"></i><span>Set/out é fim do inverno: ainda há neve no Catedral e no Tronador. Leve roupa de frio, corta-vento e bota impermeável; o tempo muda rápido na montanha.</span></div>
   </div>
 
+  <div class="dest-block" data-dest="santiago" style="display:none">
+    <div class="alert warn"><i class="ti ti-alert-triangle"></i><span>Agosto é pleno inverno: ski + frio na cidade. Roupa térmica e impermeável é essencial. Equipamento de esqui aluga-se na cordilheira — não precisa levar do Brasil.</span></div>
+
+    <div class="sec-title">Levar de casa vs alugar in loco</div>
+    <div class="compare-grid" style="margin-bottom:14px">
+      <div class="ccard rec">
+        <div class="ccard-title">🎒 Levar de casa <span class="badge badge-green">✓</span></div>
+        <div class="crow"><span>Roupa térmica (base + 2ª camada)</span><span>essencial</span></div>
+        <div class="crow"><span>Casaco impermeável + calça de neve</span><span>essencial</span></div>
+        <div class="crow"><span>Luva, gorro, buff, meia térmica</span><span>essencial</span></div>
+        <div class="crow"><span>~Bagagem despachada</span><span>~R$ 0–300</span></div>
+        <div class="ctotal"><span>Custo pp</span><span style="color:var(--accent)">~R$ 0–300</span></div>
+      </div>
+      <div class="ccard">
+        <div class="ccard-title">🏪 Alugar na cordilheira</div>
+        <div class="crow"><span>~Esqui/snowboard completo / dia</span><span>~$25–40 <span class="conv">(~R$145–232)</span></span></div>
+        <div class="crow"><span>~Roupa de neve (jaqueta+calça)/dia</span><span>~$15–25 <span class="conv">(~R$87–145)</span></span></div>
+        <div class="crow"><span>~Óculos/goggles + capacete</span><span>incluso no pacote</span></div>
+        <div class="crow"><span>Aluguel só nos dias de ski</span><span>variável</span></div>
+        <div class="ctotal"><span>Custo pp</span><span style="color:var(--amber)">~R$ 230–380/dia</span></div>
+      </div>
+    </div>
+    <div class="alert info"><i class="ti ti-info-circle"></i><span>Esqui, snowboard, botas e capacete alugam-se no Valle Nevado/El Colorado ou nas lojas de Santiago (mais barato). Roupa de neve também — mas se já tiver, leve para economizar. Pacote de ski costuma incluir capacete.</span></div>
+
+    <div class="sec-title">Checklist por pessoa</div>
+    <div class="card">
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-shirt"></i>1ª camada térmica (cima e baixo)</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">~0,4 kg</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-jacket"></i>Casaco impermeável + 2ª camada (fleece)</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">~1,5 kg</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-ski-jumping"></i>Calça de neve impermeável</div><div class="cl-right"><span class="pill pill-blue">Levar / Alugar</span><span class="cl-kg">~0,6 kg</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-hanger"></i>Luva impermeável, gorro, buff, meia térmica</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">~0,5 kg</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-sunglasses"></i>Óculos de sol + protetor solar FPS alto</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">~0,2 kg</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-shoe"></i>Bota impermeável / após-ski</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">~1,2 kg</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-ski-jumping"></i>Esqui / snowboard + botas</div><div class="cl-right"><span class="pill pill-green">Alugar (cordilheira)</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-helmet"></i>Capacete + goggles</div><div class="cl-right"><span class="pill pill-green">Alugar / no pacote</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-tools-kitchen-2"></i>Marmita / pote (cozinhar e levar)</div><div class="cl-right"><span class="pill pill-blue">Levar</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-battery-charging"></i>Powerbank (carry-on)</div><div class="cl-right"><span class="pill pill-blue">Levar</span></div></div>
+    </div>
+    <div class="alert danger" style="margin-top:10px"><i class="ti ti-alert-circle"></i><span>O sol na neve queima muito: protetor solar FPS alto e óculos com proteção UV são indispensáveis mesmo em dia nublado. Hidrate-se — a altitude (3.000 m no Valle Nevado) resseca e cansa.</span></div>
+  </div>
+
 </div>
 
 <!-- ===================== DICAS ===================== -->
@@ -994,6 +1251,44 @@
       <div class="dica-item">
         <div class="dica-icon"><i class="ti ti-snowflake"></i></div>
         <div class="dica-text">Set/out é baixa temporada entre o esqui e o verão: hospedagem e voos mais baratos. Algumas trilhas altas podem ter neve — confirme as condições do Frey e do Tronador localmente.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dest-block" data-dest="santiago" style="display:none">
+    <div class="sec-title">Logística para 6 pessoas</div>
+    <div class="card">
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-bus"></i></div>
+        <div class="dica-text"><strong>Esqui sem carro:</strong> reserve o <strong>transfer da operadora</strong> (Ski Total, Ski Santiago) ida e volta. Eles lidam com as correntes na estrada de 40 curvas e levam direto à pista — mais barato e seguro que dirigir na neve.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-ski-jumping"></i></div>
+        <div class="dica-text"><strong>Economize no ski:</strong> compre <strong>passe + aluguel + transfer em pacote</strong> multi-dia (sai bem menos que avulso) e considere El Colorado/Farellones, mais baratos que Valle Nevado. Alugue equipamento em Santiago, não na estação.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-train"></i></div>
+        <div class="dica-text"><strong>Cartão Bip!:</strong> compre ao chegar para usar metrô e ônibus (Red). O metrô de Santiago é rápido e barato e cobre quase tudo — dispensa táxi e carro na cidade.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-tools-kitchen-2"></i></div>
+        <div class="dica-text"><strong>Cozinhe metade das refeições:</strong> abasteça no <strong>Jumbo, Lider ou no Mercado Central / La Vega</strong> (frutas, peixe, carne baratos). Leve marmita para os dias de ski — comida na estação é cara.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-tools-kitchen-3"></i></div>
+        <div class="dica-text"><strong>A outra metade nos restaurantes:</strong> guarde o orçamento para um <strong>mariscos</strong> no Mercado Central, uma parrilla, e os bairros Lastarria/Bellavista. <strong>Menú del día</strong> no almoço é mais barato que jantar à la carte.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-cloud-snow"></i></div>
+        <div class="dica-text"><strong>Plano B para nevasca:</strong> em agosto a estrada da neve pode fechar em dias isolados. Tenha alternativas urbanas (museus, Sky Costanera, Valparaíso) e prefira transfer/passe flexíveis.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-cash"></i></div>
+        <div class="dica-text">O Chile é mais caro que a Argentina e <strong>não tem câmbio paralelo</strong>. Cartão é aceito em todo lugar; leve algum CLP em espécie para colectivos e ascensores. Avise o banco sobre a viagem.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-shield-check"></i></div>
+        <div class="dica-text">Seguro viagem com <strong>cobertura de esqui/esportes de inverno</strong> é essencial — confirme que a apólice cobre acidentes em pista e resgate na montanha antes de embarcar.</div>
       </div>
     </div>
   </div>
