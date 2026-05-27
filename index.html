@@ -18,6 +18,7 @@
   <div class="dest-toggle">
     <button class="dest-btn active" id="dest-btn-patagonia" onclick="selectDest('patagonia')">🏔 Patagônia</button>
     <button class="dest-btn" id="dest-btn-ushuaia" onclick="selectDest('ushuaia')">🐧 Ushuaia</button>
+    <button class="dest-btn" id="dest-btn-bariloche" onclick="selectDest('bariloche')">🌲 Bariloche</button>
   </div>
   <div class="hero-badges" id="hero-badges">
     <span class="hero-badge">👥 6 pessoas</span>
@@ -154,6 +155,63 @@
     <div class="alert warn" style="margin-top:4px">
       <i class="ti ti-alert-triangle"></i>
       <span>USH tem menos voos diários que destinos maiores — quanto mais perto da data, mais caro e cheio. Reserve cedo.</span>
+    </div>
+  </div>
+
+  <div class="dest-block" data-dest="bariloche" style="display:none">
+    <div class="sec-title">Escolha seu perfil</div>
+    <div class="perfil-grid">
+      <div class="pcard sel" id="b-card-camping" onclick="selectPerfil('bariloche','camping')">
+        <div class="pcard-icon">🛏️</div>
+        <div class="pcard-title">Hostel quarto privado</div>
+        <div class="pcard-sub">Quarto privado para o grupo com cozinha. Opção mais econômica e central.</div>
+      </div>
+      <div class="pcard" id="b-card-airbnb" onclick="selectPerfil('bariloche','airbnb')">
+        <div class="pcard-icon">🏡</div>
+        <div class="pcard-title">Cabana / Airbnb</div>
+        <div class="pcard-sub">Cabana inteira dividida entre os 6, com cozinha completa e, às vezes, vista do lago.</div>
+      </div>
+    </div>
+
+    <div id="b-desc-camping">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:6px">Perfil Hostel quarto privado</div>
+        <div class="card-sub">Hostel com quarto privado para os 6 e cozinha compartilhada, no centro ou na Av. Bustillo. Carro alugado dividido por 6 para os day trips. Metade das refeições cozinhando, metade em cervejarias e parrillas locais. Foco total em custo.</div>
+        <div class="card-tags" style="margin-top:10px">
+          <span class="badge badge-green">~R$ 5.500 / pessoa</span>
+          <span class="badge badge-green">Melhor custo</span>
+        </div>
+      </div>
+    </div>
+    <div id="b-desc-airbnb" style="display:none">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:6px">Perfil Cabana / Airbnb</div>
+        <div class="card-sub">Cabana ou casa inteira na Av. Bustillo (rumo ao Circuito Chico) com cozinha completa. Mais conforto e espaço para cozinhar em grupo, voltando para jantar em casa. Cabe com folga no orçamento acessível.</div>
+        <div class="card-tags" style="margin-top:10px">
+          <span class="badge badge-green">~R$ 6.300 / pessoa</span>
+          <span class="badge badge-green">Cabe folgado nos R$ 10k</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-title">Quando comprar as passagens</div>
+    <div class="card">
+      <div class="card-row">
+        <div>
+          <div class="card-title">Melhor janela de compra</div>
+          <div class="card-sub" style="margin-top:4px">Para setembro/outubro 2027: compre entre <strong>outubro e dezembro de 2026</strong>. Bariloche (BRC) tem voos diretos de GRU em alta temporada; fora dela a conexão é por Buenos Aires (Aeroparque). Compre os trechos juntos para casar horários.</div>
+        </div>
+      </div>
+      <div class="card-tags"><span class="badge badge-green">Recomendado</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Black Friday 2026</div>
+      <div class="card-sub" style="margin-top:4px">Novembro de 2026. LATAM, Gol, Aerolíneas e Flybondi soltam promoções para BRC. Ative alertas de preço no Google Flights e compare voo direto vs. conexão por Buenos Aires.</div>
+      <div class="card-tags"><span class="badge badge-amber">Oportunidade</span></div>
+    </div>
+    <div class="alert info" style="margin-top:4px">
+      <i class="ti ti-info-circle"></i>
+      <span>Set/out é fim do inverno / começo da primavera: preços mais baixos que o pico de verão e de inverno, neve possível no Catedral e Tronador. Ótima janela para custo acessível.</span>
     </div>
   </div>
 
@@ -301,6 +359,70 @@
         <div class="breakdown-row"><span>~Passeios opcionais (tren / pingüinera)</span><span class="bval amber">~R$ 300</span></div>
         <div class="breakdown-row"><span>~Seguro viagem</span><span class="bval">~R$ 200</span></div>
         <div class="breakdown-row"><span>~Reserva emergência</span><span class="bval green">~R$ 350</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dest-block" data-dest="bariloche" style="display:none">
+    <div class="sec-title">Orçamento por pessoa — 7 dias</div>
+    <div class="legend">
+      <span>Sem ~ = valor confirmado</span>
+      <span>~ = estimativa</span>
+      <span>$1 USD ≈ R$ 5,80</span>
+    </div>
+
+    <div class="pill-toggle">
+      <button class="pill-btn active" id="b-btn-o-camping" onclick="showOrc('bariloche','camping')">🛏️ Hostel</button>
+      <button class="pill-btn" id="b-btn-o-airbnb" onclick="showOrc('bariloche','airbnb')">🏡 Cabana / Airbnb</button>
+    </div>
+
+    <div id="b-orc-camping">
+      <div class="budget-hero">
+        <div class="bh-card main">
+          <div class="bh-label">Total / pessoa</div>
+          <div class="bh-value">~R$ 5.500</div>
+          <div class="bh-sub">R$ 4.500 de folga até R$ 10k</div>
+        </div>
+        <div class="bh-card">
+          <div class="bh-label">Grupo de 6</div>
+          <div class="bh-value">~R$ 33k</div>
+          <div class="bh-sub">total estimado</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="breakdown-row"><span>✈ Passagens ida e volta GRU↔BRC</span><span class="bval">~R$ 2.500</span></div>
+        <div class="breakdown-row"><span>~Hostel quarto privado (6 noites)</span><span class="bval">~R$ 600</span></div>
+        <div class="breakdown-row"><span>~Alimentação (metade cozinhando)</span><span class="bval">~R$ 700</span></div>
+        <div class="breakdown-row"><span>~SUV 4–5 dias ÷ 6 + combustível</span><span class="bval">~R$ 550</span></div>
+        <div class="breakdown-row"><span>🚡 Aerosilla Campanario + ingresso PN Tronador</span><span class="bval">~R$ 160</span></div>
+        <div class="breakdown-row"><span>~Passeios opcionais (Isla Victoria / Otto / esqui)</span><span class="bval amber">~R$ 400</span></div>
+        <div class="breakdown-row"><span>~Seguro viagem</span><span class="bval">~R$ 180</span></div>
+        <div class="breakdown-row"><span>~Reserva emergência</span><span class="bval green">~R$ 410</span></div>
+      </div>
+    </div>
+
+    <div id="b-orc-airbnb" style="display:none">
+      <div class="budget-hero">
+        <div class="bh-card main">
+          <div class="bh-label">Total / pessoa</div>
+          <div class="bh-value">~R$ 6.300</div>
+          <div class="bh-sub">R$ 3.700 de folga até R$ 10k</div>
+        </div>
+        <div class="bh-card">
+          <div class="bh-label">Grupo de 6</div>
+          <div class="bh-value">~R$ 38k</div>
+          <div class="bh-sub">total estimado</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="breakdown-row"><span>✈ Passagens ida e volta GRU↔BRC</span><span class="bval">~R$ 2.500</span></div>
+        <div class="breakdown-row"><span>~Cabana / casa inteira (6 noites)</span><span class="bval">~R$ 1.400</span></div>
+        <div class="breakdown-row"><span>~Alimentação (metade cozinhando)</span><span class="bval">~R$ 700</span></div>
+        <div class="breakdown-row"><span>~SUV 4–5 dias ÷ 6 + combustível</span><span class="bval">~R$ 550</span></div>
+        <div class="breakdown-row"><span>🚡 Aerosilla Campanario + ingresso PN Tronador</span><span class="bval">~R$ 160</span></div>
+        <div class="breakdown-row"><span>~Passeios opcionais (Isla Victoria / Otto / esqui)</span><span class="bval amber">~R$ 400</span></div>
+        <div class="breakdown-row"><span>~Seguro viagem</span><span class="bval">~R$ 180</span></div>
+        <div class="breakdown-row"><span>~Reserva emergência</span><span class="bval green">~R$ 410</span></div>
       </div>
     </div>
   </div>
@@ -458,6 +580,50 @@
     <div class="alert warn"><i class="ti ti-alert-triangle"></i><span>Garanta a conexão doméstica a USH no mesmo bilhete sempre que possível — remarcar trecho separado em alta temporada é caro.</span></div>
   </div>
 
+  <div class="dest-block" data-dest="bariloche" style="display:none">
+    <div class="sec-title">Comparativo de transporte</div>
+    <div class="compare-grid">
+      <div class="ccard">
+        <div class="ccard-title">🚐 Ônibus de linha + excursões</div>
+        <div class="crow"><span>GRU↔BRC (ida e volta)</span><span>~R$ 2.500</span></div>
+        <div class="crow"><span>~Ônibus urbano (linha 20/55) ÷ dias</span><span>~R$ 90</span></div>
+        <div class="crow"><span>~Excursão Circuito Chico</span><span>~$30 <span class="conv">(~R$174)</span></span></div>
+        <div class="crow"><span>~Excursão Tronador</span><span>~$70 <span class="conv">(~R$405)</span></span></div>
+        <div class="ctotal"><span>~Total pp</span><span style="color:var(--amber)">~R$ 3.150–3.400</span></div>
+      </div>
+      <div class="ccard rec">
+        <div class="ccard-title">🚗 Carro alugado ÷ 6 <span class="badge badge-green">✓</span></div>
+        <div class="crow"><span>GRU↔BRC (ida e volta)</span><span>~R$ 2.500</span></div>
+        <div class="crow"><span>~SUV/van 4–5d ÷ 6</span><span>~R$ 400–550</span></div>
+        <div class="crow"><span>~Combustível ÷ 6</span><span>~R$ 100–150</span></div>
+        <div class="crow"><span>~Estacionamento</span><span style="color:var(--accent)">quase tudo grátis</span></div>
+        <div class="ctotal"><span>~Total pp</span><span style="color:var(--accent)">~R$ 3.000–3.200</span></div>
+      </div>
+    </div>
+    <div class="alert success"><i class="ti ti-check"></i><span>Dividido por 6, o carro sai <strong>mais barato que as excursões</strong> e ainda libera Tronador, El Bolsón e o Circuito Chico no seu ritmo. O ônibus de linha cobre o básico (Campanario, Llao Llao, Catedral) para quem quiser economizar ainda mais em dias soltos.</span></div>
+
+    <div class="sec-title">Estratégia recomendada</div>
+    <div class="card">
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-plane"></i></div>
+        <div class="dica-text"><strong>Voo:</strong> direto GRU→BRC quando houver na alta temporada; fora dela, conexão por Buenos Aires (Aeroparque). Compre os trechos no mesmo bilhete. <span class="conv">~R$ 2.500 pp ida e volta</span></div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-car"></i></div>
+        <div class="dica-text"><strong>Carro só nos dias que rendem:</strong> alugue por 4–5 dias (Circuito Chico, Catedral/Frey, Tronador, El Bolsón). Nos dias de cidade, ande a pé e de ônibus de linha — não pague diária à toa. <span class="conv">~R$ 400–550 pp ÷ 6</span></div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-bus"></i></div>
+        <div class="dica-text"><strong>Ônibus urbano (SUBE):</strong> linhas 20 (Llao Llao), 50/55 (Catedral) e 10. Baratas e frequentes pela Av. Bustillo. Compre o cartão SUBE para pagar. <span class="conv">poucos reais por trecho</span></div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-route"></i></div>
+        <div class="dica-text"><strong>Estrada do Tronador:</strong> a Ruta 81 (ripio) é de <strong>mão única controlada por horário</strong> — só sobe pela manhã e só desce à tarde. Confirme os horários do dia antes de sair.</div>
+      </div>
+    </div>
+    <div class="alert warn"><i class="ti ti-alert-triangle"></i><span>Para 6 pessoas reserve uma <em>van/SUV grande</em> com antecedência, leve a <strong>PID</strong> e confirme pneus adequados — set/out ainda pode ter neve no Catedral e ripio até o Tronador.</span></div>
+  </div>
+
 </div>
 
 <!-- ===================== HOSPEDAGEM ===================== -->
@@ -553,6 +719,41 @@
     </div>
   </div>
 
+  <div class="dest-block" data-dest="bariloche" style="display:none">
+    <div class="alert info"><i class="ti ti-info-circle"></i><span>Todos os preços são <strong>por pessoa por noite (pp/noite)</strong>, já divididos em grupo de 6. Câmbio ref.: $1 USD ≈ R$ 5,80.</span></div>
+
+    <div class="pill-toggle">
+      <button class="pill-btn active" id="b-btn-h-camping" onclick="showHosp('bariloche','camping')">🛏️ Hostel</button>
+      <button class="pill-btn" id="b-btn-h-airbnb" onclick="showHosp('bariloche','airbnb')">🏡 Cabana / Airbnb</button>
+    </div>
+
+    <div id="b-hosp-camping">
+      <div class="card">
+        <div class="card-row"><div class="card-title">Centro — hostel quarto privado</div><div class="card-price">~R$ 30–45 pp/noite</div></div>
+        <div class="card-sub" style="margin-top:4px">Periko's, Penthouse 1004, Hostel 41 Below. Quarto privado para o grupo com cozinha, a pé do Centro Cívico e dos mercados. Base prática para os dias de cidade e ônibus de linha.</div>
+        <div class="card-tags"><span class="tag">6 noites</span><span class="badge badge-green">Melhor custo</span></div>
+      </div>
+      <div class="card">
+        <div class="card-row"><div class="card-title">Av. Bustillo — hostel com vista</div><div class="card-price">~R$ 35–55 pp/noite</div></div>
+        <div class="card-sub" style="margin-top:4px">Hostels ao longo da Av. Bustillo (km 4–8), mais perto do Circuito Chico e do lago. Boa pedida se o carro for ficar com vocês a viagem toda.</div>
+        <div class="card-tags"><span class="tag">alternativa</span></div>
+      </div>
+    </div>
+
+    <div id="b-hosp-airbnb" style="display:none">
+      <div class="card">
+        <div class="card-row"><div class="card-title">Av. Bustillo — cabana inteira com vista</div><div class="card-price">~R$ 65–95 pp/noite</div></div>
+        <div class="card-sub" style="margin-top:4px">Cabanas de madeira na Av. Bustillo (km 5–12) com cozinha completa, lareira e muitas com vista ao Nahuel Huapi. Valor total dividido por 6. Carro ajuda no acesso.</div>
+        <div class="card-tags"><span class="tag">6 noites</span><span class="badge badge-amber">Vista do lago</span></div>
+      </div>
+      <div class="card">
+        <div class="card-row"><div class="card-title">Centro — apartamento inteiro</div><div class="card-price">~R$ 50–80 pp/noite</div></div>
+        <div class="card-sub" style="margin-top:4px">Apto a pé do Centro Cívico, das chocolaterias e dos mercados. Prático para cozinhar e sair a pé nos dias de cidade, sem depender do carro.</div>
+        <div class="card-tags"><span class="tag">6 noites</span></div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <!-- ===================== EQUIPAMENTOS ===================== -->
@@ -638,6 +839,46 @@
     <div class="alert danger" style="margin-top:10px"><i class="ti ti-alert-circle"></i><span>Set/out é início da primavera austral: 0–10°C, vento forte e tempo que muda rápido. Camadas e corta-vento impermeável são indispensáveis.</span></div>
   </div>
 
+  <div class="dest-block" data-dest="bariloche" style="display:none">
+    <div class="alert warn"><i class="ti ti-alert-triangle"></i><span>Em Bariloche predominam trilhas de um dia partindo da cidade ou da base do Catedral — basta uma mochila de ataque. Não precisa carregar equipamento de camping.</span></div>
+
+    <div class="sec-title">Levar de casa vs alugar in loco</div>
+    <div class="compare-grid" style="margin-bottom:14px">
+      <div class="ccard rec">
+        <div class="ccard-title">🎒 Levar de casa <span class="badge badge-green">✓</span></div>
+        <div class="crow"><span>Mochila de ataque 25–35L</span><span>já tem</span></div>
+        <div class="crow"><span>Camadas + corta-vento</span><span>essencial</span></div>
+        <div class="crow"><span>Bota impermeável</span><span>essencial</span></div>
+        <div class="crow"><span>~Bagagem despachada</span><span>~R$ 0–300</span></div>
+        <div class="ctotal"><span>Custo pp</span><span style="color:var(--accent)">~R$ 0–300</span></div>
+      </div>
+      <div class="ccard">
+        <div class="ccard-title">🏪 Alugar em Bariloche</div>
+        <div class="crow"><span>~Esqui Cerro Catedral / dia</span><span>~$40–60 <span class="conv">(~R$232–348)</span></span></div>
+        <div class="crow"><span>~Raquetes de neve</span><span>~$15 <span class="conv">(~R$87)</span></span></div>
+        <div class="crow"><span>~Caiaque no lago / hora</span><span>~$15–20 <span class="conv">(~R$87–116)</span></span></div>
+        <div class="crow"><span>Só se fizer o opcional</span><span>variável</span></div>
+        <div class="ctotal"><span>Custo pp</span><span style="color:var(--amber)">~R$ 0–350</span></div>
+      </div>
+    </div>
+    <div class="alert info"><i class="ti ti-info-circle"></i><span>Esqui no Catedral, raquetes e caiaque são alugados no local e são todos opcionais. Para as trilhas gratuitas (Frey, Llao Llao, Gutiérrez) basta o que você já leva de casa.</span></div>
+
+    <div class="sec-title">Checklist por pessoa</div>
+    <div class="card">
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-backpack"></i>Mochila de ataque 25–35L</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">~0,8 kg</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-shirt"></i>Camadas técnicas + corta-vento impermeável</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">~2,5 kg</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-boot"></i>Bota de trilha impermeável</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">~1,2 kg</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-hanger"></i>Luva, gorro e buff (neve possível)</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">~0,3 kg</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-sunglasses"></i>Óculos de sol + protetor solar</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">~0,2 kg</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-umbrella"></i>Capa de chuva / poncho</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">~0,3 kg</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-droplet"></i>Garrafa de água + lanche de trilha</div><div class="cl-right"><span class="pill pill-blue">Levar</span><span class="cl-kg">~0,5 kg</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-ski-jumping"></i>Equipamento de esqui</div><div class="cl-right"><span class="pill pill-green">Alugar (Catedral)</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-tools-kitchen-2"></i>Marmita / pote (cozinhar e levar)</div><div class="cl-right"><span class="pill pill-blue">Levar</span></div></div>
+      <div class="cl-row"><div class="cl-left"><i class="ti ti-battery-charging"></i>Powerbank (carry-on)</div><div class="cl-right"><span class="pill pill-blue">Levar</span></div></div>
+    </div>
+    <div class="alert danger" style="margin-top:10px"><i class="ti ti-alert-circle"></i><span>Set/out é fim do inverno: ainda há neve no Catedral e no Tronador. Leve roupa de frio, corta-vento e bota impermeável; o tempo muda rápido na montanha.</span></div>
+  </div>
+
 </div>
 
 <!-- ===================== DICAS ===================== -->
@@ -715,6 +956,44 @@
       <div class="dica-item">
         <div class="dica-icon"><i class="ti ti-shirt"></i></div>
         <div class="dica-text">Roupas de frio: leve do Brasil. Mesmo na primavera, a temperatura fica perto de 0–10°C com sensação térmica menor pelo vento. Camadas resolvem melhor que um casaco único.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dest-block" data-dest="bariloche" style="display:none">
+    <div class="sec-title">Como economizar (foco em custo)</div>
+    <div class="card">
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-shopping-cart"></i></div>
+        <div class="dica-text"><strong>Cozinhe metade das refeições:</strong> abasteça nos mercados <strong>La Anónima</strong>, Todo, Vea e na feira do centro. Carne, massas e vinho argentino saem baratos — janta em casa nos dias de cidade e leve marmita nas trilhas.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-tools-kitchen-2"></i></div>
+        <div class="dica-text"><strong>A outra metade nos restaurantes certos:</strong> guarde o orçamento de comer fora para uma <strong>parrilla</strong> (cordeiro, bife de chorizo), as <strong>cervejarias artesanais</strong> (Patagonia, Manush, Berlina) e o <strong>chocolate</strong> da rua Mitre. Menú del día no almoço é mais barato que jantar.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-walk"></i></div>
+        <div class="dica-text"><strong>Priorize os passeios gratuitos:</strong> Circuito Chico/Llao Llao, Refugio Frey, Lago Gutiérrez, Colonia Suiza e El Bolsón custam pouco ou nada. A aerosilla do Campanario é barata; deixe Isla Victoria, Cerro Otto e esqui como opcionais só se sobrar verba.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-bus"></i></div>
+        <div class="dica-text">Compre o cartão <strong>SUBE</strong> ao chegar para usar os ônibus de linha (20, 50/55). Nos dias sem carro, ele leva ao Campanario, Llao Llao e Catedral por poucos reais.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-cash"></i></div>
+        <div class="dica-text">Leve <strong>USD em espécie</strong> e pesquise o <strong>câmbio blue</strong> na Argentina — costuma render bem mais que o oficial e estica o orçamento de comida e passeios. ATMs cobram taxas altas.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-route"></i></div>
+        <div class="dica-text">Concentre os dias de carro (Tronador, El Bolsón, Circuito Chico) para alugar por menos dias. Confira o <strong>horário de mão única</strong> da estrada do Tronador antes de sair.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-shield-check"></i></div>
+        <div class="dica-text">Seguro viagem com cobertura médica e de resgate é essencial nas trilhas (Frey, Tronador). Confira a cobertura antes de embarcar.</div>
+      </div>
+      <div class="dica-item">
+        <div class="dica-icon"><i class="ti ti-snowflake"></i></div>
+        <div class="dica-text">Set/out é baixa temporada entre o esqui e o verão: hospedagem e voos mais baratos. Algumas trilhas altas podem ter neve — confirme as condições do Frey e do Tronador localmente.</div>
       </div>
     </div>
   </div>

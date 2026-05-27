@@ -79,6 +79,46 @@ var roteiros = {
         {wiki:'Cerro_Castor', lat:-54.7333, lng:-68.0167, emoji:'⛷️', name:'Cerro Castor — esqui', feeType:'paid', fee:'~$60–90 USD (~R$ 350–520)', feeNote:'passe + aluguel · opcional', desc:'A estação de esqui mais austral do mundo, a 26km de Ushuaia. A temporada costuma ir de junho a início de outubro — em set/início de out ainda pode haver neve esquiável. Aluguel de equipamento no local. Totalmente opcional.', tags:['Opcional','26km do centro','Esqui mais austral']}
       ]
     }
+  ],
+
+  bariloche: [
+    {
+      code:'BRC', dotClass:'dot-blue', name:'Centro & Nahuel Huapi', days:'Dias 1–2 · 2 noites', transit: null,
+      attractions:[
+        {wiki:'San_Carlos_de_Bariloche', lat:-41.1335, lng:-71.3103, emoji:'🏛️', name:'Centro Cívico e Catedral', feeType:'free', fee:'Gratuito', feeNote:'', desc:'O coração de Bariloche em pedra e madeira estilo alpino, com vista ao Lago Nahuel Huapi. A poucos passos ficam a Catedral, a rua Mitre (chocolaterias) e os mercados para abastecer a cozinha. Ótimo primeiro dia de aclimatação, tudo a pé.', tags:['Qualquer horário','A pé','Vista do lago']},
+        {wiki:'Cerro_Campanario', lat:-41.1086, lng:-71.4250, emoji:'🚡', name:'Cerro Campanario — aerosilla', feeType:'paid', fee:'~$10–12 USD (~R$ 58–70)', feeNote:'aerosilla curta e barata', desc:'Eleito uma das melhores vistas do mundo pela National Geographic: a 360° abrange Nahuel Huapi, Llao Llao, Moreno e os cerros nevados. A aerosilla é curta e barata; dá para subir a pé de graça em ~40 min por quem quiser economizar. Melhor passeio custo-benefício da viagem.', tags:['~1–2h','Subida a pé grátis opcional','Mirante 360°']},
+        {wiki:'Bariloche', lat:-41.1290, lng:-71.3500, emoji:'🏖️', name:'Playa Bonita e Costanera', feeType:'free', fee:'Gratuito', feeNote:'', desc:'Praia de areia clara à beira do Nahuel Huapi, no km 8 da Av. Bustillo, com a Isla Huemul à frente. Parada gratuita perfeita para o pôr do sol no caminho do centro ao Circuito Chico.', tags:['Qualquer horário','Km 8 Av. Bustillo','Pôr do sol no lago']},
+        {wiki:'Cerro_Otto', lat:-41.1500, lng:-71.3700, emoji:'🎡', name:'Cerro Otto — teleférico', feeType:'paid', fee:'~$25–35 USD (~R$ 145–203)', feeNote:'passeio opcional', desc:'Teleférico até o cume com confeitaria giratória e vista de Bariloche. Caro para o que entrega — dá para subir a pé ou de carro pela estrada de ripio de graça/quase. Mantido como opcional para dia de chuva.', tags:['Opcional','Subida grátis a pé/carro','Confeitaria giratória']}
+      ]
+    },
+    {
+      code:'CHC', dotClass:'dot-teal', name:'Circuito Chico & Llao Llao', days:'Dias 3–4 · day trips',
+      transit:{icon:'ti-car', text:'Av. Bustillo a oeste · ~25 km do centro · de carro ou ônibus de linha (linha 20) — passeio quase todo gratuito'},
+      attractions:[
+        {wiki:'Llao_Llao_Municipal_Park', lat:-41.0560, lng:-71.5360, emoji:'🌲', name:'Bosque & trilhas do Parque Llao Llao', feeType:'free', fee:'Gratuito', feeNote:'parque municipal', desc:'Trilhas curtas e gratuitas pela floresta valdiviana: Lago Escondido, Villa Tacul, Brazo de la Tristeza e o pequeno Bosque de Arrayanes. Mirante do hotel Llao Llao logo ao lado. O melhor dia de natureza sem gastar nada.', tags:['~3–5h','Trilhas leves','Floresta e lagos']},
+        {wiki:'Circuito_Chico', lat:-41.0760, lng:-71.5230, emoji:'📷', name:'Punto Panorámico do Circuito Chico', feeType:'free', fee:'Gratuito', feeNote:'', desc:'Mirante clássico sobre o Lago Moreno e a península de Llao Llao, no ponto alto do Circuito Chico. Parada rápida e gratuita de carro. Combine com a Capilla San Eduardo e a Cervecería Patagonia ao lado (consumo opcional).', tags:['~30min','Parada de carro','Vista do Lago Moreno']},
+        {wiki:'Colonia_Suiza,_Río_Negro', lat:-41.0930, lng:-71.5170, emoji:'🧀', name:'Colonia Suiza', feeType:'free', fee:'Gratuito', feeNote:'feira aos fins de semana', desc:'Vilarejo fundado por colonos suíços, com feira de artesanato e o curanto (prato cozido sob a terra) preparado às quartas e domingos. Andar pela aldeia é grátis; provar o curanto é opcional. Boa pausa barata no Circuito Chico.', tags:['~2h','Feira fim de semana','Curanto opcional']},
+        {wiki:'Victoria_Island_(Argentina)', lat:-40.9500, lng:-71.5300, emoji:'⛴️', name:'Isla Victoria & Bosque de Arrayanes', feeType:'paid', fee:'~$60–90 USD (~R$ 350–520)', feeNote:'navegação · passeio opcional', desc:'Navegação saindo de Puerto Pañuelo até a Isla Victoria e o bosque de árvores de arrayán de casca canela, no PN Los Arrayanes. Cênico, porém o passeio pago mais caro da região — mantido como opcional. Reserve no porto ou online.', tags:['Opcional','~½ a 1 dia','Saída de Puerto Pañuelo']}
+      ]
+    },
+    {
+      code:'CAT', dotClass:'dot-purple', name:'Catedral, Frey & Gutiérrez', days:'Dia 5 · trilha',
+      transit:{icon:'ti-car', text:'~20 km ao sul pela base do Cerro Catedral · de carro ou ônibus (linha 55)'},
+      attractions:[
+        {wiki:'Refugio_Frey', lat:-41.1900, lng:-71.4800, emoji:'🥾', name:'Refugio Frey — trekking', feeType:'free', fee:'Gratuito', feeNote:'trilha clássica', desc:'A trilha mais clássica de Bariloche: ~20 km ida e volta saindo da base do Catedral até um refúgio à beira de uma laguna glacial cercada de agulhas de granito. Exigente mas gratuita. Leve comida e água — o refúgio vende algo, mas caro.', tags:['~7–9h','20km ida e volta','Nível difícil']},
+        {wiki:'Cerro_Catedral', lat:-41.1750, lng:-71.4420, emoji:'⛷️', name:'Cerro Catedral — base e cadeirinha', feeType:'paid', fee:'~$20–35 USD (~R$ 116–203)', feeNote:'cadeirinha opcional · esqui no inverno', desc:'O maior centro de esqui da América do Sul. Em set/out pode haver neve esquiável (caro, opcional); fora do inverno a base é gratuita e a cadeirinha ao mirante é opcional. Várias trilhas, inclusive o acesso ao Frey, partem daqui.', tags:['Opcional','Base gratuita','Esqui no inverno']},
+        {wiki:'Lago_Gutiérrez', lat:-41.2100, lng:-71.4000, emoji:'🛶', name:'Lago Gutiérrez', feeType:'free', fee:'Gratuito', feeNote:'', desc:'Lago de águas calmas a poucos minutos do centro, com praias de pedra, trilhas curtas à Cascada de los Duendes e ponto de saída de caiaque. Banho gelado no verão e ótimo para encerrar o dia de trilha sem custo.', tags:['~2h','Praias e trilhas','Acesso livre']}
+      ]
+    },
+    {
+      code:'TRO', dotClass:'dot-amber', name:'Tronador, Mascardi & El Bolsón', days:'Dias 6–7 · day trips',
+      transit:{icon:'ti-car', text:'Ruta 40 + Ruta 81 (Tronador, ~90 km, estrada de mão única por horário) · Ruta 40 ao sul para El Bolsón (~120 km)'},
+      attractions:[
+        {wiki:'Mascardi_Lake', lat:-41.3200, lng:-71.5500, emoji:'🏞️', name:'Lago Mascardi', feeType:'free', fee:'Gratuito', feeNote:'', desc:'Lago de águas turquesa no caminho do Tronador, com praias e mirantes ao longo da Ruta 81. Parada gratuita obrigatória; a estrada de terra ao Tronador é de mão única controlada por horário — confira o sentido antes de entrar.', tags:['~1–2h','A caminho do Tronador','Águas turquesa']},
+        {wiki:'Tronador', lat:-41.1800, lng:-71.8800, emoji:'🗻', name:'Cerro Tronador & Ventisquero Negro', feeType:'paid', fee:'Ingresso PN ~$15 USD (~R$ 87)', feeNote:'+ combustível ou excursão', desc:'O gigante de 3.491 m na fronteira com o Chile, com geleiras penduradas e o Ventisquero Negro (geleira coberta de sedimento). Day trip longo: barato se for de carro próprio dividido por 6, caro se for por excursão. Saída cedo pela estrada de horário controlado.', tags:['Dia inteiro','Barato de carro ÷6','Excursão é opcional cara']},
+        {wiki:'El_Bolsón', lat:-41.9670, lng:-71.5340, emoji:'🌻', name:'El Bolsón — feria e Cabeza del Indio', feeType:'free', fee:'Gratuito', feeNote:'day trip opcional', desc:'Vilarejo hippie a ~2h ao sul pela Ruta 40, com a famosa feira artesanal (ter/qui/sáb), cervejarias e o mirante gratuito da Cabeza del Indio. Day trip opcional e barato — só combustível dividido por 6. Bom plano B se o Tronador estiver fechado.', tags:['Opcional','~2h de carro','Feira e mirantes grátis']}
+      ]
+    }
   ]
 };
 
@@ -95,6 +135,12 @@ var heroInfo = {
     sub:'PN Tierra del Fuego · Canal Beagle · Glaciar Martial · Lagos fueguinos',
     badges:'<span class="hero-badge">👥 6 pessoas</span><span class="hero-badge">🗓 6 dias</span><span class="hero-badge">🚗 Carro + day trips</span>',
     roteiroTitle:'Roteiro — 6 dias em Ushuaia'
+  },
+  bariloche: {
+    title:'Bariloche<br><em>Patagônia Andina · Argentina</em>',
+    sub:'Nahuel Huapi · Circuito Chico · Llao Llao · Cerro Catedral · Tronador',
+    badges:'<span class="hero-badge">👥 6 pessoas</span><span class="hero-badge">🗓 7 dias</span><span class="hero-badge">💰 Custo acessível · carro ÷6</span>',
+    roteiroTitle:'Roteiro — 7 dias · base única + day trips'
   }
 };
 
@@ -174,11 +220,17 @@ function refreshMap(){
   }
 }
 
+// ===== PREFIXO DE IDs POR DESTINO =====
+function destPrefix(dest){
+  return dest==='ushuaia' ? 'u-' : (dest==='bariloche' ? 'b-' : '');
+}
+
 // ===== TROCA DE DESTINO =====
 function selectDest(dest){
   currentDest = dest;
-  document.getElementById('dest-btn-patagonia').classList.toggle('active', dest==='patagonia');
-  document.getElementById('dest-btn-ushuaia').classList.toggle('active', dest==='ushuaia');
+  document.querySelectorAll('.dest-btn').forEach(function(b){
+    b.classList.toggle('active', b.id==='dest-btn-'+dest);
+  });
   document.querySelectorAll('.dest-block').forEach(function(b){
     b.style.display = (b.getAttribute('data-dest')===dest) ? '' : 'none';
   });
@@ -203,21 +255,21 @@ function show(id){
 
 // ===== TOGGLES INTERNOS (escopo por destino) =====
 function selectPerfil(dest, p){
-  var pre = dest==='ushuaia' ? 'u-' : '';
+  var pre = destPrefix(dest);
   document.getElementById(pre+'card-camping').classList.toggle('sel', p==='camping');
   document.getElementById(pre+'card-airbnb').classList.toggle('sel', p==='airbnb');
   document.getElementById(pre+'desc-camping').style.display = p==='camping'?'block':'none';
   document.getElementById(pre+'desc-airbnb').style.display = p==='airbnb'?'block':'none';
 }
 function showHosp(dest, p){
-  var pre = dest==='ushuaia' ? 'u-' : '';
+  var pre = destPrefix(dest);
   document.getElementById(pre+'hosp-camping').style.display = p==='camping'?'block':'none';
   document.getElementById(pre+'hosp-airbnb').style.display = p==='airbnb'?'block':'none';
   document.getElementById(pre+'btn-h-camping').classList.toggle('active', p==='camping');
   document.getElementById(pre+'btn-h-airbnb').classList.toggle('active', p==='airbnb');
 }
 function showOrc(dest, p){
-  var pre = dest==='ushuaia' ? 'u-' : '';
+  var pre = destPrefix(dest);
   document.getElementById(pre+'orc-camping').style.display = p==='camping'?'block':'none';
   document.getElementById(pre+'orc-airbnb').style.display = p==='airbnb'?'block':'none';
   document.getElementById(pre+'btn-o-camping').classList.toggle('active', p==='camping');
