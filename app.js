@@ -324,7 +324,8 @@ async function renderHome() {
   // Ordena pela sequência da viagem (Santiago → Puerto Varas); extras vão ao fim.
   const ordem = SEED_DESTINOS.map((d) => d.id);
   dests.sort((a, b) => {
-    const ia = ordem.indexOf(a.id), ib = ordem.indexOf(b.id);
+    const ia = ordem.indexOf(a.id),
+      ib = ordem.indexOf(b.id);
     return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
   });
   const list = $("#dest-list");
