@@ -262,15 +262,12 @@ window.voltarHome = async () => {
   // Sem zoom: já na home ou sem ponto de origem guardado.
   if (!atual || atual.id === "view-home" || !ultimaOrigem) {
     pararSlideshow();
-    pausarHeroScroll();
     showView("view-home");
-    limparHero();
     return;
   }
   emTransicao = true;
   document.body.classList.add("zooming");
   pararSlideshow();
-  pausarHeroScroll(); // congela a altura atual do hero durante a animação de volta
 
   const { x: cx, y: cy } = ultimaOrigem;
   const home = document.querySelector("#view-home");
@@ -289,7 +286,6 @@ window.voltarHome = async () => {
   // 2) Home reaparece crescendo do mesmo ponto.
   showView("view-home");
   aAtual.cancel();
-  limparHero();
 
   const oHome = origemRelativa(home, cx, cy);
   const aHome = home.animate(
@@ -413,71 +409,10 @@ async function abrirDestino(id) {
   renderDia();
   iniciarSlideshow(); // slideshow roda 1x por destino e não reinicia ao trocar de dia
   showView("view-destino");
-  ativarHeroScroll(); // foto começa em 50vh e encolhe conforme rola
 }
 
 function diaCorrente() {
   return destinoAtual.dias[diaIndex] || { data: "", foto: "", atividades: [] };
-}
-
-// ---------- Hero sticky que encolhe por scroll ----------
-const HERO_COLLAPSE = 260; // px de rolagem para encolher por completo
-const HERO_MIN = 200;      // altura mínima da imagem (px) quando fixada
-let heroRaf = 0;
-let heroStickStart = 0;    // scrollY em que a imagem encosta no topo (vira sticky)
-
-// Posição (em scroll) onde o topo da imagem encosta no topo da tela.
-function calcStickStart() {
-  const c = document.querySelector("#view-destino .carousel");
-  if (!c) { heroStickStart = 0; return; }
-  // No topo (scroll 0) o rect.top é exato; senão usamos a posição de layout.
-  heroStickStart = (window.scrollY || 0) === 0
-    ? c.getBoundingClientRect().top
-    : c.offsetTop;
-}
-
-function ajustarHero() {
-  const y = window.scrollY || document.documentElement.scrollTop || 0;
-  const inicio = window.innerHeight * 0.5;        // 50vh
-  const minimo = Math.min(inicio, HERO_MIN);
-  // só encolhe depois que a imagem encosta no topo e fixa
-  const p = Math.min(Math.max((y - heroStickStart) / HERO_COLLAPSE, 0), 1);
-  const h = inicio + (minimo - inicio) * p;
-  document.documentElement.style.setProperty("--photo-h", h + "px");
-}
-
-function onScrollHero() {
-  if (heroRaf) return;
-  heroRaf = requestAnimationFrame(() => {
-    heroRaf = 0;
-    ajustarHero();
-  });
-}
-
-function onResizeHero() {
-  calcStickStart();
-  ajustarHero();
-}
-
-function ativarHeroScroll() {
-  calcStickStart();
-  ajustarHero();
-  window.addEventListener("scroll", onScrollHero, { passive: true });
-  window.addEventListener("resize", onResizeHero);
-}
-
-// Remove os listeners mas mantém a altura atual (p/ não dar salto na volta).
-function pausarHeroScroll() {
-  window.removeEventListener("scroll", onScrollHero);
-  window.removeEventListener("resize", onResizeHero);
-  if (heroRaf) {
-    cancelAnimationFrame(heroRaf);
-    heroRaf = 0;
-  }
-}
-
-function limparHero() {
-  document.documentElement.style.removeProperty("--photo-h");
 }
 
 function renderDia() {
@@ -525,25 +460,19 @@ async function buscarFotos(query, n = 12) {
   }
 }
 
-// Termos de culinária por destino (frutos do mar no sul; vinho/asado em Santiago).
-function comidaDoDestino(destino) {
-  const sul =
-    destino.id === "puerto-varas" ||
-    /varas|montt|frutillar/i.test(destino.nome);
-  return sul
-    ? ["seafood platter", "empanadas", "asado barbecue meat"]
-    : ["wine vineyard food", "empanadas", "asado barbecue meat"];
-}
-
-// Intercala paisagens e comidas: a cada 2 paisagens, entra 1 prato.
-function misturarFotos(paisagens, comidas) {
+// Intercala duas listas (paisagens e pontos turísticos), sem repetir URLs.
+function intercalarFotos(a, b) {
   const out = [];
-  let c = 0;
-  paisagens.forEach((p, i) => {
-    out.push(p);
-    if (i % 2 === 1 && c < comidas.length) out.push(comidas[c++]);
-  });
-  while (c < comidas.length) out.push(comidas[c++]);
+  const vistos = new Set();
+  const max = Math.max(a.length, b.length);
+  for (let i = 0; i < max; i++) {
+    for (const url of [a[i], b[i]]) {
+      if (url && !vistos.has(url)) {
+        vistos.add(url);
+        out.push(url);
+      }
+    }
+  }
   return out;
 }
 
@@ -583,15 +512,13 @@ async function iniciarSlideshow() {
   slideVisible = 0;
   box.classList.add("loading");
 
-  // Paisagens da cidade + pratos da culinária regional, intercalados.
+  // Paisagens + pontos turísticos da cidade, intercalados.
   const destino = destinoAtual;
-  const termosComida = comidaDoDestino(destino);
-  const porPrato = 2; // fotos por termo de comida
-  const [paisagens, ...listasComida] = await Promise.all([
-    buscarFotos(`${destino.nome} Chile landscape`, 9),
-    ...termosComida.map((t) => buscarFotos(t, porPrato)),
+  const [paisagens, pontos] = await Promise.all([
+    buscarFotos(`${destino.nome} Chile landscape`, 8),
+    buscarFotos(`${destino.nome} Chile tourist attraction`, 8),
   ]);
-  const fotos = misturarFotos(paisagens, listasComida.flat());
+  const fotos = intercalarFotos(paisagens, pontos);
 
   // O usuário pode ter saído/trocado de destino enquanto buscava.
   if (destinoAtual !== destino) return;
@@ -604,7 +531,7 @@ async function iniciarSlideshow() {
   slideTimer = setInterval(() => {
     slideIdx = (slideIdx + 1) % slideUrls.length;
     mostrarSlide(slideUrls[slideIdx]);
-  }, 5000);
+  }, 3000);
 }
 
 // Gera um rótulo curto p/ o chip a partir da data (ex: "Seg · 2 de Agosto 2027" → "Seg 2").
