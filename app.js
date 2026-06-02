@@ -18,42 +18,69 @@ const SEED_DESTINOS = [
     nome: "Santiago",
     busca: "Santiago Chile",
     dias: [
-      { data: "Seg · 2 de Agosto 2027", foto: "", atividades: [
-        "Check-in 15h — Bairro Dieciocho", "Paseo Bandera", "Cerro Santa Lucía", "Bairro Lastarria"
-      ]},
-      { data: "Ter · 3 de Agosto 2027", foto: "", atividades: [
-        "Cavalgada Santuário Yerba Loca (com churrascão)"
-      ]},
-      { data: "Qua · 4 de Agosto 2027", foto: "", atividades: [
-        "Vinícola Concha y Toro", "Parque Florestal", "La Mundial"
-      ]},
-      { data: "Qui · 5 de Agosto 2027", foto: "", atividades: [
-        "Check-out 12h", "Traslado para Puerto Varas"
-      ]}
-    ]
+      {
+        data: "Seg · 2 de Agosto 2027",
+        foto: "",
+        atividades: [
+          "Check-in 15h — Bairro Dieciocho",
+          "Paseo Bandera",
+          "Cerro Santa Lucía",
+          "Bairro Lastarria",
+        ],
+      },
+      {
+        data: "Ter · 3 de Agosto 2027",
+        foto: "",
+        atividades: ["Cavalgada Santuário Yerba Loca (com churrascão)"],
+      },
+      {
+        data: "Qua · 4 de Agosto 2027",
+        foto: "",
+        atividades: [
+          "Vinícola Concha y Toro",
+          "Parque Florestal",
+          "La Mundial",
+        ],
+      },
+      {
+        data: "Qui · 5 de Agosto 2027",
+        foto: "",
+        atividades: ["Check-out 12h", "Traslado para Puerto Varas"],
+      },
+    ],
   },
   {
     id: "puerto-varas",
     nome: "Puerto Varas",
     busca: "Puerto Varas Chile",
     dias: [
-      { data: "Qui · 5 de Agosto 2027", foto: "", atividades: [
-        "Check-in 15h"
-      ]},
-      { data: "Sex · 6 de Agosto 2027", foto: "", atividades: [
-        "Tour Vulcão Osorno + Cataratas de Petrohué"
-      ]},
-      { data: "Sáb · 7 de Agosto 2027", foto: "", atividades: [
-        "Termas del Sol — day use, piscinas vulcânicas"
-      ]},
-      { data: "Dom · 8 de Agosto 2027", foto: "", atividades: [
-        "Frutillar — Teatro del Lago / museu"
-      ]},
-      { data: "Seg · 9 de Agosto 2027", foto: "", atividades: [
-        "Mercado Angelmó — almoço + artesanato", "Check-out 12h"
-      ]}
-    ]
-  }
+      {
+        data: "Qui · 5 de Agosto 2027",
+        foto: "",
+        atividades: ["Check-in 15h"],
+      },
+      {
+        data: "Sex · 6 de Agosto 2027",
+        foto: "",
+        atividades: ["Tour Vulcão Osorno + Cataratas de Petrohué"],
+      },
+      {
+        data: "Sáb · 7 de Agosto 2027",
+        foto: "",
+        atividades: ["Termas del Sol — day use, piscinas vulcânicas"],
+      },
+      {
+        data: "Dom · 8 de Agosto 2027",
+        foto: "",
+        atividades: ["Frutillar — Teatro del Lago / museu"],
+      },
+      {
+        data: "Seg · 9 de Agosto 2027",
+        foto: "",
+        atividades: ["Mercado Angelmó — almoço + artesanato", "Check-out 12h"],
+      },
+    ],
+  },
 ];
 const SEED_LEVAR = [
   "Passaporte",
@@ -72,7 +99,7 @@ const SEED_LEVAR = [
   "Protetor solar + hidratante labial",
   "Óculos de sol",
   "Remédios pessoais + necessaire",
-  "Câmera / GoPro"
+  "Câmera / GoPro",
 ];
 
 // ============================================================
@@ -84,11 +111,14 @@ let fs = null; // funções do firestore
 async function initDB() {
   if (firebaseAtivo) {
     try {
-      const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js");
-      fs = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
+      const { initializeApp } =
+        await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js");
+      fs =
+        await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js");
       const app = initializeApp(firebaseConfig);
       db = fs.getFirestore(app);
       await semearFirebase();
+      assinarLevar(); // sincroniza a lista "o que levar" em tempo real
       return;
     } catch (e) {
       console.error("Falha ao iniciar Firebase:", e);
@@ -96,12 +126,26 @@ async function initDB() {
   }
 }
 
+// Escuta a lista "o que levar" no Firebase e atualiza ao vivo em todos os dispositivos.
+let levarCache = null;
+function assinarLevar() {
+  fs.onSnapshot(fs.doc(db, "config", "levar"), (snap) => {
+    levarCache = snap.exists() ? snap.data().itens || [] : [];
+    // se a tela estiver aberta, re-renderiza com os dados novos
+    if (document.querySelector("#view-levar.active")) renderLevar();
+  });
+}
+
 // --- Firebase: cria os documentos iniciais se ainda não existem ---
 async function semearFirebase() {
   const snap = await fs.getDocs(fs.collection(db, "destinos"));
   if (snap.empty) {
     for (const d of SEED_DESTINOS) {
-      await fs.setDoc(fs.doc(db, "destinos", d.id), { nome: d.nome, busca: d.busca || "", dias: d.dias });
+      await fs.setDoc(fs.doc(db, "destinos", d.id), {
+        nome: d.nome,
+        busca: d.busca || "",
+        dias: d.dias,
+      });
     }
   }
   const levarRef = fs.doc(db, "config", "levar");
@@ -113,10 +157,15 @@ async function semearFirebase() {
 // --- localStorage helpers ---
 const LS = {
   get(key, fallback) {
-    try { return JSON.parse(localStorage.getItem(key)) ?? fallback; }
-    catch { return fallback; }
+    try {
+      return JSON.parse(localStorage.getItem(key)) ?? fallback;
+    } catch {
+      return fallback;
+    }
   },
-  set(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
+  set(key, val) {
+    localStorage.setItem(key, JSON.stringify(val));
+  },
 };
 // Reseeda o modo local quando o roteiro-semente muda (bump da versão).
 const SEED_VERSION = "2027-08-fotos-pexels";
@@ -130,7 +179,7 @@ if (!firebaseAtivo && localStorage.getItem("seedVersion") !== SEED_VERSION) {
 async function getDestinos() {
   if (db) {
     const snap = await fs.getDocs(fs.collection(db, "destinos"));
-    return snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
   }
   return LS.get("destinos", SEED_DESTINOS);
 }
@@ -140,98 +189,115 @@ async function getDestino(id) {
     const d = await fs.getDoc(fs.doc(db, "destinos", id));
     return d.exists() ? { id: d.id, ...d.data() } : null;
   }
-  return LS.get("destinos", SEED_DESTINOS).find(d => d.id === id) || null;
+  return LS.get("destinos", SEED_DESTINOS).find((d) => d.id === id) || null;
 }
 
 // Salva o destino inteiro (usado após alterar as atividades de um dia).
 async function saveDestino(dest) {
   if (db) {
-    await fs.setDoc(fs.doc(db, "destinos", dest.id), { nome: dest.nome, busca: dest.busca || "", dias: dest.dias });
+    await fs.setDoc(fs.doc(db, "destinos", dest.id), {
+      nome: dest.nome,
+      busca: dest.busca || "",
+      dias: dest.dias,
+    });
   } else {
     const dests = LS.get("destinos", SEED_DESTINOS);
-    const i = dests.findIndex(d => d.id === dest.id);
-    if (i >= 0) dests[i] = dest; else dests.push(dest);
+    const i = dests.findIndex((d) => d.id === dest.id);
+    if (i >= 0) dests[i] = dest;
+    else dests.push(dest);
     LS.set("destinos", dests);
   }
 }
 
 async function getLevar() {
   if (db) {
+    if (levarCache) return levarCache; // mantido atualizado pelo onSnapshot
     const d = await fs.getDoc(fs.doc(db, "config", "levar"));
-    return d.exists() ? (d.data().itens || []) : [];
+    return d.exists() ? d.data().itens || [] : [];
   }
   return LS.get("levar", SEED_LEVAR);
 }
 
 async function addLevar(texto) {
   if (db) {
-    await fs.updateDoc(fs.doc(db, "config", "levar"), { itens: fs.arrayUnion(texto) });
+    await fs.updateDoc(fs.doc(db, "config", "levar"), {
+      itens: fs.arrayUnion(texto),
+    });
   } else {
-    const l = LS.get("levar", SEED_LEVAR); l.push(texto); LS.set("levar", l);
+    const l = LS.get("levar", SEED_LEVAR);
+    l.push(texto);
+    LS.set("levar", l);
   }
 }
 
 async function removeLevar(texto) {
   if (db) {
-    await fs.updateDoc(fs.doc(db, "config", "levar"), { itens: fs.arrayRemove(texto) });
+    await fs.updateDoc(fs.doc(db, "config", "levar"), {
+      itens: fs.arrayRemove(texto),
+    });
   } else {
-    LS.set("levar", LS.get("levar", SEED_LEVAR).filter(i => i !== texto));
+    LS.set(
+      "levar",
+      LS.get("levar", SEED_LEVAR).filter((i) => i !== texto),
+    );
   }
 }
 
 // ============================================================
 //  UI / NAVEGAÇÃO
 // ============================================================
-const $ = sel => document.querySelector(sel);
+const $ = (sel) => document.querySelector(sel);
 
 function showView(id) {
-  document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+  document
+    .querySelectorAll(".view")
+    .forEach((v) => v.classList.remove("active"));
   $("#" + id).classList.add("active");
   window.scrollTo(0, 0);
 }
 
 window.voltarHome = async () => {
-  const dest = document.querySelector("#view-destino");
-  // Sem zoom: se não estamos vindo de um destino (ex.: tela "O que Levar?").
-  if (!dest.classList.contains("active") || !ultimaOrigem) {
+  if (emTransicao) return;
+  const atual = document.querySelector(".view.active");
+  // Sem zoom: já na home ou sem ponto de origem guardado.
+  if (!atual || atual.id === "view-home" || !ultimaOrigem) {
     pararSlideshow();
     pausarHeroScroll();
     showView("view-home");
     limparHero();
     return;
   }
-  if (emTransicao) return;
   emTransicao = true;
   document.body.classList.add("zooming");
+  pararSlideshow();
   pausarHeroScroll(); // congela a altura atual do hero durante a animação de volta
 
   const { x: cx, y: cy } = ultimaOrigem;
   const home = document.querySelector("#view-home");
 
-  // 1) Destino encolhe de volta para o ponto do botão e some.
-  const oDest = origemRelativa(dest, cx, cy);
-  const aDest = dest.animate(
+  // 1) Tela atual (destino ou levar) encolhe de volta para o ponto do botão.
+  const oAtual = origemRelativa(atual, cx, cy);
+  const aAtual = atual.animate(
     [
-      { transformOrigin: oDest, transform: "scale(1)", opacity: 1 },
-      { transformOrigin: oDest, transform: "scale(.18)", opacity: 0 }
+      { transformOrigin: oAtual, transform: "scale(1)", opacity: 1 },
+      { transformOrigin: oAtual, transform: "scale(.18)", opacity: 0 },
     ],
-    { duration: 320, easing: "cubic-bezier(.4,0,.9,.4)", fill: "forwards" }
+    { duration: 320, easing: "cubic-bezier(.4,0,.9,.4)", fill: "forwards" },
   );
-  await aDest.finished;
-  pararSlideshow();
+  await aAtual.finished;
 
   // 2) Home reaparece crescendo do mesmo ponto.
   showView("view-home");
-  aDest.cancel();
-  limparHero(); // destino já escondido: pode resetar a altura do hero
+  aAtual.cancel();
+  limparHero();
 
   const oHome = origemRelativa(home, cx, cy);
   const aHome = home.animate(
     [
       { transformOrigin: oHome, transform: "scale(4)", opacity: 0 },
-      { transformOrigin: oHome, transform: "scale(1)", opacity: 1 }
+      { transformOrigin: oHome, transform: "scale(1)", opacity: 1 },
     ],
-    { duration: 420, easing: "cubic-bezier(.2,.7,.3,1)", fill: "none" }
+    { duration: 420, easing: "cubic-bezier(.2,.7,.3,1)", fill: "none" },
   );
   await aHome.finished;
 
@@ -259,9 +325,15 @@ function renderCountdown() {
 // ---------- Home: botões de destino ----------
 async function renderHome() {
   const dests = await getDestinos();
+  // Ordena pela sequência da viagem (Santiago → Puerto Varas); extras vão ao fim.
+  const ordem = SEED_DESTINOS.map((d) => d.id);
+  dests.sort((a, b) => {
+    const ia = ordem.indexOf(a.id), ib = ordem.indexOf(b.id);
+    return (ia === -1 ? 999 : ia) - (ib === -1 ? 999 : ib);
+  });
   const list = $("#dest-list");
   list.innerHTML = "";
-  dests.forEach(d => {
+  dests.forEach((d) => {
     const btn = document.createElement("button");
     btn.className = "btn btn-light";
     btn.textContent = d.nome;
@@ -282,48 +354,54 @@ function origemRelativa(el, screenX, screenY) {
   return `${screenX - r.left}px ${screenY - r.top}px`;
 }
 
-// Abre o destino com zoom partindo do botão clicado.
-async function abrirDestinoZoom(id, btn) {
+// Abre uma tela com zoom partindo do botão clicado.
+// preparar(): callback async que carrega o conteúdo e chama showView(targetId).
+async function abrirComZoom(btn, targetId, preparar) {
   if (emTransicao) return;
   emTransicao = true;
   document.body.classList.add("zooming");
 
   const r = btn.getBoundingClientRect();
-  const cx = r.left + r.width / 2;   // centro do botão na tela
+  const cx = r.left + r.width / 2; // centro do botão na tela
   const cy = r.top + r.height / 2;
-  ultimaOrigem = { x: cx, y: cy };   // guarda p/ o zoom de volta
+  ultimaOrigem = { x: cx, y: cy }; // guarda p/ o zoom de volta
 
   const home = $("#view-home");
-  const dest = $("#view-destino");
+  const target = document.getElementById(targetId);
 
   // 1) Home dá zoom no ponto do botão e some (forwards: segura o estado).
   const oHome = origemRelativa(home, cx, cy);
   const aHome = home.animate(
     [
       { transformOrigin: oHome, transform: "scale(1)", opacity: 1 },
-      { transformOrigin: oHome, transform: "scale(4)", opacity: 0 }
+      { transformOrigin: oHome, transform: "scale(4)", opacity: 0 },
     ],
-    { duration: 320, easing: "cubic-bezier(.4,0,.9,.4)", fill: "forwards" }
+    { duration: 320, easing: "cubic-bezier(.4,0,.9,.4)", fill: "forwards" },
   );
   await aHome.finished;
 
-  // 2) Mostra o destino e faz ele nascer do mesmo ponto.
-  await abrirDestino(id); // showView esconde a home
-  aHome.cancel();         // limpa o estado preso da home (já invisível)
+  // 2) Mostra a tela alvo e faz ela nascer do mesmo ponto.
+  await preparar(); // carrega o conteúdo + showView(targetId)
+  aHome.cancel(); // limpa o estado preso da home (já invisível)
 
-  const oDest = origemRelativa(dest, cx, cy);
-  const aDest = dest.animate(
+  const oT = origemRelativa(target, cx, cy);
+  const aT = target.animate(
     [
-      { transformOrigin: oDest, transform: "scale(.18)", opacity: 0 },
-      { transformOrigin: oDest, transform: "scale(1)", opacity: 1 }
+      { transformOrigin: oT, transform: "scale(.18)", opacity: 0 },
+      { transformOrigin: oT, transform: "scale(1)", opacity: 1 },
     ],
     // fill "none": ao terminar, volta ao estado natural (= scale 1) sem pop.
-    { duration: 420, easing: "cubic-bezier(.2,.7,.3,1)", fill: "none" }
+    { duration: 420, easing: "cubic-bezier(.2,.7,.3,1)", fill: "none" },
   );
-  await aDest.finished;
+  await aT.finished;
 
   document.body.classList.remove("zooming");
   emTransicao = false;
+}
+
+// Atalho: abre um destino com zoom.
+function abrirDestinoZoom(id, btn) {
+  return abrirComZoom(btn, "view-destino", () => abrirDestino(id));
 }
 
 async function abrirDestino(id) {
@@ -338,46 +416,69 @@ async function abrirDestino(id) {
   ativarHeroScroll(); // foto começa em 50vh e encolhe conforme rola
 }
 
-function diaCorrente() { return destinoAtual.dias[diaIndex] || { data: "", foto: "", atividades: [] }; }
+function diaCorrente() {
+  return destinoAtual.dias[diaIndex] || { data: "", foto: "", atividades: [] };
+}
 
-// ---------- Hero colapsável por scroll ----------
-const HERO_COLLAPSE = 260; // px de rolagem para colapsar o hero por completo
+// ---------- Hero sticky que encolhe por scroll ----------
+const HERO_COLLAPSE = 260; // px de rolagem para encolher por completo
+const HERO_MIN = 200;      // altura mínima da imagem (px) quando fixada
 let heroRaf = 0;
+let heroStickStart = 0;    // scrollY em que a imagem encosta no topo (vira sticky)
 
-// Altura final do card (proporção ~2:1, como no layout compacto).
-function alturaCompacta() {
-  const w = $("#carousel-photo").clientWidth || 320;
-  return Math.round(w / 2);
+// Posição (em scroll) onde o topo da imagem encosta no topo da tela.
+function calcStickStart() {
+  const c = document.querySelector("#view-destino .carousel");
+  if (!c) { heroStickStart = 0; return; }
+  // No topo (scroll 0) o rect.top é exato; senão usamos a posição de layout.
+  heroStickStart = (window.scrollY || 0) === 0
+    ? c.getBoundingClientRect().top
+    : c.offsetTop;
 }
 
 function ajustarHero() {
   const y = window.scrollY || document.documentElement.scrollTop || 0;
-  const inicio = window.innerHeight * 0.5;               // 50vh
-  const compacto = Math.min(inicio, alturaCompacta());
-  const p = Math.min(Math.max(y / HERO_COLLAPSE, 0), 1); // progresso 0..1
-  const h = inicio + (compacto - inicio) * p;
+  const inicio = window.innerHeight * 0.5;        // 50vh
+  const minimo = Math.min(inicio, HERO_MIN);
+  // só encolhe depois que a imagem encosta no topo e fixa
+  const p = Math.min(Math.max((y - heroStickStart) / HERO_COLLAPSE, 0), 1);
+  const h = inicio + (minimo - inicio) * p;
   document.documentElement.style.setProperty("--photo-h", h + "px");
 }
 
 function onScrollHero() {
   if (heroRaf) return;
-  heroRaf = requestAnimationFrame(() => { heroRaf = 0; ajustarHero(); });
+  heroRaf = requestAnimationFrame(() => {
+    heroRaf = 0;
+    ajustarHero();
+  });
+}
+
+function onResizeHero() {
+  calcStickStart();
+  ajustarHero();
 }
 
 function ativarHeroScroll() {
+  calcStickStart();
   ajustarHero();
   window.addEventListener("scroll", onScrollHero, { passive: true });
-  window.addEventListener("resize", ajustarHero);
+  window.addEventListener("resize", onResizeHero);
 }
 
 // Remove os listeners mas mantém a altura atual (p/ não dar salto na volta).
 function pausarHeroScroll() {
   window.removeEventListener("scroll", onScrollHero);
-  window.removeEventListener("resize", ajustarHero);
-  if (heroRaf) { cancelAnimationFrame(heroRaf); heroRaf = 0; }
+  window.removeEventListener("resize", onResizeHero);
+  if (heroRaf) {
+    cancelAnimationFrame(heroRaf);
+    heroRaf = 0;
+  }
 }
 
-function limparHero() { document.documentElement.style.removeProperty("--photo-h"); }
+function limparHero() {
+  document.documentElement.style.removeProperty("--photo-h");
+}
 
 function renderDia() {
   const dia = diaCorrente();
@@ -388,11 +489,11 @@ function renderDia() {
 }
 
 // ---------- Slideshow de fotos (API Pexels) ----------
-const photoCache = {};        // "query#n" -> [urls]
-let slideTimer = null;        // intervalo de troca
-let slideUrls = [];           // fotos do dia atual
-let slideIdx = 0;             // índice da foto atual
-let slideVisible = 0;         // qual camada (0=A, 1=B) está visível
+const photoCache = {}; // "query#n" -> [urls]
+let slideTimer = null; // intervalo de troca
+let slideUrls = []; // fotos do dia atual
+let slideIdx = 0; // índice da foto atual
+let slideVisible = 0; // qual camada (0=A, 1=B) está visível
 
 // Busca fotos na API da Pexels (https://www.pexels.com/api/).
 async function buscarFotos(query, n = 12) {
@@ -403,13 +504,19 @@ async function buscarFotos(query, n = 12) {
     return [];
   }
   try {
-    const url = "https://api.pexels.com/v1/search"
-      + "?query=" + encodeURIComponent(query)
-      + "&per_page=" + n + "&orientation=landscape";
+    const url =
+      "https://api.pexels.com/v1/search" +
+      "?query=" +
+      encodeURIComponent(query) +
+      "&per_page=" +
+      n +
+      "&orientation=landscape";
     const r = await fetch(url, { headers: { Authorization: PEXELS_KEY } });
     if (!r.ok) throw new Error("HTTP " + r.status);
     const j = await r.json();
-    const fotos = (j.photos || []).map(p => p.src.large2x || p.src.large).filter(Boolean);
+    const fotos = (j.photos || [])
+      .map((p) => p.src.large2x || p.src.large)
+      .filter(Boolean);
     photoCache[key] = fotos;
     return fotos;
   } catch (e) {
@@ -420,7 +527,9 @@ async function buscarFotos(query, n = 12) {
 
 // Termos de culinária por destino (frutos do mar no sul; vinho/asado em Santiago).
 function comidaDoDestino(destino) {
-  const sul = destino.id === "puerto-varas" || /varas|montt|frutillar/i.test(destino.nome);
+  const sul =
+    destino.id === "puerto-varas" ||
+    /varas|montt|frutillar/i.test(destino.nome);
   return sul
     ? ["seafood platter", "empanadas", "asado barbecue meat"]
     : ["wine vineyard food", "empanadas", "asado barbecue meat"];
@@ -439,7 +548,10 @@ function misturarFotos(paisagens, comidas) {
 }
 
 function pararSlideshow() {
-  if (slideTimer) { clearInterval(slideTimer); slideTimer = null; }
+  if (slideTimer) {
+    clearInterval(slideTimer);
+    slideTimer = null;
+  }
 }
 
 // Crossfade: pré-carrega a imagem e troca a camada visível.
@@ -464,7 +576,10 @@ async function iniciarSlideshow() {
   const layers = [$("#slide-a"), $("#slide-b")];
 
   // Reseta camadas e mostra placeholder enquanto carrega.
-  layers.forEach(l => { l.classList.remove("show"); l.style.backgroundImage = ""; });
+  layers.forEach((l) => {
+    l.classList.remove("show");
+    l.style.backgroundImage = "";
+  });
   slideVisible = 0;
   box.classList.add("loading");
 
@@ -474,7 +589,7 @@ async function iniciarSlideshow() {
   const porPrato = 2; // fotos por termo de comida
   const [paisagens, ...listasComida] = await Promise.all([
     buscarFotos(`${destino.nome} Chile landscape`, 9),
-    ...termosComida.map(t => buscarFotos(t, porPrato))
+    ...termosComida.map((t) => buscarFotos(t, porPrato)),
   ]);
   const fotos = misturarFotos(paisagens, listasComida.flat());
 
@@ -509,7 +624,10 @@ function renderDayNav() {
     const chip = document.createElement("button");
     chip.className = "chip" + (i === diaIndex ? " active" : "");
     chip.textContent = chipLabel(dia.data, i);
-    chip.onclick = () => { diaIndex = i; renderDia(); };
+    chip.onclick = () => {
+      diaIndex = i;
+      renderDia();
+    };
     wrap.appendChild(chip);
   });
   // mantém o chip ativo visível ao trocar de dia
@@ -538,7 +656,8 @@ function renderAtividades(dia) {
     const li = document.createElement("li");
     li.textContent = a;
     const del = document.createElement("button");
-    del.className = "del"; del.textContent = "×";
+    del.className = "del";
+    del.textContent = "×";
     del.onclick = async () => {
       dia.atividades.splice(i, 1);
       await saveDestino(destinoAtual);
@@ -553,26 +672,43 @@ function renderAtividades(dia) {
 async function renderLevar() {
   const itens = await getLevar();
   const ul = $("#lista-levar");
-  if (itens.length === 0) { ul.innerHTML = '<li class="empty">Lista vazia</li>'; return; }
+  if (itens.length === 0) {
+    ul.innerHTML = '<li class="empty">Lista vazia</li>';
+    return;
+  }
   ul.innerHTML = "";
-  itens.forEach(i => {
+  itens.forEach((i) => {
     const li = document.createElement("li");
     li.textContent = i;
     const del = document.createElement("button");
-    del.className = "del"; del.textContent = "×";
-    del.onclick = async () => { await removeLevar(i); renderLevar(); };
+    del.className = "del";
+    del.textContent = "×";
+    del.onclick = async () => {
+      await removeLevar(i);
+      renderLevar();
+    };
     li.appendChild(del);
     ul.appendChild(li);
   });
 }
 
-window.abrirLevar = async () => { await renderLevar(); showView("view-levar"); };
+window.abrirLevar = (btn) =>
+  abrirComZoom(btn, "view-levar", async () => {
+    await renderLevar();
+    showView("view-levar");
+  });
 
 // ---------- Modal ----------
 let modalCtx = null; // "atividade" | "levar"
 
-function abrirModal() { modalCtx = "atividade"; openModal("Adicionar atividade"); }
-function abrirModalLevar() { modalCtx = "levar"; openModal("Adicionar item"); }
+function abrirModal() {
+  modalCtx = "atividade";
+  openModal("Adicionar atividade");
+}
+function abrirModalLevar() {
+  modalCtx = "levar";
+  openModal("Adicionar item");
+}
 window.abrirModal = abrirModal;
 window.abrirModalLevar = abrirModalLevar;
 
@@ -599,8 +735,12 @@ window.salvarModal = async () => {
   fecharModal();
 };
 
-$("#modal-input").addEventListener("keydown", e => { if (e.key === "Enter") salvarModal(); });
-$("#modal").addEventListener("click", e => { if (e.target.id === "modal") fecharModal(); });
+$("#modal-input").addEventListener("keydown", (e) => {
+  if (e.key === "Enter") salvarModal();
+});
+$("#modal").addEventListener("click", (e) => {
+  if (e.target.id === "modal") fecharModal();
+});
 
 // ============================================================
 //  START
