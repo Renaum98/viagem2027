@@ -89,14 +89,10 @@ async function initDB() {
       const app = initializeApp(firebaseConfig);
       db = fs.getFirestore(app);
       await semearFirebase();
-      setStatus("🟢 Salvando no Firebase");
       return;
     } catch (e) {
       console.error("Falha ao iniciar Firebase:", e);
-      setStatus("🔴 Erro no Firebase — usando modo local");
     }
-  } else {
-    setStatus("🟡 Modo local (configure o Firebase)");
   }
 }
 
@@ -188,8 +184,6 @@ async function removeLevar(texto) {
 // ============================================================
 const $ = sel => document.querySelector(sel);
 
-function setStatus(txt) { $("#db-status").textContent = txt; }
-
 function showView(id) {
   document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
   $("#" + id).classList.add("active");
@@ -247,10 +241,19 @@ window.voltarHome = async () => {
 
 // ---------- Countdown ----------
 function renderCountdown() {
-  const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
-  const alvo = new Date(DATA_VIAGEM);
-  const dias = Math.ceil((alvo - hoje) / 86400000);
-  $("#countdown-num").textContent = dias > 0 ? dias : 0;
+  const [y, m, d] = DATA_VIAGEM.split("-").map(Number);
+  const alvo = new Date(y, m - 1, d); // meia-noite local da data da viagem
+  const diff = alvo - new Date();
+  if (diff <= 0) {
+    $("#countdown-num").textContent = 0;
+    $("#countdown-sub").textContent = "A viagem chegou! 🎉";
+    return;
+  }
+  const dias = Math.floor(diff / 86400000);
+  const horas = Math.floor((diff % 86400000) / 3600000);
+  const minutos = Math.floor((diff % 3600000) / 60000);
+  $("#countdown-num").textContent = dias;
+  $("#countdown-sub").textContent = `${horas} horas e ${minutos} minutos`;
 }
 
 // ---------- Home: botões de destino ----------
@@ -384,16 +387,17 @@ function renderDia() {
   // Obs: o slideshow de fotos NÃO é tocado aqui — ele roda contínuo por destino.
 }
 
-// ---------- Slideshow de fotos (API Wikimedia Commons) ----------
-const photoCache = {};        // termo de busca -> [urls]
+// ---------- Slideshow de fotos (API Pexels) ----------
+const photoCache = {};        // "query#n" -> [urls]
 let slideTimer = null;        // intervalo de troca
 let slideUrls = [];           // fotos do dia atual
 let slideIdx = 0;             // índice da foto atual
 let slideVisible = 0;         // qual camada (0=A, 1=B) está visível
 
-// Busca fotos do local na API da Pexels (https://www.pexels.com/api/).
-async function buscarFotos(query) {
-  if (photoCache[query]) return photoCache[query];
+// Busca fotos na API da Pexels (https://www.pexels.com/api/).
+async function buscarFotos(query, n = 12) {
+  const key = query + "#" + n;
+  if (photoCache[key]) return photoCache[key];
   if (!PEXELS_KEY || PEXELS_KEY.startsWith("SUA_")) {
     console.warn("Defina sua chave da Pexels em PEXELS_KEY (app.js).");
     return [];
@@ -401,17 +405,37 @@ async function buscarFotos(query) {
   try {
     const url = "https://api.pexels.com/v1/search"
       + "?query=" + encodeURIComponent(query)
-      + "&per_page=15&orientation=landscape";
+      + "&per_page=" + n + "&orientation=landscape";
     const r = await fetch(url, { headers: { Authorization: PEXELS_KEY } });
     if (!r.ok) throw new Error("HTTP " + r.status);
     const j = await r.json();
     const fotos = (j.photos || []).map(p => p.src.large2x || p.src.large).filter(Boolean);
-    photoCache[query] = fotos;
+    photoCache[key] = fotos;
     return fotos;
   } catch (e) {
     console.warn("Falha ao buscar fotos na Pexels:", e);
     return [];
   }
+}
+
+// Termos de culinária por destino (frutos do mar no sul; vinho/asado em Santiago).
+function comidaDoDestino(destino) {
+  const sul = destino.id === "puerto-varas" || /varas|montt|frutillar/i.test(destino.nome);
+  return sul
+    ? ["seafood platter", "empanadas", "asado barbecue meat"]
+    : ["wine vineyard food", "empanadas", "asado barbecue meat"];
+}
+
+// Intercala paisagens e comidas: a cada 2 paisagens, entra 1 prato.
+function misturarFotos(paisagens, comidas) {
+  const out = [];
+  let c = 0;
+  paisagens.forEach((p, i) => {
+    out.push(p);
+    if (i % 2 === 1 && c < comidas.length) out.push(comidas[c++]);
+  });
+  while (c < comidas.length) out.push(comidas[c++]);
+  return out;
 }
 
 function pararSlideshow() {
@@ -444,10 +468,15 @@ async function iniciarSlideshow() {
   slideVisible = 0;
   box.classList.add("loading");
 
-  // Fotos dos PONTOS TURÍSTICOS da cidade.
+  // Paisagens da cidade + pratos da culinária regional, intercalados.
   const destino = destinoAtual;
-  const query = `${destino.nome} Chile tourist attraction`;
-  const fotos = await buscarFotos(query);
+  const termosComida = comidaDoDestino(destino);
+  const porPrato = 2; // fotos por termo de comida
+  const [paisagens, ...listasComida] = await Promise.all([
+    buscarFotos(`${destino.nome} Chile landscape`, 9),
+    ...termosComida.map(t => buscarFotos(t, porPrato))
+  ]);
+  const fotos = misturarFotos(paisagens, listasComida.flat());
 
   // O usuário pode ter saído/trocado de destino enquanto buscava.
   if (destinoAtual !== destino) return;
@@ -578,6 +607,7 @@ $("#modal").addEventListener("click", e => { if (e.target.id === "modal") fechar
 // ============================================================
 (async function start() {
   renderCountdown();
+  setInterval(renderCountdown, 30000); // mantém horas/minutos atualizados
   await initDB();
   await renderHome();
 })();

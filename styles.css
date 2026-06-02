@@ -45,6 +45,7 @@ body.zooming { overflow: hidden; }
 .countdown { margin-bottom: 48px; line-height: 1.1; }
 .countdown-label { display: block; font-size: clamp(26px, 7vw, 38px); font-weight: 700; }
 .countdown-num { display: block; font-size: clamp(40px, 12vw, 64px); font-weight: 800; color: var(--blue); margin: 4px 0; }
+.countdown-sub { display: block; font-size: clamp(13px, 3.6vw, 16px); font-weight: 600; color: var(--text-dim); margin-top: 8px; }
 
 .dest-list { display: flex; flex-direction: column; gap: 16px; max-width: 340px; margin: 0 auto 16px; }
 
@@ -199,11 +200,3 @@ body.zooming { overflow: hidden; }
 .modal-input:focus { outline: none; border-color: var(--blue); }
 .modal-actions { display: flex; gap: 10px; margin-top: 18px; justify-content: flex-end; }
 .modal-actions .btn { padding: 12px 22px; font-size: 15px; }
-
-/* ---------- Status DB ---------- */
-.db-status {
-  position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%);
-  font-size: 11px; color: var(--text-dim); opacity: .6;
-  background: rgba(0,0,0,.4); padding: 4px 12px; border-radius: 20px;
-  pointer-events: none; white-space: nowrap;
-}
